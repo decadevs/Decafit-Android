@@ -19,9 +19,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.DecafitAndroid.AppBarOverlay" parent="Theme.MaterialComponents.Light.NoActionBar" />
+    <style name="Theme.DecafitAndroid.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.DecafitAndroid.PopupOverlay" parent="Widget.AppCompat.TextView" />
+    <style name="Theme.DecafitAndroid.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="NormalBoldText" parent="Widget.AppCompat.TextView" >
         <item name="android:layout_width"> wrap_content</item>
