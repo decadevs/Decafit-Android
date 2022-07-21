@@ -9,9 +9,4 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="track_your_fitness">Track \nyour fitness</string>
-    <string name="sign_in">Sign in</string>
-    <string name="don_t_have_an_account">Don’t have an account?</string>
 </resources>
