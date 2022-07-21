@@ -14,4 +14,12 @@
     <string name="track_your_fitness">Track \nyour fitness</string>
     <string name="sign_in">Sign in</string>
     <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="or_sign_up_with">Or sign up with</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email address</string>
+    <string name="create_a_nfitness_nutrition_plan">Create a\nfitness/nutrition plan</string>
+    <string name="full_name">Full name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="wrong_email_address">wrong email address</string>
 </resources>
