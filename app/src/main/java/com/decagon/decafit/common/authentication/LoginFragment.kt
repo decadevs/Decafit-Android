@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
 import com.decagon.decafit.common.utils.Validation
+import com.decagon.decafit.common.utils.hideKeyboard
+import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentFirstBinding
 import com.decagon.decafit.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
@@ -36,7 +38,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun activateClickListeners(){
+        binding.layout.setOnClickListener{
+            it.hideKeyboard()
+        }
         binding.fragmentLoginLoginBtn.setOnClickListener {
+
             val email = binding.fragmentLoginEmailET.text.toString().trim()
             val password = binding.fragmentLoginPasswordET.text.toString().trim()
 
@@ -46,15 +52,22 @@ class LoginFragment : Fragment() {
 
                 } else {
                     // call for incorrect password here
-                    Snackbar.make(binding.root, "Invalid Password", Snackbar.LENGTH_LONG).show()
+                    snackBar("Invalid Password")
                 }
             } else {
                 // call for incorrect email here
-                Snackbar.make(binding.root, "Invalid email address", Snackbar.LENGTH_LONG)
-                    .show()
+                snackBar("Invalid email address")
             }
         }
-
+        binding.facebookLogin.setOnClickListener {
+            snackBar("login with facebook")
+        }
+        binding.googleLogin.setOnClickListener {
+            snackBar("login with google")
+        }
+        binding.appleLogin.setOnClickListener {
+            snackBar("login with apple")
+        }
     }
 
     private fun loginInputHandler(){
@@ -67,7 +80,6 @@ class LoginFragment : Fragment() {
                 binding.fragmentLoginLoginBtn.isEnabled = Validation.validateEmailInput(userLoginEmail)
                         && userLoginPassword.isNotEmpty()
             }
-
             override fun afterTextChanged(s: Editable?) {}
         }
         binding.fragmentLoginEmailET.addTextChangedListener(inputHandler)
