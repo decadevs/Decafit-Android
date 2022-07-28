@@ -1,4 +1,4 @@
-package com.decagon.decafit.common.authentication
+package com.decagon.decafit.common.authentication.presentation.screens
 
 import android.os.Bundle
 import android.text.Editable
@@ -12,9 +12,7 @@ import com.decagon.decafit.R
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
-import com.decagon.decafit.databinding.FragmentFirstBinding
 import com.decagon.decafit.databinding.FragmentLoginBinding
-import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".workout.presentation.screens.WorkoutBreakdownFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="288dp"
+            android:background="@drawable/login_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/NormalBoldText"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:text="10 Workouts"
+            android:layout_marginBottom="9dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_24sp"
+            app:layout_constraintBottom_toTopOf="@+id/timer_tv"
+            app:layout_constraintStart_toStartOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/calory_tv"
+            style="@style/NormalBoldText"
+            android:drawableStart="@drawable/ic_baseline_av_timer_24"
+            android:drawablePadding="8dp"
+            android:text="240 Kcal"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintStart_toEndOf="@+id/timer_tv"
+            app:layout_constraintTop_toTopOf="@+id/timer_tv" />
+
+
+        <TextView
+            android:id="@+id/timer_tv"
+            style="@style/NormalBoldText"
+            android:layout_marginBottom="@dimen/margin_32dp"
+            android:drawableStart="@drawable/ic_baseline_av_timer_24"
+            android:drawablePadding="8dp"
+            android:text="24 min"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/textView3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

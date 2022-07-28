@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.decagon.decafit.common.authentication.LoginFragment"
+        android:name="com.decagon.decafit.common.authentication.presentation.screens.LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_SecondFragment"
