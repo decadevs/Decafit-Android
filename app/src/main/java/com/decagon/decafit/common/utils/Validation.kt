@@ -5,6 +5,8 @@ import com.decagon.decafit.common.SignUpRequest
 object Validation {
     val DIGITCHARACTER = Regex("[0-9]")
     val SPECAILCHARAACTERS = Regex("[@#\$%^&+=*_-]")
+    val UPPERCASE = Regex("[A-Z]")
+    val LOWERCASE = Regex("[a-z]")
 
     fun validateEmailInput(email: String): Boolean {
         if (email.isEmpty() || !email.matches(EMAIL_PATTERN)) {
@@ -21,6 +23,7 @@ object Validation {
                 "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                 ")+"
     )
+
 
     //Validate user email pattern
     fun validatePasswordPattern(usersPassword: String): Boolean {
@@ -61,6 +64,36 @@ object Validation {
         } else if ( validatePhoneNumber(accountData.phone_number)){
             result.add("Incomplete number")
         }
+        return result
+    }
+
+    fun validateUserProfileInput(user: SignUpRequest): Boolean {
+        return (user.fullName.isEmpty() || user.email.isEmpty() || validatePhoneNumber(user.phone_number) || !validateEmailInput(
+            user.password
+        ))
+    }
+    // passwordInputField validation
+    fun validatePasswordErrors(
+        password: String,
+    ): List<String> {
+
+        val result = mutableListOf<String>()
+
+        if (password.length <= 7) {
+            result.add("* Minimum of 8 characters")
+        }
+        if (!password.contains(UPPERCASE) || !password.contains(LOWERCASE)
+        ) {
+            result.add("* Uppercase and lowercase")
+        }
+        if (!password.contains(DIGITCHARACTER)) {
+            result.add("* Numbers")
+        }
+
+        if (!password.contains(SPECAILCHARAACTERS)) {
+            result.add("* Special characters")
+        }
+
         return result
     }
 }
