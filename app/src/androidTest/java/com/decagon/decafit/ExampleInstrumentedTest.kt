@@ -1,5 +1,7 @@
 package com.decagon.decafit
 
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 
@@ -20,5 +22,11 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.decagon.decafit", appContext.packageName)
+
+        onView(withId(R.id.apple_login))
+    }
+
+    @Test
+    fun  m(){
     }
 }
