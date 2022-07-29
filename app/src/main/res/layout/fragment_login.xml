@@ -32,10 +32,10 @@
          <TextView
              style="@style/NormalBoldText"
              android:layout_marginLeft="@dimen/margin_32dp"
-             android:layout_marginBottom="@dimen/margin_46dp"
              android:text="@string/track_your_fitness"
              android:textColor="@color/white"
-             app:layout_constraintBottom_toBottomOf="@+id/exersice_image"
+             android:layout_marginBottom="@dimen/margin_46dp"
+             app:layout_constraintBottom_toBottomOf="@+id/login_image"
              app:layout_constraintStart_toStartOf="parent" />
 
          <TextView
