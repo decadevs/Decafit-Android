@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.decagon.decafit.common.authentication.LoginFragment"
+        android:name="com.decagon.decafit.common.authentication.presentation.screens.LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_SecondFragment"
@@ -23,6 +23,12 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_inputExerciseFragment"
+            app:destination="@id/inputExerciseFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -32,4 +38,27 @@
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/inputExerciseFragment"
+        android:name="com.decagon.decafit.workout.presentation.screens.InputExerciseFragment"
+        android:label="fragment_input_exercise"
+        tools:layout="@layout/fragment_input_exercise" >
+        <action
+            android:id="@+id/action_inputExerciseFragment_to_workoutBreakdownFragment"
+            app:destination="@id/workoutBreakdownFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutBreakdownFragment"
+        android:name="com.decagon.decafit.workout.presentation.screens.WorkoutBreakdownFragment"
+        android:label="fragment_workout_breakdown"
+        tools:layout="@layout/fragment_workout_breakdown" >
+        <action
+            android:id="@+id/action_workoutBreakdownFragment_to_inputExerciseFragment"
+            app:destination="@id/inputExerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashBoardFragment"
+        android:name="com.decagon.decafit.common.dashboard.DashBoardFragment"
+        android:label="fragment_dash_board"
+        tools:layout="@layout/fragment_dash_board" />
 </navigation>

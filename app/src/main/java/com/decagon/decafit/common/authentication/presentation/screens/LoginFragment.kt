@@ -1,12 +1,12 @@
-package com.decagon.decafit.common.authentication
+package com.decagon.decafit.common.authentication.presentation.screens
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
 import com.decagon.decafit.common.utils.Validation
@@ -46,7 +46,8 @@ class LoginFragment : Fragment() {
 
             if (Validation.validateEmailInput(email)) {
                 if (Validation.validatePasswordPattern(password)) {
-                    findNavController().navigate(R.id.action_loginFragment_to_inputExerciseFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
+
                 } else {
                     // call for incorrect password here
                     snackBar("Invalid Password")

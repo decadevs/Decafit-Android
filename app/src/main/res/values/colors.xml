@@ -11,4 +11,7 @@
     <color name="black">#2A2D34</color>
     <color name="orange">#F26430</color>
     <color name="red">#D91D1D</color>
+    <color name="light_orange">#FEF0EA</color>
+    <color name="green">#009B72</color>
+    <color name="light_green">#E6F5F1</color>
 </resources>
