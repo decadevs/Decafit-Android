@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.26875" />
+        <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/progress_horizontal.xml" value="0.157" />
+        <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/ratingbar.xml" value="0.157" />
+        <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/ratingbar_small.xml" value="0.157" />
+        <entry key="app/src/main/res/drawable/button_background.xml" value="0.134" />
         <entry key="app/src/main/res/drawable/image_button_bg.xml" value="0.134" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.24270833333333333" />
@@ -10,6 +15,8 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/fragment_workout_breakdown.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/workout_breakdown_item.xml" value="0.25677083333333334" />
+        <entry key="app/src/main/res/layout/workout_details_dialog.xml" value="0.18" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.24270833333333333" />
       </map>
     </option>
@@ -19,5 +26,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.18" />
+      </ProjectState>
+    </option>
   </component>
 </project>

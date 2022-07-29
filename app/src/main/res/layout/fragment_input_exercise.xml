@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardView"
+                android:id="@+id/back_arrow_CV"
                 android:layout_width="@dimen/margin_40dp"
                 android:layout_height="@dimen/margin_40dp"
                 android:layout_marginStart="@dimen/margin_32dp"
@@ -26,8 +26,8 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_back_arrow" />
             </com.google.android.material.card.MaterialCardView>
@@ -42,7 +42,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+                app:layout_constraintTop_toBottomOf="@+id/back_arrow_CV" />
 
             <TextView
                 android:id="@+id/textView3"
