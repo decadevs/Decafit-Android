@@ -33,5 +33,10 @@
     <string name="complete_workout">complete</string>
     <string name="incomplete_workout"><font color ="#F26430">Incomplete</font>></string>
     <string name="description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed.</string>
+    <string name="gift_chuks">Gift Chuks</string>
+    <string name="_24_min">24 min</string>
+    <string name="_24_kcal">24 Kcal</string>
+    <string name="number_or_reps">Number or reps</string>
+    <string name="start_workout">Start Workout</string>
 
 </resources>

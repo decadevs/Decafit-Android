@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
+import com.decagon.decafit.common.SignUpRequest
 import com.decagon.decafit.databinding.FragmentDashBoardBinding
 
 class DashBoardFragment : Fragment() {
@@ -18,7 +20,22 @@ class DashBoardFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentDashBoardBinding.inflate(inflater, container, false)
 
-        return binding.root
+        binding.card1ExImage.setOnClickListener {
+                findNavController().navigate(R.id.action_dashBoardFragment_to_inputExerciseFragment)
+        }
 
+        binding.exercise1.setOnClickListener {
+            findNavController().navigate(R.id.action_dashBoardFragment_to_inputExerciseFragment)
+        }
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with(binding) {
+
+        }
     }
 }

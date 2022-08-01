@@ -60,5 +60,12 @@
         android:id="@+id/dashBoardFragment"
         android:name="com.decagon.decafit.common.dashboard.DashBoardFragment"
         android:label="fragment_dash_board"
-        tools:layout="@layout/fragment_dash_board" />
+        tools:layout="@layout/fragment_dash_board" >
+        <action
+            android:id="@+id/action_dashBoardFragment_to_workoutBreakdownFragment"
+            app:destination="@id/workoutBreakdownFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_inputExerciseFragment"
+            app:destination="@id/inputExerciseFragment" />
+    </fragment>
 </navigation>
