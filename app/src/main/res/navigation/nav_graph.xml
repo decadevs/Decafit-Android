@@ -18,6 +18,22 @@
         android:name="com.decagon.decafit.common.authentication.presentation.screens.LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
+            android:id="@+id/action_loginFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_inputExerciseFragment"
+            app:destination="@id/inputExerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.decagon.decafit.common.authentication.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
             android:id="@+id/action_loginFragment_to_inputExerciseFragment"
             app:destination="@id/inputExerciseFragment" />
     </fragment>
