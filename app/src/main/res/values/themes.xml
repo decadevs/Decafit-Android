@@ -34,6 +34,7 @@
     <style name="NormalText" parent="NormalBoldText" >
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/poppins</item>
     </style>
 
     <style name="TextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
