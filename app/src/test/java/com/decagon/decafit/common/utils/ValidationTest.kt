@@ -94,4 +94,11 @@ class ValidationTest {
         val actual = Validation.validatePasswordErrors(passwordLessThan8character)
         Assert.assertEquals(expected, actual)
     }
+
+    @Test
+    fun validate_sign_up_process() {
+        val expected = listOf("* Minimum of 8 characters")
+        val actual = Validation.validatePasswordErrors(passwordLessThan8character)
+        Assert.assertEquals(expected, actual)
+    }
 }
