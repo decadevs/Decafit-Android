@@ -37,6 +37,7 @@ fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, work
     }
 
 
+    dialogBinding.imageView2.setImageResource(R.drawable.workout_detail_background)
     dialogBinding.discTitleTv.text = workoutItems.title
     dialogBinding.workoutDescriptionTv.text = workoutItems.description
 

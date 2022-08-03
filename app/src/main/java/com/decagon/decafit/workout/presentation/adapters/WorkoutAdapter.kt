@@ -45,7 +45,7 @@ class WorkoutAdapter(private  val listener:OnclickListener, private val context:
                  workoutProgressCard.visibility = View.VISIBLE
                  workoutStatus.setText(R.string.complete_workout)
                  workoutProgressCard.setCardBackgroundColor(context.getColor(R.color.light_green))
-                 progressBar.progress = items.workoutProgress
+                 progressBar.visibility = View.INVISIBLE
              }else if(items.workoutProgress !=0){
                  workoutProgressCard.visibility = View.VISIBLE
                  workoutStatus.setText(R.string.incomplete_workout)
