@@ -8,7 +8,6 @@
         <entry key="app/src/main/res/drawable/ic_play_icon.xml" value="0.134" />
         <entry key="app/src/main/res/drawable/ic_play_round_icon.xml" value="0.134" />
         <entry key="app/src/main/res/drawable/image_button_bg.xml" value="0.134" />
-<<<<<<< HEAD
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/fragment_dash_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.24270833333333333" />
@@ -18,7 +17,6 @@
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_workout_breakdown.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/workout_details_dialog.xml" value="0.2828125" />
-=======
           <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/play_icon.xml" value="0.134" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -29,7 +27,6 @@
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_workout_breakdown.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/workout_breakdown_item.xml" value="0.10520833333333333" />
->>>>>>> 0948db9533d2c109effb2fdeb936744dc0ad3faf
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.24270833333333333" />
       </map>
     </option>
@@ -43,11 +40,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-<<<<<<< HEAD
-        <option name="scale" value="0.33" />
-=======
         <option name="scale" value="0.22" />
->>>>>>> 0948db9533d2c109effb2fdeb936744dc0ad3faf
       </ProjectState>
     </option>
   </component>
