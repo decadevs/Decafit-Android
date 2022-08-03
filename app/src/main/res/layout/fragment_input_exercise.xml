@@ -19,77 +19,106 @@
                 android:id="@+id/input_exercise_back_arrow_CV"
                 android:layout_width="@dimen/margin_40dp"
                 android:layout_height="@dimen/margin_40dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#F7F7FB"
                 android:layout_marginStart="@dimen/margin_32dp"
                 android:layout_marginTop="@dimen/margin_40dp"
-                android:background="@drawable/ic_back_arrow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_back_arrow" />
+                    android:src="@drawable/ic_back_arrow"
+                  />
             </com.google.android.material.card.MaterialCardView>
+<androidx.cardview.widget.CardView
+    android:id="@+id/input_exercise_image_Cv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="12dp"
+    android:layout_marginTop="@dimen/margin_40dp"
+    android:layout_marginHorizontal="@dimen/margin_32dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/input_exercise_back_arrow_CV">
 
-            <ImageView
-                android:id="@+id/input_exercise_image"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_175dp"
-                android:layout_marginHorizontal="@dimen/margin_32dp"
-                android:layout_marginTop="@dimen/margin_40dp"
-                android:background="@drawable/login_bg"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/input_exercise_back_arrow_CV" />
-
-            <TextView
-                android:id="@+id/full_body_tv"
-                style="@style/NormalBoldText"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:text="Full Body"
-                android:textSize="@dimen/text_size_24sp"
-                android:layout_marginTop="6dp"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/input_exercise_image"
-                app:layout_constraintStart_toStartOf="@+id/input_exercise_image"
-                app:layout_constraintTop_toTopOf="@+id/input_exercise_image" />
-
-            <TextView
-                android:id="@+id/calory_tv"
-                style="@style/NormalBoldText"
-                android:drawableStart="@drawable/ic_baseline_av_timer_24"
-                android:drawablePadding="8dp"
-                android:text="240 Kcal"
-                android:layout_marginStart="8dp"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintStart_toEndOf="@+id/timer_tv"
-                app:layout_constraintTop_toTopOf="@+id/timer_tv" />
-
-            <TextView
-                android:id="@+id/users_name_tv"
-                style="@style/NormalText"
-                android:text="Gift Chuks"
-                android:textColor="@color/white"
-                android:textSize="12dp"
-                app:layout_constraintStart_toStartOf="@+id/full_body_tv"
-                app:layout_constraintTop_toBottomOf="@+id/full_body_tv" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-            <TextView
-                android:id="@+id/timer_tv"
-                style="@style/NormalBoldText"
-                android:drawableStart="@drawable/ic_baseline_av_timer_24"
-                android:drawablePadding="8dp"
-                android:layout_marginBottom="@dimen/margin_16dp"
-                android:text="24 min"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="@+id/input_exercise_image"
-                app:layout_constraintStart_toStartOf="@+id/users_name_tv"
-                app:layout_constraintTop_toBottomOf="@+id/users_name_tv" />
+        <ImageView
+            android:id="@+id/input_exercise_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_175dp"
+            android:background="@drawable/full_body_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/full_body_tv"
+            style="@style/NormalBoldText"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="6dp"
+            android:text="Full Body"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/input_exercise_image"
+            app:layout_constraintStart_toStartOf="@+id/input_exercise_image"
+            app:layout_constraintTop_toTopOf="@+id/input_exercise_image" />
+
+        <ImageView
+            android:layout_width="@dimen/margin_32dp"
+            android:layout_height="@dimen/margin_32dp"
+            android:layout_marginEnd="@dimen/margin_24dp"
+            android:layout_marginBottom="39dp"
+            android:src="@drawable/ic_play_round_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/calory_tv"
+            style="@style/NormalText"
+            android:layout_marginStart="8dp"
+            android:drawableStart="@drawable/ic_fire_icon"
+            android:drawablePadding="8dp"
+            android:text="240 Kcal"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintStart_toEndOf="@+id/timer_tv"
+            app:layout_constraintTop_toTopOf="@+id/timer_tv" />
+
+        <TextView
+            android:id="@+id/users_name_tv"
+            style="@style/NormalText"
+            android:text="Gift Chuks"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_12sp"
+            app:layout_constraintStart_toStartOf="@+id/full_body_tv"
+            app:layout_constraintTop_toBottomOf="@+id/full_body_tv" />
+
+
+        <TextView
+            android:id="@+id/timer_tv"
+            style="@style/NormalText"
+            android:layout_marginBottom="@dimen/margin_16dp"
+            android:drawableStart="@drawable/ic_clock_icon"
+            android:drawablePadding="8dp"
+            android:text="24 min"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/input_exercise_image"
+            app:layout_constraintStart_toStartOf="@+id/users_name_tv"
+            app:layout_constraintTop_toBottomOf="@+id/users_name_tv" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/set_limit_tv"
@@ -100,14 +129,14 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/input_exercise_image" />
+                app:layout_constraintTop_toBottomOf="@+id/input_exercise_image_Cv" />
 
             <TextView
                 android:id="@+id/description_tv"
                 style="@style/FaintText"
                 android:layout_width="match_parent"
                 android:text="Enter the number of reps and sets for your workout"
-                android:textSize="@dimen/text_size_16sp"
+                android:textSize="@dimen/text_size_12sp"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="@dimen/margin_32dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -155,6 +184,7 @@
                     android:layout_height="56dp"
                     android:hint="@string/number_or_reps"
                     android:paddingVertical="10dp"
+                    android:fontFamily="@font/poppins"
                     android:textColorHint="@color/gray"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -167,7 +197,6 @@
                 style="@style/ButtonStyle"
                 android:layout_marginHorizontal="@dimen/margin_32dp"
                 android:layout_marginTop="48dp"
-                android:backgroundTint="@color/primary_color"
                 android:paddingVertical="10dp"
                 android:text="Next"
                 android:textColor="@color/white"
