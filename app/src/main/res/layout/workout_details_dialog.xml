@@ -32,6 +32,7 @@
             android:layout_marginLeft="@dimen/margin_32dp"
             android:layout_marginTop="@dimen/margin_24dp"
             android:text="Jumping Jacks"
+            android:elevation="@dimen/margin_12dp"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/black"
             android:textSize="20sp"
