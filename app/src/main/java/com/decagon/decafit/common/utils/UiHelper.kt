@@ -1,6 +1,5 @@
 package com.decagon.decafit.common.utils
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -8,15 +7,13 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
-import com.decagon.decafit.databinding.FragmentLoginBinding
 import com.decagon.decafit.databinding.WorkoutDetailsDialogBinding
 import com.decagon.decafit.workout.data.WorkoutItems
 import com.google.android.material.snackbar.Snackbar
 
 
-    fun Fragment.snackBar(message: String) {
+fun Fragment.snackBar(message: String) {
         Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG)
             .setBackgroundTint(resources.getColor(R.color.primary_color))
             .setTextColor(resources.getColor(R.color.white))
