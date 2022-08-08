@@ -1,5 +1,6 @@
 package com.decagon.decafit.common.authentication
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -33,6 +34,10 @@ class LoginFragment : Fragment() {
         activateClickListeners()
         loginInputHandler()
 
+    }
+
+    override fun getContext(): Context? {
+        return super.getContext()
     }
 
     private fun activateClickListeners(){

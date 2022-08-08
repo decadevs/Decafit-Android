@@ -3,20 +3,30 @@ package com.decagon.decafit.common.authentication.presentation.screens
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
+import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
+import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
+import com.decagon.decafit.common.utils.Resource
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentLoginBinding
+import com.decagon.decafit.type.UsersPermissionsRegisterInput
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: AuthViewModels by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,9 +39,11 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initSharedPreference(requireActivity())
 
         activateClickListeners()
         loginInputHandler()
+        singUpObserver()
 
     }
 
@@ -82,5 +94,17 @@ class LoginFragment : Fragment() {
         }
         binding.fragmentLoginEmailET.addTextChangedListener(inputHandler)
         binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
+    }
+
+    private fun singUpObserver(){
+        viewModel.registerUser(
+            UsersPermissionsRegisterInput(
+            "daniaamin", "min@gmail.com", "Password#123")
+        )
+        viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
+
+            //TODO( YET TO BE IMPLEMENTED)
+
+        }
     }
 }
