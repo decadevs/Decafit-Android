@@ -1,6 +1,6 @@
 package com.decagon.decafit.common.utils
 
-import com.decagon.decafit.common.SignUpRequest
+import com.decagon.decafit.common.authentication.data.SignUpRequest
 import org.junit.Assert
 import org.junit.Test
 

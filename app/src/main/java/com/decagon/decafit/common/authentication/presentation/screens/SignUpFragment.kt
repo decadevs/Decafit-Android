@@ -1,7 +1,6 @@
 package com.decagon.decafit.common.authentication.presentation.screens
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
-import com.decagon.decafit.common.SignUpRequest
+import com.decagon.decafit.common.authentication.data.SignUpRequest
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
-import com.decagon.decafit.common.utils.Resource
 import com.decagon.decafit.common.utils.Validation
-import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentSignUpBinding
-import com.decagon.decafit.type.UsersPermissionsRegisterInput
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
