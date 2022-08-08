@@ -1,0 +1,3404 @@
+input FileInfoInput {
+  name: String
+
+  alternativeText: String
+
+  caption: String
+}
+
+type UsersPermissionsMe {
+  id: ID!
+
+  username: String!
+
+  email: String!
+
+  confirmed: Boolean
+
+  blocked: Boolean
+
+  role: UsersPermissionsMeRole
+
+  firstname: String
+
+  lastname: String
+
+  wallet_balance: Float
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+
+  name: String!
+
+  description: String
+
+  type: String
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+
+  email: String!
+
+  password: String!
+
+  firstname: String
+
+  lastname: String
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+
+  password: String!
+
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+
+  user: UsersPermissionsMe!
+}
+
+type UserPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type BankAccounts {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  bank_name: String
+
+  bank_code: String
+
+  account_name: String
+
+  account_number: String
+
+  user_id: UsersPermissionsUser
+
+  default: Boolean
+
+  published_at: DateTime
+}
+
+type BankAccountsConnection {
+  values: [BankAccounts]
+
+  groupBy: BankAccountsGroupBy
+
+  aggregate: BankAccountsAggregator
+}
+
+type BankAccountsAggregator {
+  count: Int
+
+  totalCount: Int
+}
+
+type BankAccountsGroupBy {
+  id: [BankAccountsConnectionId]
+
+  created_at: [BankAccountsConnectionCreated_at]
+
+  updated_at: [BankAccountsConnectionUpdated_at]
+
+  bank_name: [BankAccountsConnectionBank_name]
+
+  bank_code: [BankAccountsConnectionBank_code]
+
+  account_name: [BankAccountsConnectionAccount_name]
+
+  account_number: [BankAccountsConnectionAccount_number]
+
+  user_id: [BankAccountsConnectionUser_id]
+
+  default: [BankAccountsConnectionDefault]
+
+  published_at: [BankAccountsConnectionPublished_at]
+}
+
+type BankAccountsConnectionId {
+  key: ID
+
+  connection: BankAccountsConnection
+}
+
+type BankAccountsConnectionCreated_at {
+  key: DateTime
+
+  connection: BankAccountsConnection
+}
+
+type BankAccountsConnectionUpdated_at {
+  key: DateTime
+
+  connection: BankAccountsConnection
+}
+
+type BankAccountsConnectionBank_name {
+  key: String
+
+  connection: BankAccountsConnection
+}
+
+type BankAccountsConnectionBank_code {
+  key: String
+
+  connection: BankAccountsConnection
+}
+
+type BankAccountsConnectionAccount_name {
+  key: String
+
+  connection: BankAccountsConnection
+}
+
+type BankAccountsConnectionAccount_number {
+  key: String
+
+  connection: BankAccountsConnection
+}
+
+type BankAccountsConnectionUser_id {
+  key: ID
+
+  connection: BankAccountsConnection
+}
+
+type BankAccountsConnectionDefault {
+  key: Boolean
+
+  connection: BankAccountsConnection
+}
+
+type BankAccountsConnectionPublished_at {
+  key: DateTime
+
+  connection: BankAccountsConnection
+}
+
+input BankAccountInput {
+  bank_name: String
+
+  bank_code: String
+
+  account_name: String
+
+  account_number: String
+
+  user_id: ID
+
+  default: Boolean
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editBankAccountInput {
+  bank_name: String
+
+  bank_code: String
+
+  account_name: String
+
+  account_number: String
+
+  user_id: ID
+
+  default: Boolean
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createBankAccountInput {
+  data: BankAccountInput
+}
+
+type createBankAccountPayload {
+  bankAccount: BankAccounts
+}
+
+input updateBankAccountInput {
+  where: InputID
+
+  data: editBankAccountInput
+}
+
+type updateBankAccountPayload {
+  bankAccount: BankAccounts
+}
+
+input deleteBankAccountInput {
+  where: InputID
+}
+
+type deleteBankAccountPayload {
+  bankAccount: BankAccounts
+}
+
+type BvnDetails {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  users_id: UsersPermissionsUser
+
+  bvn: JSON
+
+  published_at: DateTime
+}
+
+type BvnDetailsConnection {
+  values: [BvnDetails]
+
+  groupBy: BvnDetailsGroupBy
+
+  aggregate: BvnDetailsAggregator
+}
+
+type BvnDetailsAggregator {
+  count: Int
+
+  totalCount: Int
+}
+
+type BvnDetailsGroupBy {
+  id: [BvnDetailsConnectionId]
+
+  created_at: [BvnDetailsConnectionCreated_at]
+
+  updated_at: [BvnDetailsConnectionUpdated_at]
+
+  users_id: [BvnDetailsConnectionUsers_id]
+
+  bvn: [BvnDetailsConnectionBvn]
+
+  published_at: [BvnDetailsConnectionPublished_at]
+}
+
+type BvnDetailsConnectionId {
+  key: ID
+
+  connection: BvnDetailsConnection
+}
+
+type BvnDetailsConnectionCreated_at {
+  key: DateTime
+
+  connection: BvnDetailsConnection
+}
+
+type BvnDetailsConnectionUpdated_at {
+  key: DateTime
+
+  connection: BvnDetailsConnection
+}
+
+type BvnDetailsConnectionUsers_id {
+  key: ID
+
+  connection: BvnDetailsConnection
+}
+
+type BvnDetailsConnectionBvn {
+  key: JSON
+
+  connection: BvnDetailsConnection
+}
+
+type BvnDetailsConnectionPublished_at {
+  key: DateTime
+
+  connection: BvnDetailsConnection
+}
+
+input BvnDetailInput {
+  users_id: ID
+
+  bvn: JSON
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editBvnDetailInput {
+  users_id: ID
+
+  bvn: JSON
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createBvnDetailInput {
+  data: BvnDetailInput
+}
+
+type createBvnDetailPayload {
+  bvnDetail: BvnDetails
+}
+
+input updateBvnDetailInput {
+  where: InputID
+
+  data: editBvnDetailInput
+}
+
+type updateBvnDetailPayload {
+  bvnDetail: BvnDetails
+}
+
+input deleteBvnDetailInput {
+  where: InputID
+}
+
+type deleteBvnDetailPayload {
+  bvnDetail: BvnDetails
+}
+
+type GeneralSettings {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  goal_roi: Float
+
+  before_end_withdraw: Float
+
+  withdraw_condition: String
+
+  withdraw_charges: Int
+
+  minimum_withdraw: Float
+
+  published_at: DateTime
+}
+
+input GeneralSettingInput {
+  goal_roi: Float
+
+  before_end_withdraw: Float
+
+  withdraw_condition: String
+
+  withdraw_charges: Int
+
+  minimum_withdraw: Float
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editGeneralSettingInput {
+  goal_roi: Float
+
+  before_end_withdraw: Float
+
+  withdraw_condition: String
+
+  withdraw_charges: Int
+
+  minimum_withdraw: Float
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input updateGeneralSettingInput {
+  data: editGeneralSettingInput
+}
+
+type updateGeneralSettingPayload {
+  generalSetting: GeneralSettings
+}
+
+type deleteGeneralSettingPayload {
+  generalSetting: GeneralSettings
+}
+
+type Interests {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  user_id: UsersPermissionsUser
+
+  goal_id: UserGoal
+
+  user_saving_id: UserSavingsChallenges
+
+  amount: Float
+
+  reference: String
+
+  interested_amount: Float
+
+  published_at: DateTime
+}
+
+type InterestsConnection {
+  values: [Interests]
+
+  groupBy: InterestsGroupBy
+
+  aggregate: InterestsAggregator
+}
+
+type InterestsAggregator {
+  count: Int
+
+  totalCount: Int
+
+  sum: InterestsAggregatorSum
+
+  avg: InterestsAggregatorAvg
+
+  min: InterestsAggregatorMin
+
+  max: InterestsAggregatorMax
+}
+
+type InterestsAggregatorSum {
+  amount: Float
+
+  interested_amount: Float
+}
+
+type InterestsAggregatorAvg {
+  amount: Float
+
+  interested_amount: Float
+}
+
+type InterestsAggregatorMin {
+  amount: Float
+
+  interested_amount: Float
+}
+
+type InterestsAggregatorMax {
+  amount: Float
+
+  interested_amount: Float
+}
+
+type InterestsGroupBy {
+  id: [InterestsConnectionId]
+
+  created_at: [InterestsConnectionCreated_at]
+
+  updated_at: [InterestsConnectionUpdated_at]
+
+  user_id: [InterestsConnectionUser_id]
+
+  goal_id: [InterestsConnectionGoal_id]
+
+  user_saving_id: [InterestsConnectionUser_saving_id]
+
+  amount: [InterestsConnectionAmount]
+
+  reference: [InterestsConnectionReference]
+
+  interested_amount: [InterestsConnectionInterested_amount]
+
+  published_at: [InterestsConnectionPublished_at]
+}
+
+type InterestsConnectionId {
+  key: ID
+
+  connection: InterestsConnection
+}
+
+type InterestsConnectionCreated_at {
+  key: DateTime
+
+  connection: InterestsConnection
+}
+
+type InterestsConnectionUpdated_at {
+  key: DateTime
+
+  connection: InterestsConnection
+}
+
+type InterestsConnectionUser_id {
+  key: ID
+
+  connection: InterestsConnection
+}
+
+type InterestsConnectionGoal_id {
+  key: ID
+
+  connection: InterestsConnection
+}
+
+type InterestsConnectionUser_saving_id {
+  key: ID
+
+  connection: InterestsConnection
+}
+
+type InterestsConnectionAmount {
+  key: Float
+
+  connection: InterestsConnection
+}
+
+type InterestsConnectionReference {
+  key: String
+
+  connection: InterestsConnection
+}
+
+type InterestsConnectionInterested_amount {
+  key: Float
+
+  connection: InterestsConnection
+}
+
+type InterestsConnectionPublished_at {
+  key: DateTime
+
+  connection: InterestsConnection
+}
+
+input InterestInput {
+  user_id: ID
+
+  goal_id: ID
+
+  user_saving_id: ID
+
+  amount: Float
+
+  reference: String
+
+  interested_amount: Float
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editInterestInput {
+  user_id: ID
+
+  goal_id: ID
+
+  user_saving_id: ID
+
+  amount: Float
+
+  reference: String
+
+  interested_amount: Float
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createInterestInput {
+  data: InterestInput
+}
+
+type createInterestPayload {
+  interest: Interests
+}
+
+input updateInterestInput {
+  where: InputID
+
+  data: editInterestInput
+}
+
+type updateInterestPayload {
+  interest: Interests
+}
+
+input deleteInterestInput {
+  where: InputID
+}
+
+type deleteInterestPayload {
+  interest: Interests
+}
+
+type PayoutLogs {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  reference: String
+
+  providus_response: String
+
+  published_at: DateTime
+}
+
+type PayoutLogsConnection {
+  values: [PayoutLogs]
+
+  groupBy: PayoutLogsGroupBy
+
+  aggregate: PayoutLogsAggregator
+}
+
+type PayoutLogsAggregator {
+  count: Int
+
+  totalCount: Int
+}
+
+type PayoutLogsGroupBy {
+  id: [PayoutLogsConnectionId]
+
+  created_at: [PayoutLogsConnectionCreated_at]
+
+  updated_at: [PayoutLogsConnectionUpdated_at]
+
+  reference: [PayoutLogsConnectionReference]
+
+  providus_response: [PayoutLogsConnectionProvidus_response]
+
+  published_at: [PayoutLogsConnectionPublished_at]
+}
+
+type PayoutLogsConnectionId {
+  key: ID
+
+  connection: PayoutLogsConnection
+}
+
+type PayoutLogsConnectionCreated_at {
+  key: DateTime
+
+  connection: PayoutLogsConnection
+}
+
+type PayoutLogsConnectionUpdated_at {
+  key: DateTime
+
+  connection: PayoutLogsConnection
+}
+
+type PayoutLogsConnectionReference {
+  key: String
+
+  connection: PayoutLogsConnection
+}
+
+type PayoutLogsConnectionProvidus_response {
+  key: String
+
+  connection: PayoutLogsConnection
+}
+
+type PayoutLogsConnectionPublished_at {
+  key: DateTime
+
+  connection: PayoutLogsConnection
+}
+
+input PayoutLogInput {
+  reference: String
+
+  providus_response: String
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editPayoutLogInput {
+  reference: String
+
+  providus_response: String
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createPayoutLogInput {
+  data: PayoutLogInput
+}
+
+type createPayoutLogPayload {
+  payoutLog: PayoutLogs
+}
+
+input updatePayoutLogInput {
+  where: InputID
+
+  data: editPayoutLogInput
+}
+
+type updatePayoutLogPayload {
+  payoutLog: PayoutLogs
+}
+
+input deletePayoutLogInput {
+  where: InputID
+}
+
+type deletePayoutLogPayload {
+  payoutLog: PayoutLogs
+}
+
+enum ENUM_SAVINGCHALLENGES_FREQUENCY {
+  Once
+
+  Daily
+
+  Weekly
+
+  Monthly
+}
+
+type SavingChallenges {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  title: String
+
+  description: String
+
+  roi: Float
+
+  amount_to_be_saved: Long
+
+  start_date: Date
+
+  maturity_date: Date
+
+  maturity_period: String
+
+  risk_profile: String
+
+  withdraw_condition: String
+
+  image: String
+
+  frequency: ENUM_SAVINGCHALLENGES_FREQUENCY
+
+  published_at: DateTime
+
+  user_savings_challenges(sort: String, limit: Int, start: Int, where: JSON): [UserSavingsChallenges]
+}
+
+type SavingChallengesConnection {
+  values: [SavingChallenges]
+
+  groupBy: SavingChallengesGroupBy
+
+  aggregate: SavingChallengesAggregator
+}
+
+type SavingChallengesAggregator {
+  count: Int
+
+  totalCount: Int
+
+  sum: SavingChallengesAggregatorSum
+
+  avg: SavingChallengesAggregatorAvg
+
+  min: SavingChallengesAggregatorMin
+
+  max: SavingChallengesAggregatorMax
+}
+
+type SavingChallengesAggregatorSum {
+  roi: Float
+}
+
+type SavingChallengesAggregatorAvg {
+  roi: Float
+}
+
+type SavingChallengesAggregatorMin {
+  roi: Float
+}
+
+type SavingChallengesAggregatorMax {
+  roi: Float
+}
+
+type SavingChallengesGroupBy {
+  id: [SavingChallengesConnectionId]
+
+  created_at: [SavingChallengesConnectionCreated_at]
+
+  updated_at: [SavingChallengesConnectionUpdated_at]
+
+  title: [SavingChallengesConnectionTitle]
+
+  description: [SavingChallengesConnectionDescription]
+
+  roi: [SavingChallengesConnectionRoi]
+
+  amount_to_be_saved: [SavingChallengesConnectionAmount_to_be_saved]
+
+  start_date: [SavingChallengesConnectionStart_date]
+
+  maturity_date: [SavingChallengesConnectionMaturity_date]
+
+  maturity_period: [SavingChallengesConnectionMaturity_period]
+
+  risk_profile: [SavingChallengesConnectionRisk_profile]
+
+  withdraw_condition: [SavingChallengesConnectionWithdraw_condition]
+
+  image: [SavingChallengesConnectionImage]
+
+  frequency: [SavingChallengesConnectionFrequency]
+
+  published_at: [SavingChallengesConnectionPublished_at]
+}
+
+type SavingChallengesConnectionId {
+  key: ID
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionCreated_at {
+  key: DateTime
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionUpdated_at {
+  key: DateTime
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionTitle {
+  key: String
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionDescription {
+  key: String
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionRoi {
+  key: Float
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionAmount_to_be_saved {
+  key: ID
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionStart_date {
+  key: ID
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionMaturity_date {
+  key: ID
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionMaturity_period {
+  key: String
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionRisk_profile {
+  key: String
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionWithdraw_condition {
+  key: String
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionImage {
+  key: String
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionFrequency {
+  key: String
+
+  connection: SavingChallengesConnection
+}
+
+type SavingChallengesConnectionPublished_at {
+  key: DateTime
+
+  connection: SavingChallengesConnection
+}
+
+input SavingChallengeInput {
+  title: String
+
+  description: String
+
+  roi: Float
+
+  amount_to_be_saved: Long
+
+  start_date: Date
+
+  maturity_date: Date
+
+  maturity_period: String
+
+  risk_profile: String
+
+  withdraw_condition: String
+
+  image: String
+
+  user_savings_challenges: [ID]
+
+  frequency: ENUM_SAVINGCHALLENGES_FREQUENCY
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editSavingChallengeInput {
+  title: String
+
+  description: String
+
+  roi: Float
+
+  amount_to_be_saved: Long
+
+  start_date: Date
+
+  maturity_date: Date
+
+  maturity_period: String
+
+  risk_profile: String
+
+  withdraw_condition: String
+
+  image: String
+
+  user_savings_challenges: [ID]
+
+  frequency: ENUM_SAVINGCHALLENGES_FREQUENCY
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createSavingChallengeInput {
+  data: SavingChallengeInput
+}
+
+type createSavingChallengePayload {
+  savingChallenge: SavingChallenges
+}
+
+input updateSavingChallengeInput {
+  where: InputID
+
+  data: editSavingChallengeInput
+}
+
+type updateSavingChallengePayload {
+  savingChallenge: SavingChallenges
+}
+
+input deleteSavingChallengeInput {
+  where: InputID
+}
+
+type deleteSavingChallengePayload {
+  savingChallenge: SavingChallenges
+}
+
+enum ENUM_TRANSACTION_TRANSACTION_TYPE {
+  withdraw
+
+  funding
+}
+
+type Transaction {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  user_id: UsersPermissionsUser
+
+  user_goal: UserGoal
+
+  user_savings_challenge: UserSavingsChallenges
+
+  reference: String
+
+  amount: Float
+
+  transaction_type: ENUM_TRANSACTION_TRANSACTION_TYPE
+
+  source: String
+
+  destination: String
+
+  description: String
+
+  status: String
+
+  published_at: DateTime
+}
+
+type TransactionConnection {
+  values: [Transaction]
+
+  groupBy: TransactionGroupBy
+
+  aggregate: TransactionAggregator
+}
+
+type TransactionAggregator {
+  count: Int
+
+  totalCount: Int
+
+  sum: TransactionAggregatorSum
+
+  avg: TransactionAggregatorAvg
+
+  min: TransactionAggregatorMin
+
+  max: TransactionAggregatorMax
+}
+
+type TransactionAggregatorSum {
+  amount: Float
+}
+
+type TransactionAggregatorAvg {
+  amount: Float
+}
+
+type TransactionAggregatorMin {
+  amount: Float
+}
+
+type TransactionAggregatorMax {
+  amount: Float
+}
+
+type TransactionGroupBy {
+  id: [TransactionConnectionId]
+
+  created_at: [TransactionConnectionCreated_at]
+
+  updated_at: [TransactionConnectionUpdated_at]
+
+  user_id: [TransactionConnectionUser_id]
+
+  user_goal: [TransactionConnectionUser_goal]
+
+  user_savings_challenge: [TransactionConnectionUser_savings_challenge]
+
+  reference: [TransactionConnectionReference]
+
+  amount: [TransactionConnectionAmount]
+
+  transaction_type: [TransactionConnectionTransaction_type]
+
+  source: [TransactionConnectionSource]
+
+  destination: [TransactionConnectionDestination]
+
+  description: [TransactionConnectionDescription]
+
+  status: [TransactionConnectionStatus]
+
+  published_at: [TransactionConnectionPublished_at]
+}
+
+type TransactionConnectionId {
+  key: ID
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionCreated_at {
+  key: DateTime
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionUpdated_at {
+  key: DateTime
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionUser_id {
+  key: ID
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionUser_goal {
+  key: ID
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionUser_savings_challenge {
+  key: ID
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionReference {
+  key: String
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionAmount {
+  key: Float
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionTransaction_type {
+  key: String
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionSource {
+  key: String
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionDestination {
+  key: String
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionDescription {
+  key: String
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionStatus {
+  key: String
+
+  connection: TransactionConnection
+}
+
+type TransactionConnectionPublished_at {
+  key: DateTime
+
+  connection: TransactionConnection
+}
+
+input TransactionInput {
+  user_id: ID
+
+  user_goal: ID
+
+  user_savings_challenge: ID
+
+  reference: String
+
+  amount: Float
+
+  transaction_type: ENUM_TRANSACTION_TRANSACTION_TYPE
+
+  source: String
+
+  destination: String
+
+  description: String
+
+  status: String
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editTransactionInput {
+  user_id: ID
+
+  user_goal: ID
+
+  user_savings_challenge: ID
+
+  reference: String
+
+  amount: Float
+
+  transaction_type: ENUM_TRANSACTION_TRANSACTION_TYPE
+
+  source: String
+
+  destination: String
+
+  description: String
+
+  status: String
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createTransactionInput {
+  data: TransactionInput
+}
+
+type createTransactionPayload {
+  transaction: Transaction
+}
+
+input updateTransactionInput {
+  where: InputID
+
+  data: editTransactionInput
+}
+
+type updateTransactionPayload {
+  transaction: Transaction
+}
+
+input deleteTransactionInput {
+  where: InputID
+}
+
+type deleteTransactionPayload {
+  transaction: Transaction
+}
+
+type UserCards {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  authorization_obj: JSON
+
+  user_id: UsersPermissionsUser
+
+  default: Boolean
+
+  customer: JSON
+
+  published_at: DateTime
+}
+
+type UserCardsConnection {
+  values: [UserCards]
+
+  groupBy: UserCardsGroupBy
+
+  aggregate: UserCardsAggregator
+}
+
+type UserCardsAggregator {
+  count: Int
+
+  totalCount: Int
+}
+
+type UserCardsGroupBy {
+  id: [UserCardsConnectionId]
+
+  created_at: [UserCardsConnectionCreated_at]
+
+  updated_at: [UserCardsConnectionUpdated_at]
+
+  authorization_obj: [UserCardsConnectionAuthorization_obj]
+
+  user_id: [UserCardsConnectionUser_id]
+
+  default: [UserCardsConnectionDefault]
+
+  customer: [UserCardsConnectionCustomer]
+
+  published_at: [UserCardsConnectionPublished_at]
+}
+
+type UserCardsConnectionId {
+  key: ID
+
+  connection: UserCardsConnection
+}
+
+type UserCardsConnectionCreated_at {
+  key: DateTime
+
+  connection: UserCardsConnection
+}
+
+type UserCardsConnectionUpdated_at {
+  key: DateTime
+
+  connection: UserCardsConnection
+}
+
+type UserCardsConnectionAuthorization_obj {
+  key: JSON
+
+  connection: UserCardsConnection
+}
+
+type UserCardsConnectionUser_id {
+  key: ID
+
+  connection: UserCardsConnection
+}
+
+type UserCardsConnectionDefault {
+  key: Boolean
+
+  connection: UserCardsConnection
+}
+
+type UserCardsConnectionCustomer {
+  key: JSON
+
+  connection: UserCardsConnection
+}
+
+type UserCardsConnectionPublished_at {
+  key: DateTime
+
+  connection: UserCardsConnection
+}
+
+input UserCardInput {
+  authorization_obj: JSON
+
+  user_id: ID
+
+  default: Boolean
+
+  customer: JSON
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editUserCardInput {
+  authorization_obj: JSON
+
+  user_id: ID
+
+  default: Boolean
+
+  customer: JSON
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createUserCardInput {
+  data: UserCardInput
+}
+
+type createUserCardPayload {
+  userCard: UserCards
+}
+
+input updateUserCardInput {
+  where: InputID
+
+  data: editUserCardInput
+}
+
+type updateUserCardPayload {
+  userCard: UserCards
+}
+
+input deleteUserCardInput {
+  where: InputID
+}
+
+type deleteUserCardPayload {
+  userCard: UserCards
+}
+
+enum ENUM_USERGOAL_STATUS {
+  Not_Started
+
+  In_Progress
+
+  Suspend_Auto_Charge
+
+  Completed
+
+  Cancelled
+}
+
+enum ENUM_USERGOAL_FREQUENCY {
+  Once
+
+  Daily
+
+  Weekly
+
+  Monthly
+}
+
+type UserGoal {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  user_id: UsersPermissionsUser
+
+  title: String
+
+  start_date: Date
+
+  end_date: Date
+
+  description: String
+
+  smashed: Boolean
+
+  target_amount: Long
+
+  status: ENUM_USERGOAL_STATUS
+
+  percentage: Float
+
+  frequency: ENUM_USERGOAL_FREQUENCY
+
+  roi: Float
+
+  amount_saved: Float
+
+  next_payment_date: Date
+
+  interested_amount: Float
+
+  published_at: DateTime
+
+  transactions(sort: String, limit: Int, start: Int, where: JSON): [Transaction]
+
+  interests(sort: String, limit: Int, start: Int, where: JSON): [Interests]
+}
+
+type UserGoalConnection {
+  values: [UserGoal]
+
+  groupBy: UserGoalGroupBy
+
+  aggregate: UserGoalAggregator
+}
+
+type UserGoalAggregator {
+  count: Int
+
+  totalCount: Int
+
+  sum: UserGoalAggregatorSum
+
+  avg: UserGoalAggregatorAvg
+
+  min: UserGoalAggregatorMin
+
+  max: UserGoalAggregatorMax
+}
+
+type UserGoalAggregatorSum {
+  percentage: Float
+
+  roi: Float
+
+  amount_saved: Float
+
+  interested_amount: Float
+}
+
+type UserGoalAggregatorAvg {
+  percentage: Float
+
+  roi: Float
+
+  amount_saved: Float
+
+  interested_amount: Float
+}
+
+type UserGoalAggregatorMin {
+  percentage: Float
+
+  roi: Float
+
+  amount_saved: Float
+
+  interested_amount: Float
+}
+
+type UserGoalAggregatorMax {
+  percentage: Float
+
+  roi: Float
+
+  amount_saved: Float
+
+  interested_amount: Float
+}
+
+type UserGoalGroupBy {
+  id: [UserGoalConnectionId]
+
+  created_at: [UserGoalConnectionCreated_at]
+
+  updated_at: [UserGoalConnectionUpdated_at]
+
+  user_id: [UserGoalConnectionUser_id]
+
+  title: [UserGoalConnectionTitle]
+
+  start_date: [UserGoalConnectionStart_date]
+
+  end_date: [UserGoalConnectionEnd_date]
+
+  description: [UserGoalConnectionDescription]
+
+  smashed: [UserGoalConnectionSmashed]
+
+  target_amount: [UserGoalConnectionTarget_amount]
+
+  status: [UserGoalConnectionStatus]
+
+  percentage: [UserGoalConnectionPercentage]
+
+  frequency: [UserGoalConnectionFrequency]
+
+  roi: [UserGoalConnectionRoi]
+
+  amount_saved: [UserGoalConnectionAmount_saved]
+
+  next_payment_date: [UserGoalConnectionNext_payment_date]
+
+  interested_amount: [UserGoalConnectionInterested_amount]
+
+  published_at: [UserGoalConnectionPublished_at]
+}
+
+type UserGoalConnectionId {
+  key: ID
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionCreated_at {
+  key: DateTime
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionUpdated_at {
+  key: DateTime
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionUser_id {
+  key: ID
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionTitle {
+  key: String
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionStart_date {
+  key: ID
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionEnd_date {
+  key: ID
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionDescription {
+  key: String
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionSmashed {
+  key: Boolean
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionTarget_amount {
+  key: ID
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionStatus {
+  key: String
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionPercentage {
+  key: Float
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionFrequency {
+  key: String
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionRoi {
+  key: Float
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionAmount_saved {
+  key: Float
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionNext_payment_date {
+  key: ID
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionInterested_amount {
+  key: Float
+
+  connection: UserGoalConnection
+}
+
+type UserGoalConnectionPublished_at {
+  key: DateTime
+
+  connection: UserGoalConnection
+}
+
+input UserGoalInput {
+  user_id: ID
+
+  title: String
+
+  start_date: Date
+
+  end_date: Date
+
+  description: String
+
+  smashed: Boolean
+
+  transactions: [ID]
+
+  target_amount: Long
+
+  status: ENUM_USERGOAL_STATUS
+
+  percentage: Float
+
+  frequency: ENUM_USERGOAL_FREQUENCY
+
+  roi: Float
+
+  amount_saved: Float
+
+  next_payment_date: Date
+
+  interests: [ID]
+
+  interested_amount: Float
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editUserGoalInput {
+  user_id: ID
+
+  title: String
+
+  start_date: Date
+
+  end_date: Date
+
+  description: String
+
+  smashed: Boolean
+
+  transactions: [ID]
+
+  target_amount: Long
+
+  status: ENUM_USERGOAL_STATUS
+
+  percentage: Float
+
+  frequency: ENUM_USERGOAL_FREQUENCY
+
+  roi: Float
+
+  amount_saved: Float
+
+  next_payment_date: Date
+
+  interests: [ID]
+
+  interested_amount: Float
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createUserGoalInput {
+  data: UserGoalInput
+}
+
+type createUserGoalPayload {
+  userGoal: UserGoal
+}
+
+input updateUserGoalInput {
+  where: InputID
+
+  data: editUserGoalInput
+}
+
+type updateUserGoalPayload {
+  userGoal: UserGoal
+}
+
+input deleteUserGoalInput {
+  where: InputID
+}
+
+type deleteUserGoalPayload {
+  userGoal: UserGoal
+}
+
+enum ENUM_USERSAVINGSCHALLENGES_STATUS {
+  Not_Started
+
+  In_Progress
+
+  Suspend_Auto_Charge
+
+  Completed
+
+  Cancelled
+}
+
+enum ENUM_USERSAVINGSCHALLENGES_FREQUENCY {
+  Once
+
+  Daily
+
+  Weekly
+
+  Monthly
+}
+
+type UserSavingsChallenges {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  user_id: UsersPermissionsUser
+
+  status: ENUM_USERSAVINGSCHALLENGES_STATUS
+
+  amount_saved: Float
+
+  start_date: Date
+
+  percentage: Float
+
+  roi: Float
+
+  frequency: ENUM_USERSAVINGSCHALLENGES_FREQUENCY
+
+  target_amount: Float
+
+  next_payment_date: Date
+
+  saving_challenges_id: SavingChallenges
+
+  interested_amount: Float
+
+  published_at: DateTime
+
+  transactions(sort: String, limit: Int, start: Int, where: JSON): [Transaction]
+
+  interests(sort: String, limit: Int, start: Int, where: JSON): [Interests]
+}
+
+type UserSavingsChallengesConnection {
+  values: [UserSavingsChallenges]
+
+  groupBy: UserSavingsChallengesGroupBy
+
+  aggregate: UserSavingsChallengesAggregator
+}
+
+type UserSavingsChallengesAggregator {
+  count: Int
+
+  totalCount: Int
+
+  sum: UserSavingsChallengesAggregatorSum
+
+  avg: UserSavingsChallengesAggregatorAvg
+
+  min: UserSavingsChallengesAggregatorMin
+
+  max: UserSavingsChallengesAggregatorMax
+}
+
+type UserSavingsChallengesAggregatorSum {
+  amount_saved: Float
+
+  percentage: Float
+
+  roi: Float
+
+  target_amount: Float
+
+  interested_amount: Float
+}
+
+type UserSavingsChallengesAggregatorAvg {
+  amount_saved: Float
+
+  percentage: Float
+
+  roi: Float
+
+  target_amount: Float
+
+  interested_amount: Float
+}
+
+type UserSavingsChallengesAggregatorMin {
+  amount_saved: Float
+
+  percentage: Float
+
+  roi: Float
+
+  target_amount: Float
+
+  interested_amount: Float
+}
+
+type UserSavingsChallengesAggregatorMax {
+  amount_saved: Float
+
+  percentage: Float
+
+  roi: Float
+
+  target_amount: Float
+
+  interested_amount: Float
+}
+
+type UserSavingsChallengesGroupBy {
+  id: [UserSavingsChallengesConnectionId]
+
+  created_at: [UserSavingsChallengesConnectionCreated_at]
+
+  updated_at: [UserSavingsChallengesConnectionUpdated_at]
+
+  user_id: [UserSavingsChallengesConnectionUser_id]
+
+  status: [UserSavingsChallengesConnectionStatus]
+
+  amount_saved: [UserSavingsChallengesConnectionAmount_saved]
+
+  start_date: [UserSavingsChallengesConnectionStart_date]
+
+  percentage: [UserSavingsChallengesConnectionPercentage]
+
+  roi: [UserSavingsChallengesConnectionRoi]
+
+  frequency: [UserSavingsChallengesConnectionFrequency]
+
+  target_amount: [UserSavingsChallengesConnectionTarget_amount]
+
+  next_payment_date: [UserSavingsChallengesConnectionNext_payment_date]
+
+  saving_challenges_id: [UserSavingsChallengesConnectionSaving_challenges_id]
+
+  interested_amount: [UserSavingsChallengesConnectionInterested_amount]
+
+  published_at: [UserSavingsChallengesConnectionPublished_at]
+}
+
+type UserSavingsChallengesConnectionId {
+  key: ID
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionCreated_at {
+  key: DateTime
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionUpdated_at {
+  key: DateTime
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionUser_id {
+  key: ID
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionStatus {
+  key: String
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionAmount_saved {
+  key: Float
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionStart_date {
+  key: ID
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionPercentage {
+  key: Float
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionRoi {
+  key: Float
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionFrequency {
+  key: String
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionTarget_amount {
+  key: Float
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionNext_payment_date {
+  key: ID
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionSaving_challenges_id {
+  key: ID
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionInterested_amount {
+  key: Float
+
+  connection: UserSavingsChallengesConnection
+}
+
+type UserSavingsChallengesConnectionPublished_at {
+  key: DateTime
+
+  connection: UserSavingsChallengesConnection
+}
+
+input UserSavingsChallengeInput {
+  user_id: ID
+
+  status: ENUM_USERSAVINGSCHALLENGES_STATUS
+
+  amount_saved: Float
+
+  start_date: Date
+
+  transactions: [ID]
+
+  percentage: Float
+
+  roi: Float
+
+  frequency: ENUM_USERSAVINGSCHALLENGES_FREQUENCY
+
+  target_amount: Float
+
+  next_payment_date: Date
+
+  saving_challenges_id: ID
+
+  interests: [ID]
+
+  interested_amount: Float
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editUserSavingsChallengeInput {
+  user_id: ID
+
+  status: ENUM_USERSAVINGSCHALLENGES_STATUS
+
+  amount_saved: Float
+
+  start_date: Date
+
+  transactions: [ID]
+
+  percentage: Float
+
+  roi: Float
+
+  frequency: ENUM_USERSAVINGSCHALLENGES_FREQUENCY
+
+  target_amount: Float
+
+  next_payment_date: Date
+
+  saving_challenges_id: ID
+
+  interests: [ID]
+
+  interested_amount: Float
+
+  published_at: DateTime
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createUserSavingsChallengeInput {
+  data: UserSavingsChallengeInput
+}
+
+type createUserSavingsChallengePayload {
+  userSavingsChallenge: UserSavingsChallenges
+}
+
+input updateUserSavingsChallengeInput {
+  where: InputID
+
+  data: editUserSavingsChallengeInput
+}
+
+type updateUserSavingsChallengePayload {
+  userSavingsChallenge: UserSavingsChallenges
+}
+
+input deleteUserSavingsChallengeInput {
+  where: InputID
+}
+
+type deleteUserSavingsChallengePayload {
+  userSavingsChallenge: UserSavingsChallenges
+}
+
+type I18NLocale {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  name: String
+
+  code: String
+}
+
+input LocaleInput {
+  name: String
+
+  code: String
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editLocaleInput {
+  name: String
+
+  code: String
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+type UploadFile {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  name: String!
+
+  alternativeText: String
+
+  caption: String
+
+  width: Int
+
+  height: Int
+
+  formats: JSON
+
+  hash: String!
+
+  ext: String
+
+  mime: String!
+
+  size: Float!
+
+  url: String!
+
+  previewUrl: String
+
+  provider: String!
+
+  provider_metadata: JSON
+
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+
+  groupBy: UploadFileGroupBy
+
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileAggregator {
+  count: Int
+
+  totalCount: Int
+
+  sum: UploadFileAggregatorSum
+
+  avg: UploadFileAggregatorAvg
+
+  min: UploadFileAggregatorMin
+
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+
+  height: Float
+
+  size: Float
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+
+  height: Float
+
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+
+  height: Float
+
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+
+  height: Float
+
+  size: Float
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+
+  created_at: [UploadFileConnectionCreated_at]
+
+  updated_at: [UploadFileConnectionUpdated_at]
+
+  name: [UploadFileConnectionName]
+
+  alternativeText: [UploadFileConnectionAlternativeText]
+
+  caption: [UploadFileConnectionCaption]
+
+  width: [UploadFileConnectionWidth]
+
+  height: [UploadFileConnectionHeight]
+
+  formats: [UploadFileConnectionFormats]
+
+  hash: [UploadFileConnectionHash]
+
+  ext: [UploadFileConnectionExt]
+
+  mime: [UploadFileConnectionMime]
+
+  size: [UploadFileConnectionSize]
+
+  url: [UploadFileConnectionUrl]
+
+  previewUrl: [UploadFileConnectionPreviewUrl]
+
+  provider: [UploadFileConnectionProvider]
+
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+type UploadFileConnectionId {
+  key: ID
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreated_at {
+  key: DateTime
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdated_at {
+  key: DateTime
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+
+  connection: UploadFileConnection
+}
+
+input FileInput {
+  name: String!
+
+  alternativeText: String
+
+  caption: String
+
+  width: Int
+
+  height: Int
+
+  formats: JSON
+
+  hash: String!
+
+  ext: String
+
+  mime: String!
+
+  size: Float!
+
+  url: String!
+
+  previewUrl: String
+
+  provider: String!
+
+  provider_metadata: JSON
+
+  related: [ID]
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editFileInput {
+  name: String
+
+  alternativeText: String
+
+  caption: String
+
+  width: Int
+
+  height: Int
+
+  formats: JSON
+
+  hash: String
+
+  ext: String
+
+  mime: String
+
+  size: Float
+
+  url: String
+
+  previewUrl: String
+
+  provider: String
+
+  provider_metadata: JSON
+
+  related: [ID]
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input deleteFileInput {
+  where: InputID
+}
+
+type deleteFilePayload {
+  file: UploadFile
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+
+  type: String!
+
+  controller: String!
+
+  action: String!
+
+  enabled: Boolean!
+
+  policy: String
+
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+
+  name: String!
+
+  description: String
+
+  type: String
+
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+
+  groupBy: UsersPermissionsRoleGroupBy
+
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+
+  totalCount: Int
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+
+  name: [UsersPermissionsRoleConnectionName]
+
+  description: [UsersPermissionsRoleConnectionDescription]
+
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+
+  connection: UsersPermissionsRoleConnection
+}
+
+input RoleInput {
+  name: String!
+
+  description: String
+
+  type: String
+
+  permissions: [ID]
+
+  users: [ID]
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editRoleInput {
+  name: String
+
+  description: String
+
+  type: String
+
+  permissions: [ID]
+
+  users: [ID]
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateRoleInput {
+  where: InputID
+
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUser {
+  id: ID!
+
+  created_at: DateTime!
+
+  updated_at: DateTime!
+
+  username: String!
+
+  email: String!
+
+  provider: String
+
+  confirmed: Boolean
+
+  blocked: Boolean
+
+  role: UsersPermissionsRole
+
+  wallet_balance: Float
+
+  bvn: String
+
+  firstname: String
+
+  lastname: String
+
+  uuid: String
+
+  ags_nuban_number: String
+
+  ags_nuban_bank: String
+
+  ags_nuban_bank_code: String
+
+  ags_nuban_name: String
+
+  bvn_detail: BvnDetails
+
+  phone: String
+
+  otp: String
+
+  recipient_transfer_code: String
+
+  withdraw_amount: Float
+
+  user_savings_challenges(sort: String, limit: Int, start: Int, where: JSON): [UserSavingsChallenges]
+
+  user_goals(sort: String, limit: Int, start: Int, where: JSON): [UserGoal]
+
+  transactions(sort: String, limit: Int, start: Int, where: JSON): [Transaction]
+
+  bank_accounts(sort: String, limit: Int, start: Int, where: JSON): [BankAccounts]
+
+  interests(sort: String, limit: Int, start: Int, where: JSON): [Interests]
+
+  user_cards(sort: String, limit: Int, start: Int, where: JSON): [UserCards]
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+
+  groupBy: UsersPermissionsUserGroupBy
+
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+
+  totalCount: Int
+
+  sum: UsersPermissionsUserAggregatorSum
+
+  avg: UsersPermissionsUserAggregatorAvg
+
+  min: UsersPermissionsUserAggregatorMin
+
+  max: UsersPermissionsUserAggregatorMax
+}
+
+type UsersPermissionsUserAggregatorSum {
+  wallet_balance: Float
+
+  withdraw_amount: Float
+}
+
+type UsersPermissionsUserAggregatorAvg {
+  wallet_balance: Float
+
+  withdraw_amount: Float
+}
+
+type UsersPermissionsUserAggregatorMin {
+  wallet_balance: Float
+
+  withdraw_amount: Float
+}
+
+type UsersPermissionsUserAggregatorMax {
+  wallet_balance: Float
+
+  withdraw_amount: Float
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+
+  created_at: [UsersPermissionsUserConnectionCreated_at]
+
+  updated_at: [UsersPermissionsUserConnectionUpdated_at]
+
+  username: [UsersPermissionsUserConnectionUsername]
+
+  email: [UsersPermissionsUserConnectionEmail]
+
+  provider: [UsersPermissionsUserConnectionProvider]
+
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+
+  blocked: [UsersPermissionsUserConnectionBlocked]
+
+  role: [UsersPermissionsUserConnectionRole]
+
+  wallet_balance: [UsersPermissionsUserConnectionWallet_balance]
+
+  bvn: [UsersPermissionsUserConnectionBvn]
+
+  firstname: [UsersPermissionsUserConnectionFirstname]
+
+  lastname: [UsersPermissionsUserConnectionLastname]
+
+  uuid: [UsersPermissionsUserConnectionUuid]
+
+  ags_nuban_number: [UsersPermissionsUserConnectionAgs_nuban_number]
+
+  ags_nuban_bank: [UsersPermissionsUserConnectionAgs_nuban_bank]
+
+  ags_nuban_bank_code: [UsersPermissionsUserConnectionAgs_nuban_bank_code]
+
+  ags_nuban_name: [UsersPermissionsUserConnectionAgs_nuban_name]
+
+  bvn_detail: [UsersPermissionsUserConnectionBvn_detail]
+
+  phone: [UsersPermissionsUserConnectionPhone]
+
+  otp: [UsersPermissionsUserConnectionOtp]
+
+  recipient_transfer_code: [UsersPermissionsUserConnectionRecipient_transfer_code]
+
+  withdraw_amount: [UsersPermissionsUserConnectionWithdraw_amount]
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreated_at {
+  key: DateTime
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdated_at {
+  key: DateTime
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionWallet_balance {
+  key: Float
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBvn {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionFirstname {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionLastname {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUuid {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionAgs_nuban_number {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionAgs_nuban_bank {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionAgs_nuban_bank_code {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionAgs_nuban_name {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBvn_detail {
+  key: ID
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionPhone {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionOtp {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRecipient_transfer_code {
+  key: String
+
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionWithdraw_amount {
+  key: Float
+
+  connection: UsersPermissionsUserConnection
+}
+
+input UserInput {
+  username: String!
+
+  email: String!
+
+  provider: String
+
+  password: String
+
+  resetPasswordToken: String
+
+  confirmationToken: String
+
+  confirmed: Boolean
+
+  blocked: Boolean
+
+  role: ID
+
+  wallet_balance: Float
+
+  user_savings_challenges: [ID]
+
+  user_goals: [ID]
+
+  transactions: [ID]
+
+  bvn: String
+
+  firstname: String
+
+  lastname: String
+
+  uuid: String
+
+  bank_accounts: [ID]
+
+  ags_nuban_number: String
+
+  ags_nuban_bank: String
+
+  ags_nuban_bank_code: String
+
+  ags_nuban_name: String
+
+  interests: [ID]
+
+  bvn_detail: ID
+
+  user_cards: [ID]
+
+  phone: String
+
+  otp: String
+
+  recipient_transfer_code: String
+
+  withdraw_amount: Float
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input editUserInput {
+  username: String
+
+  email: String
+
+  provider: String
+
+  password: String
+
+  resetPasswordToken: String
+
+  confirmationToken: String
+
+  confirmed: Boolean
+
+  blocked: Boolean
+
+  role: ID
+
+  wallet_balance: Float
+
+  user_savings_challenges: [ID]
+
+  user_goals: [ID]
+
+  transactions: [ID]
+
+  bvn: String
+
+  firstname: String
+
+  lastname: String
+
+  uuid: String
+
+  bank_accounts: [ID]
+
+  ags_nuban_number: String
+
+  ags_nuban_bank: String
+
+  ags_nuban_bank_code: String
+
+  ags_nuban_name: String
+
+  interests: [ID]
+
+  bvn_detail: ID
+
+  user_cards: [ID]
+
+  phone: String
+
+  otp: String
+
+  recipient_transfer_code: String
+
+  withdraw_amount: Float
+
+  created_by: ID
+
+  updated_by: ID
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+input updateUserInput {
+  where: InputID
+
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+union Morph = UsersPermissionsMe|UsersPermissionsMeRole|UsersPermissionsLoginPayload|UserPermissionsPasswordPayload|BankAccounts|BankAccountsConnection|BankAccountsAggregator|BankAccountsGroupBy|BankAccountsConnectionId|BankAccountsConnectionCreated_at|BankAccountsConnectionUpdated_at|BankAccountsConnectionBank_name|BankAccountsConnectionBank_code|BankAccountsConnectionAccount_name|BankAccountsConnectionAccount_number|BankAccountsConnectionUser_id|BankAccountsConnectionDefault|BankAccountsConnectionPublished_at|createBankAccountPayload|updateBankAccountPayload|deleteBankAccountPayload|BvnDetails|BvnDetailsConnection|BvnDetailsAggregator|BvnDetailsGroupBy|BvnDetailsConnectionId|BvnDetailsConnectionCreated_at|BvnDetailsConnectionUpdated_at|BvnDetailsConnectionUsers_id|BvnDetailsConnectionBvn|BvnDetailsConnectionPublished_at|createBvnDetailPayload|updateBvnDetailPayload|deleteBvnDetailPayload|GeneralSettings|updateGeneralSettingPayload|deleteGeneralSettingPayload|Interests|InterestsConnection|InterestsAggregator|InterestsAggregatorSum|InterestsAggregatorAvg|InterestsAggregatorMin|InterestsAggregatorMax|InterestsGroupBy|InterestsConnectionId|InterestsConnectionCreated_at|InterestsConnectionUpdated_at|InterestsConnectionUser_id|InterestsConnectionGoal_id|InterestsConnectionUser_saving_id|InterestsConnectionAmount|InterestsConnectionReference|InterestsConnectionInterested_amount|InterestsConnectionPublished_at|createInterestPayload|updateInterestPayload|deleteInterestPayload|PayoutLogs|PayoutLogsConnection|PayoutLogsAggregator|PayoutLogsGroupBy|PayoutLogsConnectionId|PayoutLogsConnectionCreated_at|PayoutLogsConnectionUpdated_at|PayoutLogsConnectionReference|PayoutLogsConnectionProvidus_response|PayoutLogsConnectionPublished_at|createPayoutLogPayload|updatePayoutLogPayload|deletePayoutLogPayload|SavingChallenges|SavingChallengesConnection|SavingChallengesAggregator|SavingChallengesAggregatorSum|SavingChallengesAggregatorAvg|SavingChallengesAggregatorMin|SavingChallengesAggregatorMax|SavingChallengesGroupBy|SavingChallengesConnectionId|SavingChallengesConnectionCreated_at|SavingChallengesConnectionUpdated_at|SavingChallengesConnectionTitle|SavingChallengesConnectionDescription|SavingChallengesConnectionRoi|SavingChallengesConnectionAmount_to_be_saved|SavingChallengesConnectionStart_date|SavingChallengesConnectionMaturity_date|SavingChallengesConnectionMaturity_period|SavingChallengesConnectionRisk_profile|SavingChallengesConnectionWithdraw_condition|SavingChallengesConnectionImage|SavingChallengesConnectionFrequency|SavingChallengesConnectionPublished_at|createSavingChallengePayload|updateSavingChallengePayload|deleteSavingChallengePayload|Transaction|TransactionConnection|TransactionAggregator|TransactionAggregatorSum|TransactionAggregatorAvg|TransactionAggregatorMin|TransactionAggregatorMax|TransactionGroupBy|TransactionConnectionId|TransactionConnectionCreated_at|TransactionConnectionUpdated_at|TransactionConnectionUser_id|TransactionConnectionUser_goal|TransactionConnectionUser_savings_challenge|TransactionConnectionReference|TransactionConnectionAmount|TransactionConnectionTransaction_type|TransactionConnectionSource|TransactionConnectionDestination|TransactionConnectionDescription|TransactionConnectionStatus|TransactionConnectionPublished_at|createTransactionPayload|updateTransactionPayload|deleteTransactionPayload|UserCards|UserCardsConnection|UserCardsAggregator|UserCardsGroupBy|UserCardsConnectionId|UserCardsConnectionCreated_at|UserCardsConnectionUpdated_at|UserCardsConnectionAuthorization_obj|UserCardsConnectionUser_id|UserCardsConnectionDefault|UserCardsConnectionCustomer|UserCardsConnectionPublished_at|createUserCardPayload|updateUserCardPayload|deleteUserCardPayload|UserGoal|UserGoalConnection|UserGoalAggregator|UserGoalAggregatorSum|UserGoalAggregatorAvg|UserGoalAggregatorMin|UserGoalAggregatorMax|UserGoalGroupBy|UserGoalConnectionId|UserGoalConnectionCreated_at|UserGoalConnectionUpdated_at|UserGoalConnectionUser_id|UserGoalConnectionTitle|UserGoalConnectionStart_date|UserGoalConnectionEnd_date|UserGoalConnectionDescription|UserGoalConnectionSmashed|UserGoalConnectionTarget_amount|UserGoalConnectionStatus|UserGoalConnectionPercentage|UserGoalConnectionFrequency|UserGoalConnectionRoi|UserGoalConnectionAmount_saved|UserGoalConnectionNext_payment_date|UserGoalConnectionInterested_amount|UserGoalConnectionPublished_at|createUserGoalPayload|updateUserGoalPayload|deleteUserGoalPayload|UserSavingsChallenges|UserSavingsChallengesConnection|UserSavingsChallengesAggregator|UserSavingsChallengesAggregatorSum|UserSavingsChallengesAggregatorAvg|UserSavingsChallengesAggregatorMin|UserSavingsChallengesAggregatorMax|UserSavingsChallengesGroupBy|UserSavingsChallengesConnectionId|UserSavingsChallengesConnectionCreated_at|UserSavingsChallengesConnectionUpdated_at|UserSavingsChallengesConnectionUser_id|UserSavingsChallengesConnectionStatus|UserSavingsChallengesConnectionAmount_saved|UserSavingsChallengesConnectionStart_date|UserSavingsChallengesConnectionPercentage|UserSavingsChallengesConnectionRoi|UserSavingsChallengesConnectionFrequency|UserSavingsChallengesConnectionTarget_amount|UserSavingsChallengesConnectionNext_payment_date|UserSavingsChallengesConnectionSaving_challenges_id|UserSavingsChallengesConnectionInterested_amount|UserSavingsChallengesConnectionPublished_at|createUserSavingsChallengePayload|updateUserSavingsChallengePayload|deleteUserSavingsChallengePayload|I18NLocale|UploadFile|UploadFileConnection|UploadFileAggregator|UploadFileAggregatorSum|UploadFileAggregatorAvg|UploadFileAggregatorMin|UploadFileAggregatorMax|UploadFileGroupBy|UploadFileConnectionId|UploadFileConnectionCreated_at|UploadFileConnectionUpdated_at|UploadFileConnectionName|UploadFileConnectionAlternativeText|UploadFileConnectionCaption|UploadFileConnectionWidth|UploadFileConnectionHeight|UploadFileConnectionFormats|UploadFileConnectionHash|UploadFileConnectionExt|UploadFileConnectionMime|UploadFileConnectionSize|UploadFileConnectionUrl|UploadFileConnectionPreviewUrl|UploadFileConnectionProvider|UploadFileConnectionProvider_metadata|deleteFilePayload|UsersPermissionsPermission|UsersPermissionsRole|UsersPermissionsRoleConnection|UsersPermissionsRoleAggregator|UsersPermissionsRoleGroupBy|UsersPermissionsRoleConnectionId|UsersPermissionsRoleConnectionName|UsersPermissionsRoleConnectionDescription|UsersPermissionsRoleConnectionType|createRolePayload|updateRolePayload|deleteRolePayload|UsersPermissionsUser|UsersPermissionsUserConnection|UsersPermissionsUserAggregator|UsersPermissionsUserAggregatorSum|UsersPermissionsUserAggregatorAvg|UsersPermissionsUserAggregatorMin|UsersPermissionsUserAggregatorMax|UsersPermissionsUserGroupBy|UsersPermissionsUserConnectionId|UsersPermissionsUserConnectionCreated_at|UsersPermissionsUserConnectionUpdated_at|UsersPermissionsUserConnectionUsername|UsersPermissionsUserConnectionEmail|UsersPermissionsUserConnectionProvider|UsersPermissionsUserConnectionConfirmed|UsersPermissionsUserConnectionBlocked|UsersPermissionsUserConnectionRole|UsersPermissionsUserConnectionWallet_balance|UsersPermissionsUserConnectionBvn|UsersPermissionsUserConnectionFirstname|UsersPermissionsUserConnectionLastname|UsersPermissionsUserConnectionUuid|UsersPermissionsUserConnectionAgs_nuban_number|UsersPermissionsUserConnectionAgs_nuban_bank|UsersPermissionsUserConnectionAgs_nuban_bank_code|UsersPermissionsUserConnectionAgs_nuban_name|UsersPermissionsUserConnectionBvn_detail|UsersPermissionsUserConnectionPhone|UsersPermissionsUserConnectionOtp|UsersPermissionsUserConnectionRecipient_transfer_code|UsersPermissionsUserConnectionWithdraw_amount|createUserPayload|updateUserPayload|deleteUserPayload
+
+input InputID {
+  id: ID!
+}
+
+enum PublicationState {
+  LIVE
+
+  PREVIEW
+}
+
+type AdminUser {
+  id: ID!
+
+  username: String
+
+  firstname: String!
+
+  lastname: String!
+}
+
+type Query {
+  bankAccount(id: ID!, publicationState: PublicationState): BankAccounts
+
+  bankAccounts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [BankAccounts]
+
+  bankAccountsConnection(sort: String, limit: Int, start: Int, where: JSON): BankAccountsConnection
+
+  bvnDetail(id: ID!, publicationState: PublicationState): BvnDetails
+
+  bvnDetails(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [BvnDetails]
+
+  bvnDetailsConnection(sort: String, limit: Int, start: Int, where: JSON): BvnDetailsConnection
+
+  generalSetting(publicationState: PublicationState): GeneralSettings
+
+  interest(id: ID!, publicationState: PublicationState): Interests
+
+  interests(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Interests]
+
+  interestsConnection(sort: String, limit: Int, start: Int, where: JSON): InterestsConnection
+
+  payoutLog(id: ID!, publicationState: PublicationState): PayoutLogs
+
+  payoutLogs(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [PayoutLogs]
+
+  payoutLogsConnection(sort: String, limit: Int, start: Int, where: JSON): PayoutLogsConnection
+
+  savingChallenge(id: ID!, publicationState: PublicationState): SavingChallenges
+
+  savingChallenges(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [SavingChallenges]
+
+  savingChallengesConnection(sort: String, limit: Int, start: Int, where: JSON): SavingChallengesConnection
+
+  transaction(id: ID!, publicationState: PublicationState): Transaction
+
+  transactions(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Transaction]
+
+  transactionsConnection(sort: String, limit: Int, start: Int, where: JSON): TransactionConnection
+
+  userCard(id: ID!, publicationState: PublicationState): UserCards
+
+  userCards(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UserCards]
+
+  userCardsConnection(sort: String, limit: Int, start: Int, where: JSON): UserCardsConnection
+
+  userGoal(id: ID!, publicationState: PublicationState): UserGoal
+
+  userGoals(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UserGoal]
+
+  userGoalsConnection(sort: String, limit: Int, start: Int, where: JSON): UserGoalConnection
+
+  userSavingsChallenge(id: ID!, publicationState: PublicationState): UserSavingsChallenges
+
+  userSavingsChallenges(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UserSavingsChallenges]
+
+  userSavingsChallengesConnection(sort: String, limit: Int, start: Int, where: JSON): UserSavingsChallengesConnection
+
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile]
+
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+
+  role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole]
+
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+
+  user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
+
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser]
+
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+
+  me: UsersPermissionsMe
+}
+
+type Mutation {
+  createBankAccount(input: createBankAccountInput): createBankAccountPayload
+
+  updateBankAccount(input: updateBankAccountInput): updateBankAccountPayload
+
+  deleteBankAccount(input: deleteBankAccountInput): deleteBankAccountPayload
+
+  createBvnDetail(input: createBvnDetailInput): createBvnDetailPayload
+
+  updateBvnDetail(input: updateBvnDetailInput): updateBvnDetailPayload
+
+  deleteBvnDetail(input: deleteBvnDetailInput): deleteBvnDetailPayload
+
+  updateGeneralSetting(input: updateGeneralSettingInput): updateGeneralSettingPayload
+
+  deleteGeneralSetting: deleteGeneralSettingPayload
+
+  createInterest(input: createInterestInput): createInterestPayload
+
+  updateInterest(input: updateInterestInput): updateInterestPayload
+
+  deleteInterest(input: deleteInterestInput): deleteInterestPayload
+
+  createPayoutLog(input: createPayoutLogInput): createPayoutLogPayload
+
+  updatePayoutLog(input: updatePayoutLogInput): updatePayoutLogPayload
+
+  deletePayoutLog(input: deletePayoutLogInput): deletePayoutLogPayload
+
+  createSavingChallenge(input: createSavingChallengeInput): createSavingChallengePayload
+
+  updateSavingChallenge(input: updateSavingChallengeInput): updateSavingChallengePayload
+
+  deleteSavingChallenge(input: deleteSavingChallengeInput): deleteSavingChallengePayload
+
+  createTransaction(input: createTransactionInput): createTransactionPayload
+
+  updateTransaction(input: updateTransactionInput): updateTransactionPayload
+
+  deleteTransaction(input: deleteTransactionInput): deleteTransactionPayload
+
+  createUserCard(input: createUserCardInput): createUserCardPayload
+
+  updateUserCard(input: updateUserCardInput): updateUserCardPayload
+
+  deleteUserCard(input: deleteUserCardInput): deleteUserCardPayload
+
+  createUserGoal(input: createUserGoalInput): createUserGoalPayload
+
+  updateUserGoal(input: updateUserGoalInput): updateUserGoalPayload
+
+  deleteUserGoal(input: deleteUserGoalInput): deleteUserGoalPayload
+
+  createUserSavingsChallenge(input: createUserSavingsChallengeInput): createUserSavingsChallengePayload
+
+  updateUserSavingsChallenge(input: updateUserSavingsChallengeInput): updateUserSavingsChallengePayload
+
+  deleteUserSavingsChallenge(input: deleteUserSavingsChallengeInput): deleteUserSavingsChallengePayload
+
+  """
+  Delete one file
+  """
+  deleteFile(input: deleteFileInput): deleteFilePayload
+
+  """
+  Create a new role
+  """
+  createRole(input: createRoleInput): createRolePayload
+
+  """
+  Update an existing role
+  """
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """
+  Delete an existing role
+  """
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """
+  Create a new user
+  """
+  createUser(input: createUserInput): createUserPayload
+
+  """
+  Update an existing user
+  """
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """
+  Delete an existing user
+  """
+  deleteUser(input: deleteUserInput): deleteUserPayload
+
+  upload(refId: ID, ref: String, field: String, source: String, info: FileInfoInput, file: Upload!): UploadFile!
+
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+
+  updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
+
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+
+  forgotPassword(email: String!): UserPermissionsPasswordPayload
+
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""
+A time string with format: HH:mm:ss.SSS
+"""
+scalar Time
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""
+The `Long` scalar type represents 52-bit integers
+"""
+scalar Long
+
+"""
+The `Upload` scalar type represents a file upload.
+"""
+scalar Upload
+
+schema {
+  query: Query
+  mutation: Mutation
+}

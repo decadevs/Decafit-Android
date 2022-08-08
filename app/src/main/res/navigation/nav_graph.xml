@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.decagon.decafit.common.authentication.SignUpFragment"
+        android:name="com.decagon.decafit.common.authentication.presentation.screens.SignUpFragment"
         android:label="SignUpFragment" >
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
