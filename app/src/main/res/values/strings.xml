@@ -24,7 +24,7 @@
     <string name="wrong_email_address">wrong email address</string>
     <string name="timer_value">00:20</string>
     <string name="complete_workout">complete</string>
-    <string name="incomplete_workout"><font color ="#F26430">Incomplete</font></string>
+    <string name="incomplete_workout"><font color="#F26430">Incomplete</font></string>
     <string name="description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed.</string>
     <string name="start_workout">Start Workout</string>
     <string name="continue_workout">Continue Workout</string>
@@ -33,4 +33,9 @@
     <string name="workouts_points">10 Workouts</string>
     <string name="kcal_points">240 Kcal</string>
     <string name="workout_time_min">24 min</string>
+    <string name="workout_counter">00:04</string>
+    <string name="next_workout">Next Workout</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="jumping_jacks">Jumping Jacks</string>
 </resources>
