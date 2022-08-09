@@ -1,4 +1,4 @@
-package com.decagon.decafit.common
+package com.decagon.decafit.common.authentication.data
 
 data class SignUpRequest(
     val email : String,

@@ -34,8 +34,7 @@
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-            android:id="@+id/action_loginFragment_to_inputExerciseFragment"
-            app:destination="@id/inputExerciseFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/inputExerciseFragment"
@@ -54,5 +53,13 @@
         <action
             android:id="@+id/action_workoutBreakdownFragment_to_inputExerciseFragment"
             app:destination="@id/inputExerciseFragment" />
+        <action
+            android:id="@+id/action_workoutBreakdownFragment_to_pauseResumeWorkoutFragment"
+            app:destination="@id/pauseResumeWorkoutFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/pauseResumeWorkoutFragment"
+        android:name="com.decagon.decafit.workout.presentation.screens.PauseResumeWorkoutFragment"
+        android:label="fragment_pause_resume_workout"
+        tools:layout="@layout/fragment_pause_resume_workout" />
 </navigation>
