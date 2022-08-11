@@ -17,6 +17,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ProgressBar
+            android:id="@+id/workout_progress_bar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:progress="0"
+            android:progressBackgroundTint="@color/white"
+            android:progressTint="#F2FAF8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="wrap_content"
@@ -25,7 +39,6 @@
             android:layout_marginStart="@dimen/margin_16dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -57,24 +70,11 @@
             app:layout_constraintStart_toStartOf="@+id/workout_title_tv"
             app:layout_constraintTop_toBottomOf="@+id/workout_title_tv" />
 
-        <ProgressBar
-            android:id="@+id/workout_progress_bar"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:progress="0"
-            android:background="@color/white"
-            android:progressBackgroundTint="@color/white"
-            android:progressTint="#F2FAF8"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/workout_status_CV"
             android:layout_width="wrap_content"
+            android:outlineSpotShadowColor="@color/white"
+            android:outlineAmbientShadowColor="@color/white"
             android:layout_height="match_parent"
             app:cardBackgroundColor="#E6F5F1"
             android:layout_marginEnd="@dimen/margin_16dp"
@@ -97,7 +97,5 @@
                 android:textColor="@color/green"/>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
