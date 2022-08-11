@@ -18,7 +18,7 @@ import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentLoginBinding
-import com.decagon.decafit.type.UsersPermissionsRegisterInput
+import com.decagon.decafit.type.RegisterInput
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -98,8 +98,8 @@ class LoginFragment : Fragment() {
 
     private fun singUpObserver(){
         viewModel.registerUser(
-            UsersPermissionsRegisterInput(
-            "daniaamin", "min@gmail.com", "Password#123")
+            RegisterInput(
+            "daniaamin", "min@gmail.com", "09012678900","Password#123")
          , requireContext())
         viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
 
