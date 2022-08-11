@@ -36,6 +36,7 @@ class AuthViewModels @Inject constructor(
                 } catch (e: ApolloException) {
                     return@launch
                 }
+
                 _registerResponse.value = response
             }
         }else{

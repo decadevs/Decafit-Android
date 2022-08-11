@@ -116,6 +116,8 @@ dependencies {
 
     //apollo_android
     implementation("com.apollographql.apollo3:apollo-runtime:3.2.2")
+    // Coroutines extensions for easier asynchronicity handling
+    //implementation("com.apollographql.apollo:apollo-coroutines-support:x.y.z")
 
 //    coil
     implementation("io.coil-kt:coil:2.1.0")

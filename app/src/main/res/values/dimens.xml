@@ -22,4 +22,5 @@
     <dimen name="height_362dp">362dp</dimen>
     <dimen name="margin_136dp">136dp</dimen>
     <dimen name="text_size">20sp</dimen>
+    <dimen name="margin_48dp">48dp</dimen>
 </resources>
