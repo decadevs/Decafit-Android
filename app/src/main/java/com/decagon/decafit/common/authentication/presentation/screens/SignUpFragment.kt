@@ -1,4 +1,4 @@
-package com.decagon.decafit.common.authentication
+package com.decagon.decafit.common.authentication.presentation.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,16 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
-import com.decagon.decafit.common.SignUpRequest
+import com.decagon.decafit.common.authentication.data.SignUpRequest
+import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.databinding.FragmentSignUpBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
     private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
@@ -20,6 +24,9 @@ class SignUpFragment : Fragment() {
     private lateinit var email: String
     private lateinit var fullName: String
     private lateinit var phoneNumber: String
+    private val viewModel:AuthViewModels by viewModels()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -112,5 +119,7 @@ class SignUpFragment : Fragment() {
             }
         }
     }
+
+
 
 }

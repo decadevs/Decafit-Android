@@ -16,4 +16,11 @@
     <dimen name="margin_240dp">240dp</dimen>
     <dimen name="text_size_12sp">12sp</dimen>
     <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="text_size_14sp">14sp</dimen>
+    <dimen name="margin_61dp">61dp</dimen>
+    <dimen name="margin_42dp">42dp</dimen>
+    <dimen name="height_362dp">362dp</dimen>
+    <dimen name="margin_136dp">136dp</dimen>
+    <dimen name="text_size">20sp</dimen>
+    <dimen name="margin_48dp">48dp</dimen>
 </resources>

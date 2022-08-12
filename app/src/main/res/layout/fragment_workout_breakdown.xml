@@ -14,11 +14,12 @@
             android:id="@+id/exersice_image"
             android:layout_width="match_parent"
             android:layout_height="288dp"
-            android:background="@drawable/login_bg"
+            android:background="@drawable/workout_breakdown_image_"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/workout_image" />
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/back_arrow_CV"
             android:layout_width="@dimen/margin_40dp"
@@ -35,7 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_back_arrow" />
+                android:src="@drawable/ic_back_arrow"
+                android:contentDescription="@string/back_arrow" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
@@ -43,7 +45,7 @@
             style="@style/NormalBoldText"
             android:layout_marginStart="@dimen/margin_32dp"
             android:layout_marginBottom="9dp"
-            android:text="10 Workouts"
+            android:text="@string/workouts_points"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_24sp"
             app:layout_constraintBottom_toTopOf="@+id/workoutBreakdown_timer_tv"
@@ -55,12 +57,13 @@
             android:layout_marginStart="8dp"
             android:drawableStart="@drawable/ic_fire_icon"
             android:drawablePadding="8dp"
-            android:text="240 Kcal"
+            android:text="@string/kcal_points"
             android:textColor="@color/white"
-            android:textSize="14dp"
+            android:textSize="14sp"
+            app:drawableStartCompat="@drawable/ic_fire_icon"
             app:layout_constraintStart_toEndOf="@+id/workoutBreakdown_timer_tv"
-            app:layout_constraintTop_toTopOf="@+id/workoutBreakdown_timer_tv" />
-
+            app:layout_constraintTop_toTopOf="@+id/workoutBreakdown_timer_tv"
+             />
 
         <TextView
             android:id="@+id/workoutBreakdown_timer_tv"
@@ -68,11 +71,13 @@
             android:layout_marginBottom="@dimen/margin_32dp"
             android:drawableStart="@drawable/ic_baseline_av_timer_24"
             android:drawablePadding="8dp"
-            android:text="24 min"
+            android:text="@string/workout_time_min"
             android:textColor="@color/white"
-            android:textSize="14dp"
+            android:textSize="@dimen/text_size_14sp"
+            app:drawableStartCompat="@drawable/ic_clock_icon"
             app:layout_constraintBottom_toBottomOf="@+id/exersice_image"
-            app:layout_constraintStart_toStartOf="@+id/workoutBreakdown_tv" />
+            app:layout_constraintStart_toStartOf="@+id/workoutBreakdown_tv"
+             />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/workout_RV"
@@ -84,17 +89,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/exersice_image"
             tools:listitem="@layout/workout_breakdown_item" />
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/start_workout_btn"
             style="@style/ButtonStyle"
             android:layout_marginHorizontal="@dimen/margin_32dp"
-            android:layout_marginBottom="@dimen/margin_56dp"
+            android:layout_marginBottom="79dp"
             android:backgroundTint="@color/primary_color"
-            android:fontFamily="@font/ubuntu_medium"
             android:paddingVertical="10dp"
-            android:text="Start Workout"
-            android:textStyle="bold"
+            android:text="@string/start_workout"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,22 +107,18 @@
             android:id="@+id/continue_workout_btn"
             style="@style/ButtonStyle"
             android:layout_marginHorizontal="@dimen/margin_32dp"
-            android:layout_marginBottom="@dimen/margin_56dp"
+            android:layout_marginBottom="79dp"
             android:backgroundTint="@color/primary_color"
             android:fontFamily="@font/ubuntu_medium"
             android:paddingVertical="10dp"
             android:visibility="gone"
-            android:text="Continue Workout"
-
             android:textStyle="bold"
+            android:text="@string/continue_workout"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
