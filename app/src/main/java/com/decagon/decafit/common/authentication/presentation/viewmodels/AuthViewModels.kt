@@ -29,7 +29,6 @@ class AuthViewModels @Inject constructor(
 
     fun registerUser(registerInput: RegisterInput, context :Context) {
         if (isNetworkAvailable(context)) {
-
             viewModelScope.launch {
                 val response = try {
                     repository.register(registerInput)
@@ -43,4 +42,5 @@ class AuthViewModels @Inject constructor(
             _networkCheckResponse.value = "N0 INTERNET"
         }
     }
+
 }

@@ -43,13 +43,14 @@ class LoginFragment : Fragment() {
 
         activateClickListeners()
         loginInputHandler()
-        singUpObserver()
-
     }
 
     private fun activateClickListeners(){
         binding.layout.setOnClickListener{
             it.hideKeyboard()
+        }
+        binding.signUpTv.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment2())
         }
         binding.fragmentLoginLoginBtn.setOnClickListener {
 
@@ -96,15 +97,5 @@ class LoginFragment : Fragment() {
         binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
     }
 
-    private fun singUpObserver(){
-        viewModel.registerUser(
-            RegisterInput(
-            "daniaamin", "min@gmail.com", "09012678900","Password#123")
-         , requireContext())
-        viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
 
-            //TODO( YET TO BE IMPLEMENTED)
-
-        }
-    }
 }

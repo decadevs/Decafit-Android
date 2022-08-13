@@ -7,16 +7,19 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
 import com.decagon.decafit.databinding.FragmentLoginBinding
 import com.decagon.decafit.databinding.WorkoutDetailsDialogBinding
 import com.decagon.decafit.workout.data.WorkoutItems
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 
-    fun Fragment.snackBar(message: String) {
+fun Fragment.snackBar(message: String) {
         Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG)
             .setBackgroundTint(resources.getColor(R.color.primary_color))
             .setTextColor(resources.getColor(R.color.white))
@@ -45,4 +48,20 @@ fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, work
         dialog.dismiss()
     }
     return dialog
+}
+
+// this is used for navigation animation
+fun customNavAnimation(): NavOptions.Builder {
+    val navBuilder: NavOptions.Builder = NavOptions.Builder()
+    navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
+        .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right)
+    return navBuilder
+}
+
+fun Fragment.onBackPressed(){
+    val callBack =object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().popBackStack()
+        }
+    }
 }
