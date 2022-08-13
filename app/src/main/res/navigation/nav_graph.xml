@@ -10,6 +10,9 @@
         android:id="@+id/loginFragment"
         android:name="com.decagon.decafit.common.authentication.presentation.screens.LoginFragment"
         tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
 
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
@@ -49,6 +52,18 @@
         tools:layout="@layout/fragment_workout_breakdown" >
         <action
             android:id="@+id/action_workoutBreakdownFragment_to_inputExerciseFragment"
+            app:destination="@id/inputExerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashBoardFragment"
+        android:name="com.decagon.decafit.common.dashboard.DashBoardFragment"
+        android:label="fragment_dash_board"
+        tools:layout="@layout/fragment_dash_board" >
+        <action
+            android:id="@+id/action_dashBoardFragment_to_workoutBreakdownFragment"
+            app:destination="@id/workoutBreakdownFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_inputExerciseFragment"
             app:destination="@id/inputExerciseFragment" />
         <action
             android:id="@+id/action_workoutBreakdownFragment_to_pauseResumeWorkoutFragment"

@@ -1,32 +1,22 @@
-package com.decagon.decafit.common.authentication.presentation.screens
+package com.decagon.decafit.common.authentication
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
-import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
-import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
-import com.decagon.decafit.common.utils.Resource
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentLoginBinding
-import com.decagon.decafit.type.RegisterInput
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-
-    private val viewModel: AuthViewModels by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,18 +29,15 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initSharedPreference(requireActivity())
 
         activateClickListeners()
         loginInputHandler()
+
     }
 
     private fun activateClickListeners(){
         binding.layout.setOnClickListener{
             it.hideKeyboard()
-        }
-        binding.signUpTv.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment2())
         }
         binding.fragmentLoginLoginBtn.setOnClickListener {
 
@@ -60,8 +47,6 @@ class LoginFragment : Fragment() {
             if (Validation.validateEmailInput(email)) {
                 if (Validation.validatePasswordPattern(password)) {
                     findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
-                    findNavController().navigate(R.id.action_loginFragment_to_inputExerciseFragment)
-
                 } else {
                     // call for incorrect password here
                     snackBar("Invalid Password")
@@ -97,6 +82,4 @@ class LoginFragment : Fragment() {
         binding.fragmentLoginEmailET.addTextChangedListener(inputHandler)
         binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
     }
-
-
 }
