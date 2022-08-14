@@ -22,6 +22,13 @@
     <string name="full_name">Full name</string>
     <string name="phone_number">Phone number</string>
     <string name="wrong_email_address">wrong email address</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="today_s_session">Today’s session</string>
+    <string name="your_daily_tracker">Your daily tracker 🏋🏽‍♀️</string>
+    <string name="another_focus_area">Another Focus Area</string>
+    <string name="back">Back</string>
+    <string name="_20_days">20 days</string>
+    <string name="full_body">Full Body</string>
     <string name="timer_value">00:20</string>
     <string name="complete_workout">complete</string>
     <string name="incomplete_workout"><font color="#F26430">Incomplete</font></string>
@@ -40,4 +47,9 @@
     <string name="jumping_jacks">Jumping Jacks</string>
     <string name="steps_taken">Steps taken</string>
     <string name="numbersOf_steps">%1$s Steps</string>
+    <string name="gift_chuks">Gift Chuks</string>
+    <string name="_24_min">24 min</string>
+    <string name="_24_kcal">24 Kcal</string>
+    <string name="number_or_reps">Number or reps</string>
+        <string name="enter_the_number_of_reps_and_sets_for_your_workout">Enter the number of reps and sets for your workout</string>
 </resources>
