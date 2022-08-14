@@ -14,7 +14,6 @@ import com.decagon.decafit.common.authentication.data.SignUpRequest
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.utils.Validation
-import com.decagon.decafit.common.utils.customNavAnimation
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentSignUpBinding
 import com.decagon.decafit.type.RegisterInput
