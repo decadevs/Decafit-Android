@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
-import com.decagon.decafit.common.SignUpRequest
 import com.decagon.decafit.databinding.FragmentDashBoardBinding
 
 class DashBoardFragment : Fragment() {

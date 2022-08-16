@@ -1,16 +1,21 @@
 package com.decagon.decafit.common.utils
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
 import com.decagon.decafit.databinding.WorkoutDetailsDialogBinding
 import com.decagon.decafit.workout.data.WorkoutItems
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 
 fun Fragment.snackBar(message: String) {
@@ -42,4 +47,14 @@ fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, work
         dialog.dismiss()
     }
     return dialog
+}
+
+
+
+fun Fragment.onBackPressed(){
+    val callBack =object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().popBackStack()
+        }
+    }
 }

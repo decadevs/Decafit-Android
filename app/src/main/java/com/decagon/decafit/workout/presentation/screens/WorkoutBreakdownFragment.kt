@@ -1,5 +1,6 @@
 package com.decagon.decafit.workout.presentation.screens
 
+import android.app.DirectAction
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,14 +42,15 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
         binding.continueWorkoutBtn.setOnClickListener {
             binding.continueWorkoutBtn.visibility = View.GONE
             binding.startWorkoutBtn.visibility = View.VISIBLE
-
         }
         binding.startWorkoutBtn.setOnClickListener {
             binding.startWorkoutBtn.visibility = View.GONE
             binding.continueWorkoutBtn.visibility = View.VISIBLE
+            findNavController().navigate(R.id.action_workoutBreakdownFragment_to_pauseResumeWorkoutFragment)
         }
+
         binding.backArrowCV.setOnClickListener {
-            findNavController().navigate(R.id.action_workoutBreakdownFragment_to_inputExerciseFragment)
+            findNavController().popBackStack()
         }
     }
     fun setUpRecyclerView(){

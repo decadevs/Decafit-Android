@@ -1,6 +1,6 @@
 package com.decagon.decafit.common.utils
 
-import com.decagon.decafit.common.SignUpRequest
+import com.decagon.decafit.common.authentication.data.SignUpRequest
 
 object Validation {
     val DIGITCHARACTER = Regex("[0-9]")
@@ -15,8 +15,8 @@ object Validation {
         return true
     }
     var EMAIL_PATTERN = Regex(
-        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                "\\@" +
+        "[a-zA-Z0-9+._%\\-]{1,256}" +
+                "@" +
                 "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
                 "(" +
                 "\\." +

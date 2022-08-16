@@ -11,7 +11,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.NavController
 import com.decagon.decafit.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
