@@ -1,6 +1,7 @@
 package com.decagon.decafit.common.utils
 
 import com.decagon.decafit.common.authentication.data.SignUpRequest
+import java.util.regex.Pattern
 
 object Validation {
     val DIGITCHARACTER = Regex("[0-9]")
@@ -25,11 +26,12 @@ object Validation {
     )
 
 
-    //Validate user email pattern
+    //Validate user password pattern
     fun validatePasswordPattern(usersPassword: String): Boolean {
         val passwordPattern =
             "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[-@%\\[}+'!/#$^?:;,(\")~`.*=&{>\\]<_])(?=\\S+$).{8,20}$".toRegex()
-        if (usersPassword.matches(passwordPattern)) {
+        val passwordRegEx = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\\\S+\$).{4,}\$".toRegex()
+        if (usersPassword.matches(passwordRegEx)) {
             return true
         }
         return false
@@ -46,6 +48,18 @@ object Validation {
             result.add("must not contain special characters")
         }
         return result
+    }
+
+    fun isValidPasswordFormat(password: String): Boolean {
+        val passwordREGEX = Pattern.compile("^" +
+                "(?=.*[0-9])" +         //at least 1 digit
+                "(?=.*[a-z])" +         //at least 1 lower case letter
+                "(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=\\S+$)" +           //no white spaces
+                ".{8,}" +               //at least 8 characters
+                "$");
+        return passwordREGEX.matcher(password).matches()
     }
 
     // phone_number inputField validation

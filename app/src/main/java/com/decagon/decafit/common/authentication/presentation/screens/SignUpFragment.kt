@@ -14,6 +14,7 @@ import com.decagon.decafit.common.authentication.data.SignUpRequest
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.databinding.FragmentSignUpBinding
+import com.decagon.decafit.type.RegisterInput
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,6 +41,8 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        singUpObserver()
 
         with(binding) {
             signUpButton.setOnClickListener {
@@ -71,6 +74,7 @@ class SignUpFragment : Fragment() {
                 passwordInputValidationListener(password)
             }
         }
+
     }
 
     private fun passwordInputValidationListener(password: String) {
@@ -117,6 +121,16 @@ class SignUpFragment : Fragment() {
                 errors.contains("Incomplete number") -> phoneNumberTextInput.error = "Incomplete number"
                 else -> findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
             }
+        }
+    }
+
+    private fun singUpObserver(){
+        viewModel.registerUser(
+            RegisterInput(
+                "daniaamin", "min@gmail.com", "09012678900","Password#123")
+            , requireContext())
+        viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
+
         }
     }
 

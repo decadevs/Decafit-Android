@@ -9,14 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentLoginBinding
-import com.decagon.decafit.type.RegisterInput
+import com.decagon.decafit.type.LoginInput
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +24,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AuthViewModels by viewModels()
+    private  lateinit var userInfo: LoginInput
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +41,6 @@ class LoginFragment : Fragment() {
 
         activateClickListeners()
         loginInputHandler()
-        singUpObserver()
 
     }
 
@@ -55,8 +54,9 @@ class LoginFragment : Fragment() {
             val password = binding.fragmentLoginPasswordET.text.toString().trim()
 
             if (Validation.validateEmailInput(email)) {
-                if (Validation.validatePasswordPattern(password)) {
-                    findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
+                if (Validation.isValidPasswordFormat(password)) {
+                    userInfo= LoginInput(email, password)
+                    viewModel.loginUser(userInfo, requireContext())
 
                 } else {
                     // call for incorrect password here
@@ -94,15 +94,18 @@ class LoginFragment : Fragment() {
         binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
     }
 
-    private fun singUpObserver(){
-        viewModel.registerUser(
-            RegisterInput(
-            "daniaamin", "min@gmail.com", "09012678900","Password#123")
-         , requireContext())
-        viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
 
-            //TODO( YET TO BE IMPLEMENTED)
 
+    private fun loginObserver(userInfo: LoginInput){
+        viewModel.loginUser(userInfo, requireContext())
+        viewModel.loginResponse.observe(viewLifecycleOwner){ resources->
+            if (resources.data != null){
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
+                snackBar(resources.data!!.login.message)
+            }
+            if (resources.hasErrors()){
+                snackBar(resources?.errors?.get(0)?.message!!)
+            }
         }
     }
 }
