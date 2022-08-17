@@ -50,7 +50,7 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
         }
 
         binding.backArrowCV.setOnClickListener {
-            findNavController().navigate(R.id.action_workoutBreakdownFragment_to_inputExerciseFragment)
+            findNavController().popBackStack()
         }
     }
     fun setUpRecyclerView(){

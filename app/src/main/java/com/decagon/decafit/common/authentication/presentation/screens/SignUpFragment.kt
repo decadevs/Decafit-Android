@@ -12,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.data.SignUpRequest
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
+import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.utils.Validation
+import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentSignUpBinding
 import com.decagon.decafit.type.RegisterInput
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +27,7 @@ class SignUpFragment : Fragment() {
     private lateinit var email: String
     private lateinit var fullName: String
     private lateinit var phoneNumber: String
+    private  lateinit var userInfo: RegisterInput
     private val viewModel:AuthViewModels by viewModels()
 
 
@@ -41,9 +44,12 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Preference.initSharedPreference(requireActivity())
+        networkObsever()
+        initSingUpInput()
+    }
 
-        singUpObserver()
-
+    private fun initSingUpInput(){
         with(binding) {
             signUpButton.setOnClickListener {
 
@@ -51,7 +57,6 @@ class SignUpFragment : Fragment() {
                 phoneNumber = phoneNumberTextInput.text.toString().trim()
                 email = emailTextInput.text.toString().trim()
                 password = passwordTextInput.text.toString().trim()
-
                 // create a user account
                 isAllFieldsValidated(SignUpRequest(email, fullName, phoneNumber, password))
             }
@@ -74,8 +79,8 @@ class SignUpFragment : Fragment() {
                 passwordInputValidationListener(password)
             }
         }
-
     }
+
 
     private fun passwordInputValidationListener(password: String) {
         val validatePassword = Validation.validatePasswordPattern(password)
@@ -109,7 +114,6 @@ class SignUpFragment : Fragment() {
             if (errorsList.contains(error))
                 binding.fullNameTextInput.error = error
         }
-
     }
 
     private fun isAllFieldsValidated(accountData: SignUpRequest){
@@ -119,21 +123,33 @@ class SignUpFragment : Fragment() {
                 errors.contains("Enter your full name") -> fullNameTextInput.error = "Enter your full name"
                 errors.contains("cant be empty") -> emailTextInput.error
                 errors.contains("Incomplete number") -> phoneNumberTextInput.error = "Incomplete number"
-                else -> findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
+                else -> {
+                    userInfo= RegisterInput(accountData.fullName, accountData.email,accountData.phone_number,accountData.password)
+                    singUpObserver(userInfo)
+                }
             }
         }
     }
 
-    private fun singUpObserver(){
-        viewModel.registerUser(
-            RegisterInput(
-                "daniaamin", "min@gmail.com", "09012678900","Password#123")
-            , requireContext())
+    private fun singUpObserver(userInfo: RegisterInput){
+        viewModel.registerUser( userInfo, requireContext())
         viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
-
+            if(resources.data!=null){
+                findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+                snackBar(resources.data!!.register.message)
+            }
+            if (resources.hasErrors()){
+                snackBar(resources?.errors?.get(0)?.message!!)
+            }
         }
     }
 
-
+    private fun networkObsever(){
+        viewModel.networkCheckResponse.observe(viewLifecycleOwner){
+            if (!it.isNullOrEmpty()){
+                snackBar(it)
+            }
+        }
+    }
 
 }

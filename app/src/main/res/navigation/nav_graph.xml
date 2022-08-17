@@ -5,18 +5,12 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.decagon.decafit.SecondFragment"
-        tools:layout="@layout/fragment_second">
-        <action
-            android:id="@+id/action_SecondFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.decagon.decafit.common.authentication.presentation.screens.LoginFragment"
         tools:layout="@layout/fragment_login" >
+
         <action
             android:id="@+id/action_loginFragment_to_dashBoardFragment"
             app:destination="@id/dashBoardFragment" />
@@ -26,6 +20,9 @@
         <action
             android:id="@+id/action_loginFragment_to_inputExerciseFragment"
             app:destination="@id/inputExerciseFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment2"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -43,6 +40,9 @@
         <action
             android:id="@+id/action_inputExerciseFragment_to_workoutBreakdownFragment"
             app:destination="@id/workoutBreakdownFragment" />
+        <action
+            android:id="@+id/action_inputExerciseFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/workoutBreakdownFragment"
@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_dashBoardFragment_to_inputExerciseFragment"
             app:destination="@id/inputExerciseFragment" />
+        <action
+            android:id="@+id/action_workoutBreakdownFragment_to_pauseResumeWorkoutFragment"
+            app:destination="@id/pauseResumeWorkoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/pauseResumeWorkoutFragment"

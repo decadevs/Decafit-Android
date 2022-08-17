@@ -58,17 +58,31 @@ dependencies {
 
     //material component
     implementation 'com.google.android.material:material:1.5.0-alpha03'
+    //viewpager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    
+    //splashscreen
+    implementation 'androidx.core:core-splashscreen:1.0.0-alpha02'
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
-
-
-    //val nav_version = "2.4.0"
+    //DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     testImplementation 'org.mockito:mockito-core:2.24.5'
     androidTestImplementation 'org.mockito:mockito-android:2.24.5'
     androidTestImplementation 'androidx.navigation:navigation-testing:2.4.1'
     androidTestImplementation 'org.junit.jupiter:junit-jupiter'
     androidTestImplementation 'org.junit.jupiter:junit-jupiter'
+    // Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
 
+    //retrofit
+    def retrofit = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 
 
     //viewpager2
@@ -89,10 +103,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
 
-    //retrofit
-    def retrofit = "2.9.0"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 
     //okhttp
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
@@ -125,12 +135,9 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-
 //Fragment testing dependency
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
     androidTestImplementation 'androidx.navigation:navigation-testing:2.4.1'
-
-
 
     //mockito testing dependency
     testImplementation 'org.mockito:mockito-core:2.24.5'

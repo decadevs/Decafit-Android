@@ -1,7 +1,6 @@
 package com.decagon.decafit.common.authentication.presentation.viewmodels
 
 import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,13 +10,13 @@ import com.apollographql.apollo3.exception.ApolloException
 import com.decagon.decafit.LoginMutation
 import com.decagon.decafit.RegisterMutation
 import com.decagon.decafit.common.common.domain.repository.RepositoryInterface
-import com.decagon.decafit.common.utils.Resource
 import com.decagon.decafit.common.utils.isNetworkAvailable
 import com.decagon.decafit.type.LoginInput
 import com.decagon.decafit.type.RegisterInput
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @HiltViewModel
 class AuthViewModels @Inject constructor(
@@ -35,7 +34,6 @@ class AuthViewModels @Inject constructor(
 
     fun registerUser(registerInput: RegisterInput, context :Context) {
         if (isNetworkAvailable(context)) {
-
             viewModelScope.launch {
                 val response = try {
                     repository.register(registerInput)

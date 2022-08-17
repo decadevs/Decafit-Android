@@ -30,6 +30,9 @@ class InputExerciseFragment : Fragment() {
         binding.nextExerciseBtn.setOnClickListener {
             findNavController().navigate(R.id.action_inputExerciseFragment_to_workoutBreakdownFragment)
         }
+        binding.inputExerciseBackArrowCV.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
 }

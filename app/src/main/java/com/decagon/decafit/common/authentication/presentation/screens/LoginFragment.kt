@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
 import com.decagon.decafit.common.utils.Validation
@@ -41,44 +42,9 @@ class LoginFragment : Fragment() {
 
         activateClickListeners()
         loginInputHandler()
-
     }
 
-    private fun activateClickListeners(){
-        binding.layout.setOnClickListener{
-            it.hideKeyboard()
-        }
-        binding.fragmentLoginLoginBtn.setOnClickListener {
-
-            val email = binding.fragmentLoginEmailET.text.toString().trim()
-            val password = binding.fragmentLoginPasswordET.text.toString().trim()
-
-            if (Validation.validateEmailInput(email)) {
-                if (Validation.isValidPasswordFormat(password)) {
-                    userInfo= LoginInput(email, password)
-                    viewModel.loginUser(userInfo, requireContext())
-
-                } else {
-                    // call for incorrect password here
-                    snackBar("Invalid Password")
-                }
-            } else {
-                // call for incorrect email here
-                snackBar("Invalid email address")
-            }
-        }
-        binding.facebookLogin.setOnClickListener {
-            snackBar("login with facebook")
-        }
-        binding.googleLogin.setOnClickListener {
-            snackBar("login with google")
-        }
-        binding.appleLogin.setOnClickListener {
-            snackBar("login with apple")
-        }
-    }
-
-    private fun loginInputHandler(){
+    private fun loginInputHandler() {
         val inputHandler :TextWatcher = object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -94,17 +60,53 @@ class LoginFragment : Fragment() {
         binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
     }
 
+    private fun activateClickListeners() {
+        binding.layout.setOnClickListener {
+            it.hideKeyboard()
+        }
+        binding.signUpTv.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment2())
+        }
+        binding.fragmentLoginLoginBtn.setOnClickListener {
 
+            val email = binding.fragmentLoginEmailET.text.toString().trim()
+            val password = binding.fragmentLoginPasswordET.text.toString().trim()
+
+            if (Validation.validateEmailInput(email)) {
+                if (Validation.isValidPasswordFormat(password)) {
+                    userInfo = LoginInput(email, password)
+                    loginObserver(userInfo)
+//                    viewModel.loginUser(userInfo, requireContext())
+                } else {
+                    // call for incorrect password here
+                    snackBar("Invalid Password")
+                }
+            } else {
+                // call for incorrect email here
+                snackBar("Invalid email address")
+            }
+
+            binding.facebookLogin.setOnClickListener {
+                snackBar("login with facebook")
+            }
+            binding.googleLogin.setOnClickListener {
+                snackBar("login with google")
+            }
+            binding.appleLogin.setOnClickListener {
+                snackBar("login with apple")
+            }
+        }
+    }
 
     private fun loginObserver(userInfo: LoginInput){
         viewModel.loginUser(userInfo, requireContext())
-        viewModel.loginResponse.observe(viewLifecycleOwner){ resources->
-            if (resources.data != null){
+        viewModel.loginResponse.observe(viewLifecycleOwner){ it ->
+            if (it.data != null){
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
-                snackBar(resources.data!!.login.message)
+                snackBar(it.data!!.login.message)
             }
-            if (resources.hasErrors()){
-                snackBar(resources?.errors?.get(0)?.message!!)
+            if (it.hasErrors()){
+                snackBar(it?.errors?.get(0)?.message!!)
             }
         }
     }

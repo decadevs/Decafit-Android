@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
 import com.decagon.decafit.databinding.FragmentDashBoardBinding
 
+
 class DashBoardFragment : Fragment() {
     private var _binding: FragmentDashBoardBinding? = null
     private val binding get() = _binding!!
