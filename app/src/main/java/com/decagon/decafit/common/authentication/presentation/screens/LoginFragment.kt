@@ -60,7 +60,7 @@ class LoginFragment : Fragment() {
             if (Validation.validateEmailInput(email)) {
                 if (Validation.validatePasswordPattern(password)) {
                     findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
-                    findNavController().navigate(R.id.action_loginFragment_to_inputExerciseFragment)
+                   // findNavController().navigate(R.id.action_loginFragment_to_inputExerciseFragment)
 
                 } else {
                     // call for incorrect password here

@@ -60,7 +60,9 @@ class SignUpFragment : Fragment() {
                 // create a user account
                 isAllFieldsValidated(SignUpRequest(email, fullName, phoneNumber, password))
             }
-
+            signInTv.setOnClickListener {
+                findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+            }
             fullNameTextInput.addTextChangedListener {
                 fullName = binding.fullNameTextInput.text.toString().trim()
                 fullNameTExtInputValidation(fullName)
@@ -137,7 +139,7 @@ class SignUpFragment : Fragment() {
         viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
             if(resources.data!=null){
                 findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-                snackBar(resources.data!!.register.message)
+               // snackBar(resources.data!!.register.message)
             }
             if (resources.hasErrors()){
                 snackBar(resources?.errors?.get(0)?.message!!)

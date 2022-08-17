@@ -33,6 +33,7 @@ class AuthViewModels @Inject constructor(
                 val response = try {
                     repository.register(registerInput)
                 } catch (e: ApolloException) {
+                    Toast.makeText(context, "${e.message}", Toast.LENGTH_SHORT).show()
                     return@launch
                 }
 

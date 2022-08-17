@@ -87,6 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:hint="Password"
+                app:passwordToggleEnabled="true"
                 android:inputType="textPassword"
                 android:paddingVertical="10dp"
                 android:textColorHint="@color/gray"
