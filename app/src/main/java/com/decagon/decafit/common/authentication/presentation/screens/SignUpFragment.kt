@@ -1,6 +1,7 @@
 package com.decagon.decafit.common.authentication.presentation.screens
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.data.SignUpRequest
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.common.data.preferences.Preference
+import com.decagon.decafit.common.utils.ProgressBarLoading
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentSignUpBinding
@@ -47,6 +49,8 @@ class SignUpFragment : Fragment() {
         Preference.initSharedPreference(requireActivity())
         networkObsever()
        initSingUpInput()
+        isLoading()
+
     }
 
     private fun initSingUpInput(){
@@ -134,15 +138,26 @@ class SignUpFragment : Fragment() {
         }
     }
 
+    private fun isLoading(){
+        val progressBar = ProgressBarLoading(requireContext())
+        viewModel.progressBar.observe(viewLifecycleOwner){
+            if (it){
+                progressBar.show()
+            }else{
+                progressBar.dismiss()
+            }
+    }}
+
     private fun singUpObserver(userInfo: RegisterInput){
         viewModel.registerUser( userInfo, requireContext())
         viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
             if(resources.data!=null){
                 findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-               // snackBar(resources.data!!.register.message)
+               snackBar(resources.data!!.userRegister.message)
             }
             if (resources.hasErrors()){
                 snackBar(resources?.errors?.get(0)?.message!!)
+                Log.d("SIGNUP","has error====${resources?.errors?.get(0)?.message!!}")
             }
         }
     }

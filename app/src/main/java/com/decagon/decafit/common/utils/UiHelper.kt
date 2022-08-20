@@ -5,13 +5,16 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
+import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.databinding.WorkoutDetailsDialogBinding
 import com.decagon.decafit.workout.data.WorkoutItems
 import com.google.android.material.snackbar.Snackbar
@@ -31,7 +34,7 @@ fun View.hideKeyboard() {
     inputManager.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, workoutItems: WorkoutItems): Dialog {
+fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, workoutItems: Exercises): Dialog {
     val dialog = Dialog(requireContext()).apply {
         setContentView(dialogBinding.root)
         setCancelable(true)
@@ -39,7 +42,6 @@ fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, work
     }
 
 
-    dialogBinding.imageView2.setImageResource(R.drawable.workout_detail_background)
     dialogBinding.discTitleTv.text = workoutItems.title
     dialogBinding.workoutDescriptionTv.text = workoutItems.description
 
@@ -58,3 +60,16 @@ fun Fragment.onBackPressed(){
         }
     }
 }
+
+fun Fragment.showProgressBar():Dialog{
+
+    val dialog = Dialog(requireContext()).apply {
+        setContentView(R.layout.progressbar_layout)
+        setCancelable(true)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
+
+    return dialog
+
+}
+

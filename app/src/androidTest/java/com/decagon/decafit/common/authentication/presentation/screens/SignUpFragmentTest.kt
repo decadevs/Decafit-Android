@@ -16,7 +16,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.decagon.decafit.common.common.utils.launchFragmentInHiltContainer
 import com.decagon.decafit.R
-import com.decagon.decafit.common.utils.customNavAnimation
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.*

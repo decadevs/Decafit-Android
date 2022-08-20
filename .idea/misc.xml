@@ -20,8 +20,9 @@
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_workout_breakdown.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/progressbar_layout.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/workout_breakdown_item.xml" value="0.10520833333333333" />
-        <entry key="app/src/main/res/layout/workout_details_dialog.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/workout_details_dialog.xml" value="0.19" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.24270833333333333" />
       </map>
     </option>

@@ -58,7 +58,7 @@ class LoginFragment : Fragment() {
             val password = binding.fragmentLoginPasswordET.text.toString().trim()
 
             if (Validation.validateEmailInput(email)) {
-                if (Validation.validatePasswordPattern(password)) {
+                if (Validation.isValidPasswordFormat(password)) {
                     findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
                    // findNavController().navigate(R.id.action_loginFragment_to_inputExerciseFragment)
 

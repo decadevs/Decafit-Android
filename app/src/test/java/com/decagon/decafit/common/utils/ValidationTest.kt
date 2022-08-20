@@ -25,14 +25,14 @@ class ValidationTest {
     @Test
     fun validate_right_password_returns_true() {
         val expected = true
-        val actual = Validation.validatePasswordPattern("Benjamin@123")
+        val actual = Validation.isValidPasswordFormat("Benjamin22")
         Assert.assertEquals(expected, actual)
     }
 
     @Test
     fun validate_empty_password_returns_false() {
         val expected = false
-        val actual = Validation.validatePasswordPattern("")
+        val actual = Validation.isValidPasswordFormat("")
         Assert.assertEquals(expected, actual)
     }
     @Test

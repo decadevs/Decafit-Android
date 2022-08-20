@@ -11,18 +11,19 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.decagon.decafit.R
+import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.common.utils.OnclickListener
 import com.decagon.decafit.databinding.WorkoutBreakdownItemBinding
 import com.decagon.decafit.workout.data.WorkoutItems
 
 class WorkoutAdapter(private  val listener:OnclickListener, private val context: Context) :RecyclerView.Adapter<WorkoutAdapter.ViewHolder>(){
 
-    private val callBack = object :DiffUtil.ItemCallback<WorkoutItems>(){
-        override fun areItemsTheSame(oldItem: WorkoutItems, newItem: WorkoutItems): Boolean {
-            return ((oldItem.title == newItem.title)&&(oldItem.workoutProgress ==newItem.workoutProgress))
+    private val callBack = object :DiffUtil.ItemCallback<Exercises>(){
+        override fun areItemsTheSame(oldItem: Exercises, newItem: Exercises): Boolean {
+            return ((oldItem.title == newItem.title)&&(oldItem.id ==newItem.id))
         }
 
-        override fun areContentsTheSame(oldItem: WorkoutItems, newItem: WorkoutItems): Boolean {
+        override fun areContentsTheSame(oldItem: Exercises, newItem: Exercises): Boolean {
             return oldItem == newItem
         }
     }
@@ -38,19 +39,21 @@ class WorkoutAdapter(private  val listener:OnclickListener, private val context:
          val progressBar = binding.workoutProgressBar
 
          @RequiresApi(Build.VERSION_CODES.M)
-         fun bindView(items: WorkoutItems, context: Context){
+         fun bindView(items: Exercises, context: Context){
              title.text = items.title
-             timer.text =items.workoutTime.toString()
-             if (items.workoutProgress ==100){
+             //timer.text =items.workoutTime.toString()
+             val iscomplete = false
+             val pausedTime =0
+             if (iscomplete){
                  workoutProgressCard.visibility = View.VISIBLE
                  workoutStatus.setText(R.string.complete_workout)
                  workoutProgressCard.setCardBackgroundColor(context.getColor(R.color.light_green))
                  progressBar.visibility = View.INVISIBLE
-             }else if(items.workoutProgress !=0){
+             }else if(pausedTime !=0){
                  workoutProgressCard.visibility = View.VISIBLE
                  workoutStatus.setText(R.string.incomplete_workout)
                  workoutProgressCard.setCardBackgroundColor(context.getColor(R.color.light_orange))
-                 progressBar.progress = items.workoutProgress
+                 progressBar.progress = pausedTime
              }
          }
     }

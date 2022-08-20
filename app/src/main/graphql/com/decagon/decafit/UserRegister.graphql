@@ -1,0 +1,9 @@
+mutation RegisterMutation($user: RegisterInput!) {
+  userRegister(user: $user) {
+    id
+    fullName
+    email
+    phoneNumber
+    message
+  }
+}

@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
+import com.decagon.decafit.common.utils.dommyData.workoutData
 import com.decagon.decafit.databinding.FragmentInputExerciseBinding
 import com.decagon.decafit.databinding.FragmentLoginBinding
+import com.decagon.decafit.workout.data.WorkoutItems
 
 class InputExerciseFragment : Fragment() {
     private var _binding: FragmentInputExerciseBinding? = null
@@ -31,8 +33,15 @@ class InputExerciseFragment : Fragment() {
             findNavController().navigate(R.id.action_inputExerciseFragment_to_workoutBreakdownFragment)
         }
         binding.inputExerciseBackArrowCV.setOnClickListener {
+            updateWorkout()
             findNavController().popBackStack()
         }
+    }
+
+    fun updateWorkout(){
+        workoutData.set(2,
+            WorkoutItems("Planks", "Lorem ipsum dolor sit amt Lorem ipsum dolor sit amtLorem ipsum dolor sit amtLorem ipsum dolor sit amtLorem ip amtLorem ipsum dolor sit amtLorem ipsum dolor sit amtLorem ipsum dolor sit amt sum dolor sit amtLorem ipsum dolor sit amt ","1:00", 10),
+        )
     }
 
 }

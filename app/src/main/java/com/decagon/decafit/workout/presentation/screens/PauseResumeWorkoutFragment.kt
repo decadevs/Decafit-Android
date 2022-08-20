@@ -37,7 +37,7 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     private var sensorManager : SensorManager ? = null
     private var running = false
     private var totalSteps = 0F
-    private var previousSteps = 0F
+    private var previousSteps = 0
     private var currentStep=0
     private var stepCounter = 0
 
@@ -89,8 +89,8 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
             binding.resumeBtn.visibility = View.INVISIBLE
         }
         binding.nextWorkoutBtn.setOnClickListener {
-//            timer.stopTimer()
-//            stopStepCounter()
+            //timer.stopTimer()
+           stopStepCounter()
             resetStepCounter()
             num++
             setUpWorkout()
@@ -151,14 +151,15 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     private fun resetStepCounter(){
         currentStep = 0
         totalSteps =0F
-        previousSteps = 0F
+        previousSteps = 0
         sensorManager?.unregisterListener(this)
     }
     override fun onSensorChanged(event: SensorEvent) {
 
         if (running){
             totalSteps =event.values[0]
-             currentStep = totalSteps.toInt() - previousSteps.toInt()
+             currentStep = totalSteps.toInt() - previousSteps
+            previousSteps = currentStep
             binding.numbersOfStepsTv.text= getString(R.string.numbersOf_steps,currentStep.toString())
 
             Log.d("COUNTER", "currentStep = $currentStep")

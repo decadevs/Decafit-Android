@@ -72,10 +72,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
 
-    //retrofit
-    def retrofit = "2.9.0"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 
     //okhttp
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
@@ -105,6 +101,10 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    //converter
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 
 //Fragment testing dependency
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"

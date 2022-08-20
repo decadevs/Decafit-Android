@@ -16,11 +16,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <TextView
+            android:id="@+id/detail_IV"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_240dp"
-            android:src="@drawable/full_body_img"
+            android:elevation="@dimen/margin_12dp"
+            android:background="@color/primary_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +38,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_IV" />
 
         <TextView
             android:id="@+id/workout_description_tv"
