@@ -55,6 +55,7 @@
             android:id="@+id/workout_cal_tv"
             style="@style/NormalBoldText"
             android:layout_marginStart="8dp"
+            android:drawableStart="@drawable/ic_fire_icon"
             android:drawablePadding="8dp"
             android:text="@string/kcal_points"
             android:textColor="@color/white"
@@ -87,7 +88,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/exersice_image"
             tools:listitem="@layout/workout_breakdown_item" />
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/start_workout_btn"
             style="@style/ButtonStyle"
@@ -111,6 +111,7 @@
             android:fontFamily="@font/ubuntu_medium"
             android:paddingVertical="10dp"
             android:visibility="gone"
+            android:textStyle="bold"
             android:text="@string/continue_workout"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

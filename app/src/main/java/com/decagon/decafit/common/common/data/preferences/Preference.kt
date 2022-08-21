@@ -11,7 +11,6 @@ object Preference {
 
     lateinit var preferences: SharedPreferences
 
-
     fun initSharedPreference(activity: Activity){
         preferences = activity.getSharedPreferences(MY_PREF, Context.MODE_PRIVATE)
     }

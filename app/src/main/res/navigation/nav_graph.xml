@@ -31,7 +31,6 @@
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-
     </fragment>
     <fragment
         android:id="@+id/inputExerciseFragment"
@@ -53,6 +52,9 @@
         <action
             android:id="@+id/action_workoutBreakdownFragment_to_inputExerciseFragment"
             app:destination="@id/inputExerciseFragment" />
+        <action
+            android:id="@+id/action_workoutBreakdownFragment_to_pauseResumeWorkoutFragment"
+            app:destination="@id/pauseResumeWorkoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/dashBoardFragment"

@@ -46,7 +46,7 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Preference.initSharedPreference(requireActivity())
         networkObsever()
-       initSingUpInput()
+        initSingUpInput()
     }
 
     private fun initSingUpInput(){
@@ -124,7 +124,6 @@ class SignUpFragment : Fragment() {
                 errors.contains("cant be empty") -> emailTextInput.error
                 errors.contains("Incomplete number") -> phoneNumberTextInput.error = "Incomplete number"
                 else -> {
-
                     userInfo= RegisterInput(accountData.fullName, accountData.email,accountData.phone_number,accountData.password)
                     singUpObserver(userInfo)
                 }

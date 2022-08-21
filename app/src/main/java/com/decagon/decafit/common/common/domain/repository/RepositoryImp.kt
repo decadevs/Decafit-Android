@@ -6,10 +6,6 @@ import com.decagon.decafit.LoginMutation
 import com.decagon.decafit.RegisterMutation
 import com.decagon.decafit.type.LoginInput
 import com.decagon.decafit.type.RegisterInput
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class RepositoryImp @Inject constructor(
@@ -19,8 +15,7 @@ class RepositoryImp @Inject constructor(
         return apolloClient.mutation(RegisterMutation(user = register)).execute()
     }
 
-//    override suspend fun login(loginUser:LoginInput): ApolloResponse<LoginMutation.Data> {
-//
-//        return apolloClient.mutation(LoginMutation(user = loginUser)).execute()
-//    }
+    override suspend fun login(login: LoginInput): ApolloResponse<LoginMutation.Data> {
+        return apolloClient.mutation(LoginMutation(user = login)).execute()
+    }
 }

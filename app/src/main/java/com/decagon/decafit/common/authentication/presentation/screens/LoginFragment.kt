@@ -3,22 +3,20 @@ package com.decagon.decafit.common.authentication.presentation.screens
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
-import com.decagon.decafit.common.utils.Resource
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentLoginBinding
-import com.decagon.decafit.type.RegisterInput
+import com.decagon.decafit.type.LoginInput
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +25,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AuthViewModels by viewModels()
+    private  lateinit var userInfo: LoginInput
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,44 +44,7 @@ class LoginFragment : Fragment() {
         loginInputHandler()
     }
 
-    private fun activateClickListeners(){
-        binding.layout.setOnClickListener{
-            it.hideKeyboard()
-        }
-        binding.signUpTv.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment2())
-        }
-        binding.fragmentLoginLoginBtn.setOnClickListener {
-
-            val email = binding.fragmentLoginEmailET.text.toString().trim()
-            val password = binding.fragmentLoginPasswordET.text.toString().trim()
-
-            if (Validation.validateEmailInput(email)) {
-                if (Validation.validatePasswordPattern(password)) {
-                    findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
-                    findNavController().navigate(R.id.action_loginFragment_to_inputExerciseFragment)
-
-                } else {
-                    // call for incorrect password here
-                    snackBar("Invalid Password")
-                }
-            } else {
-                // call for incorrect email here
-                snackBar("Invalid email address")
-            }
-        }
-        binding.facebookLogin.setOnClickListener {
-            snackBar("login with facebook")
-        }
-        binding.googleLogin.setOnClickListener {
-            snackBar("login with google")
-        }
-        binding.appleLogin.setOnClickListener {
-            snackBar("login with apple")
-        }
-    }
-
-    private fun loginInputHandler(){
+    private fun loginInputHandler() {
         val inputHandler :TextWatcher = object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -98,5 +60,54 @@ class LoginFragment : Fragment() {
         binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
     }
 
+    private fun activateClickListeners() {
+        binding.layout.setOnClickListener {
+            it.hideKeyboard()
+        }
+        binding.signUpTv.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment2())
+        }
+        binding.fragmentLoginLoginBtn.setOnClickListener {
 
+            val email = binding.fragmentLoginEmailET.text.toString().trim()
+            val password = binding.fragmentLoginPasswordET.text.toString().trim()
+
+            if (Validation.validateEmailInput(email)) {
+                if (Validation.isValidPasswordFormat(password)) {
+                    userInfo = LoginInput(email, password)
+                    loginObserver(userInfo)
+//                    viewModel.loginUser(userInfo, requireContext())
+                } else {
+                    // call for incorrect password here
+                    snackBar("Invalid Password")
+                }
+            } else {
+                // call for incorrect email here
+                snackBar("Invalid email address")
+            }
+
+            binding.facebookLogin.setOnClickListener {
+                snackBar("login with facebook")
+            }
+            binding.googleLogin.setOnClickListener {
+                snackBar("login with google")
+            }
+            binding.appleLogin.setOnClickListener {
+                snackBar("login with apple")
+            }
+        }
+    }
+
+    private fun loginObserver(userInfo: LoginInput){
+        viewModel.loginUser(userInfo, requireContext())
+        viewModel.loginResponse.observe(viewLifecycleOwner){ it ->
+            if (it.data != null){
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
+                snackBar(it.data!!.login.message)
+            }
+            if (it.hasErrors()){
+                snackBar(it?.errors?.get(0)?.message!!)
+            }
+        }
+    }
 }
