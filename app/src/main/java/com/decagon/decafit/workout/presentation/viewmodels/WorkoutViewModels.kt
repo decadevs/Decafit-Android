@@ -57,13 +57,12 @@ class WorkoutViewModels @Inject constructor(
                     return@launch
                 }
                 _progressBar.value = false
-                _workoutWithIdResponse.value = response
                 if (response.data != null) {
+                    _workoutWithIdResponse.value = response
                     _progressBar.value = false
-                    val exercises = response.data?.workout?.exercises as List<Exercises>
-
-                    repository.saveExerciseToLocalDB(exercises)
-                    _exerciseResponse.value = repository.getExerciseFromLocalDB()
+//                    val exercises = response.data?.workout?.exercises
+//                    repository.saveExerciseToLocalDB(exercises)
+                    //_exerciseResponse.value = response
                 }
                 if (response.hasErrors()){
                     Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()

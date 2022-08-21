@@ -12,12 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
+import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
 import com.decagon.decafit.common.utils.Resource
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentLoginBinding
+import com.decagon.decafit.type.LoginInput
 import com.decagon.decafit.type.RegisterInput
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -59,7 +61,7 @@ class LoginFragment : Fragment() {
 
             if (Validation.validateEmailInput(email)) {
                 if (Validation.isValidPasswordFormat(password)) {
-                    findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
+                    loginObserver(LoginInput(email, password))
                    // findNavController().navigate(R.id.action_loginFragment_to_inputExerciseFragment)
 
                 } else {
@@ -98,5 +100,17 @@ class LoginFragment : Fragment() {
         binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
     }
 
+    private fun loginObserver(loginInput:LoginInput){
+        viewModel.loginUser(loginInput,requireContext())
+        viewModel.loginResponse.observe(viewLifecycleOwner){
+            if (it.data !=null){
+                Preference.saveHeader("${it.data!!.userLogin.token}")
+                findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
+            }
+            if (it.hasErrors()){
+                snackBar(it!!.errors?.get(0)!!.message)
+            }
+        }
+    }
 
 }

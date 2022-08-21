@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.decagon.decafit.R
+import com.decagon.decafit.WorkoutWitIdQuery
 import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.databinding.WorkoutDetailsDialogBinding
 import com.decagon.decafit.workout.data.WorkoutItems
@@ -34,14 +36,15 @@ fun View.hideKeyboard() {
     inputManager.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, workoutItems: Exercises): Dialog {
+fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, workoutItems: WorkoutWitIdQuery.Exercise): Dialog {
     val dialog = Dialog(requireContext()).apply {
         setContentView(dialogBinding.root)
         setCancelable(true)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
-
+    Glide.with(requireContext()).load(workoutItems.image)
+        .into(dialogBinding.detailIV)
     dialogBinding.discTitleTv.text = workoutItems.title
     dialogBinding.workoutDescriptionTv.text = workoutItems.description
 

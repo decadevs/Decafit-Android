@@ -21,7 +21,6 @@ class WorkoutBreakdownFragmentTest {
     @Test
     fun test_view_visibility(){
         onView(withId(R.id.back_arrow_CV)).check(matches(isDisplayed()))
-        onView(withId(R.id.exersice_image)).check(matches(isDisplayed()))
         onView(withId(R.id.start_workout_btn)).check(matches(isDisplayed()))
         onView(withId(R.id.workout_cal_tv)).check(matches(isDisplayed()))
         onView(withId(R.id.workout_RV)).check(matches(isDisplayed()))

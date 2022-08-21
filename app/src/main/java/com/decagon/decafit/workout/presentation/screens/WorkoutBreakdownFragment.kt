@@ -8,9 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import com.bumptech.glide.Glide
 import com.decagon.decafit.R
+import com.decagon.decafit.WorkoutWitIdQuery
 import com.decagon.decafit.common.common.data.models.Exercises
+import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.utils.OnclickListener
+import com.decagon.decafit.common.utils.ProgressBarLoading
 import com.decagon.decafit.common.utils.showWorkoutDetails
 import com.decagon.decafit.databinding.FragmentWorkoutBreakdownBinding
 import com.decagon.decafit.databinding.WorkoutDetailsDialogBinding
@@ -39,6 +44,7 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        isLoading()
         setUpRecyclerView()
         initListener()
         getExerciseFromDb()
@@ -69,16 +75,31 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
 
     }
 
+    private fun isLoading(){
+        val progressBar = ProgressBarLoading(requireContext())
+        viewModel.progressBar.observe(viewLifecycleOwner){
+            if (it){
+                progressBar.show()
+            }else{
+                progressBar.dismiss()
+            }
+        }}
+
     private fun getExerciseFromDb(){
+        val id = Preference
         viewModel.getWorkoutWithId("6300106a9d9bd74931c514c9",requireContext())
-        viewModel.exerciseResponse.observe(viewLifecycleOwner){
-            workoutAdapter.differ.submitList(it)
+        viewModel.workoutWithIdResponse.observe(viewLifecycleOwner){
+            Glide.with(requireContext()).load(it.data?.workout?.backgroundImage)
+                .centerCrop()
+                .into(binding.exerciseImage)
+            binding.workoutBreakdownTv.text = getString(R.string.numberOfExercises,it.data?.workout?.exercises?.size)
+            workoutAdapter.differ.submitList(it.data?.workout?.exercises)
 
         }
     }
 
 
-    override fun onclickWorkoutItem(workoutItems: Exercises) {
+    override fun onclickWorkoutItem(workoutItems: WorkoutWitIdQuery.Exercise) {
         val dialogBinding = WorkoutDetailsDialogBinding.inflate(layoutInflater)
         val workoutDetails = showWorkoutDetails(dialogBinding,workoutItems)
         workoutDetails.show()
