@@ -136,7 +136,7 @@ class SignUpFragment : Fragment() {
         viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
             if(resources.data!=null){
                 findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-                snackBar(resources.data!!.register.message)
+                snackBar(resources.data!!.userRegister.message)
             }
             if (resources.hasErrors()){
                 snackBar(resources?.errors?.get(0)?.message!!)

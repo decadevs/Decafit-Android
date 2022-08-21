@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.decagon.decafit.R
+import com.decagon.decafit.common.authentication.data.LoginRequest
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
+import com.decagon.decafit.common.common.data.preferences.Preference.saveHeader
+import com.decagon.decafit.common.common.data.preferences.Preference.saveName
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
@@ -100,10 +102,12 @@ class LoginFragment : Fragment() {
 
     private fun loginObserver(userInfo: LoginInput){
         viewModel.loginUser(userInfo, requireContext())
-        viewModel.loginResponse.observe(viewLifecycleOwner){ it ->
+        viewModel.loginResponse.observe(viewLifecycleOwner){
             if (it.data != null){
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
-                snackBar(it.data!!.login.message)
+                it.data!!.userLogin.token?.let { it1 -> saveHeader(it1) }
+                saveName(it.data!!.userLogin.fullName)
+                snackBar(it.data!!.userLogin.message) //snackBar(it.data!!.login.message)
             }
             if (it.hasErrors()){
                 snackBar(it?.errors?.get(0)?.message!!)

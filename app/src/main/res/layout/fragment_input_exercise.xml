@@ -20,7 +20,7 @@
                 android:layout_width="@dimen/margin_40dp"
                 android:layout_height="@dimen/margin_40dp"
                 android:layout_marginStart="@dimen/margin_32dp"
-                android:layout_marginTop="@dimen/margin_40dp"
+                android:layout_marginTop="10dp"
                 app:cardBackgroundColor="#F7F7FB"
                 app:cardCornerRadius="12dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_32dp"
-                android:layout_marginTop="@dimen/margin_40dp"
+                android:layout_marginTop="8dp"
                 app:cardCornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -51,10 +51,11 @@
 
 
                     <ImageView
-                        android:id="@+id/input_exercise_image"
+                        android:id="@+id/workoutImage"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_175dp"
                         android:background="@drawable/full_body_img"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -62,7 +63,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/full_body_tv"
+                        android:id="@+id/workoutName"
                         style="@style/NormalBoldText"
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:layout_marginTop="6dp"
@@ -70,9 +71,9 @@
                         android:text="Full Body"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_24sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/input_exercise_image"
-                        app:layout_constraintStart_toStartOf="@+id/input_exercise_image"
-                        app:layout_constraintTop_toTopOf="@+id/input_exercise_image" />
+                        app:layout_constraintBottom_toBottomOf="@+id/workoutImage"
+                        app:layout_constraintStart_toStartOf="@+id/workoutImage"
+                        app:layout_constraintTop_toTopOf="@+id/workoutImage" />
 
                     <ImageView
                         android:layout_width="@dimen/margin_32dp"
@@ -98,11 +99,11 @@
                     <TextView
                         android:id="@+id/users_name_tv"
                         style="@style/NormalText"
-                        android:text="Gift Chuks"
+                        android:text="@string/workout"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_12sp"
-                        app:layout_constraintStart_toStartOf="@+id/full_body_tv"
-                        app:layout_constraintTop_toBottomOf="@+id/full_body_tv" />
+                        app:layout_constraintStart_toStartOf="@+id/workoutName"
+                        app:layout_constraintTop_toBottomOf="@+id/workoutName" />
 
 
                     <TextView
@@ -114,7 +115,7 @@
                         android:text="24 min"
                         android:textColor="@color/white"
                         android:textSize="14dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/input_exercise_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/workoutImage"
                         app:layout_constraintStart_toStartOf="@+id/users_name_tv"
                         app:layout_constraintTop_toBottomOf="@+id/users_name_tv" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
