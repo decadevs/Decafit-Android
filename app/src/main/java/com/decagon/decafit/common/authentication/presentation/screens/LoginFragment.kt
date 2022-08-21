@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.decagon.decafit.common.authentication.data.LoginRequest
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
 import com.decagon.decafit.common.common.data.preferences.Preference.saveHeader
@@ -27,7 +26,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AuthViewModels by viewModels()
-    private  lateinit var userInfo: LoginInput
+    private lateinit var userInfo: LoginInput
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,15 +46,18 @@ class LoginFragment : Fragment() {
     }
 
     private fun loginInputHandler() {
-        val inputHandler :TextWatcher = object :TextWatcher{
+        val inputHandler: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val userLoginEmail: String = binding.fragmentLoginEmailET.text.toString().trim()
-                val userLoginPassword: String = binding.fragmentLoginPasswordET.text.toString().trim()
-                binding.fragmentLoginLoginBtn.isEnabled = Validation.validateEmailInput(userLoginEmail)
-                        && userLoginPassword.isNotEmpty()
+                val userLoginPassword: String =
+                    binding.fragmentLoginPasswordET.text.toString().trim()
+                binding.fragmentLoginLoginBtn.isEnabled =
+                    Validation.validateEmailInput(userLoginEmail)
+                            && userLoginPassword.isNotEmpty()
             }
+
             override fun afterTextChanged(s: Editable?) {}
         }
         binding.fragmentLoginEmailET.addTextChangedListener(inputHandler)
@@ -100,17 +102,14 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun loginObserver(userInfo: LoginInput){
+    private fun loginObserver(userInfo: LoginInput) {
         viewModel.loginUser(userInfo, requireContext())
-        viewModel.loginResponse.observe(viewLifecycleOwner){
-            if (it.data != null){
+        viewModel.loginResponse.observe(viewLifecycleOwner) {
+            if (it.data != null) {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
                 it.data!!.userLogin.token?.let { it1 -> saveHeader(it1) }
                 saveName(it.data!!.userLogin.fullName)
                 snackBar(it.data!!.userLogin.message) //snackBar(it.data!!.login.message)
-            }
-            if (it.hasErrors()){
-                snackBar(it?.errors?.get(0)?.message!!)
             }
         }
     }
