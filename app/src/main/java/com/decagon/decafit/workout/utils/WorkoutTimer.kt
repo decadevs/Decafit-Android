@@ -25,7 +25,7 @@ class WorkoutTimer(listener: OnTimerTickListener) {
 
     fun timeRemaining():String{
         val secs:Long = 60 - ((duration/1000) %60)
-        val min : Long = 2-((duration/1000/60)%60)
+        val min : Long = 0
         return "%02d:%02d".format( min,secs)
     }
     fun progressTracker() = (duration/1000)%60

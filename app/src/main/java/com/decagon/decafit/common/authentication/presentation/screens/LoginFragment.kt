@@ -10,17 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
-import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
-import com.decagon.decafit.common.utils.Resource
+import com.decagon.decafit.common.common.data.preferences.Preference.saveHeader
+import com.decagon.decafit.common.common.data.preferences.Preference.saveName
+import com.decagon.decafit.common.utils.ProgressBarLoading
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentLoginBinding
 import com.decagon.decafit.type.LoginInput
-import com.decagon.decafit.type.RegisterInput
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +28,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AuthViewModels by viewModels()
+    private lateinit var userInfo: LoginInput
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,13 +42,42 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSharedPreference(requireActivity())
-
+        isLoading()
         activateClickListeners()
         loginInputHandler()
     }
 
-    private fun activateClickListeners(){
-        binding.layout.setOnClickListener{
+    private fun loginInputHandler() {
+        val inputHandler: TextWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val userLoginEmail: String = binding.fragmentLoginEmailET.text.toString().trim()
+                val userLoginPassword: String =
+                    binding.fragmentLoginPasswordET.text.toString().trim()
+                binding.fragmentLoginLoginBtn.isEnabled =
+                    Validation.validateEmailInput(userLoginEmail)
+                            && userLoginPassword.isNotEmpty()
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        }
+        binding.fragmentLoginEmailET.addTextChangedListener(inputHandler)
+        binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
+    }
+
+    private fun isLoading(){
+        val progressBar = ProgressBarLoading(requireContext())
+        viewModel.progressBar.observe(viewLifecycleOwner){
+            if (it){
+                progressBar.show()
+            }else{
+                progressBar.dismiss()
+            }
+        }}
+
+    private fun activateClickListeners() {
+        binding.layout.setOnClickListener {
             it.hideKeyboard()
         }
         binding.signUpTv.setOnClickListener {
@@ -61,9 +90,9 @@ class LoginFragment : Fragment() {
 
             if (Validation.validateEmailInput(email)) {
                 if (Validation.isValidPasswordFormat(password)) {
-                    loginObserver(LoginInput(email, password))
-                   // findNavController().navigate(R.id.action_loginFragment_to_inputExerciseFragment)
-
+                    userInfo = LoginInput(email, password)
+                    loginObserver(userInfo)
+//                    viewModel.loginUser(userInfo, requireContext())
                 } else {
                     // call for incorrect password here
                     snackBar("Invalid Password")
@@ -73,6 +102,7 @@ class LoginFragment : Fragment() {
                 snackBar("Invalid email address")
             }
         }
+
         binding.facebookLogin.setOnClickListener {
             snackBar("login with facebook")
         }
@@ -84,33 +114,15 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun loginInputHandler(){
-        val inputHandler :TextWatcher = object :TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val userLoginEmail: String = binding.fragmentLoginEmailET.text.toString().trim()
-                val userLoginPassword: String = binding.fragmentLoginPasswordET.text.toString().trim()
-                binding.fragmentLoginLoginBtn.isEnabled = Validation.validateEmailInput(userLoginEmail)
-                        && userLoginPassword.isNotEmpty()
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        }
-        binding.fragmentLoginEmailET.addTextChangedListener(inputHandler)
-        binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
-    }
-
-    private fun loginObserver(loginInput:LoginInput){
-        viewModel.loginUser(loginInput,requireContext())
-        viewModel.loginResponse.observe(viewLifecycleOwner){
-            if (it.data !=null){
-                Preference.saveHeader("${it.data!!.userLogin.token}")
-                findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
-            }
-            if (it.hasErrors()){
-                snackBar(it!!.errors?.get(0)!!.message)
+    private fun loginObserver(userInfo: LoginInput) {
+        viewModel.loginUser(userInfo, requireContext())
+        viewModel.loginResponse.observe(viewLifecycleOwner) {
+            if (it.data != null) {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
+                it.data!!.userLogin.token?.let { it1 -> saveHeader(it1) }
+                saveName(it.data!!.userLogin.fullName)
+                snackBar(it.data!!.userLogin.message) //snackBar(it.data!!.login.message)
             }
         }
     }
-
 }

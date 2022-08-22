@@ -62,7 +62,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/full_body_tv"
+            android:id="@+id/workoutName"
             style="@style/NormalBoldText"
             android:layout_marginStart="@dimen/margin_16dp"
             android:layout_marginTop="6dp"
@@ -94,14 +94,15 @@
             app:layout_constraintStart_toEndOf="@+id/timer_tv"
             app:layout_constraintTop_toTopOf="@+id/timer_tv" />
 
-        <TextView
-            android:id="@+id/users_name_tv"
-            style="@style/NormalText"
-            android:text="Gift Chuks"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_12sp"
-            app:layout_constraintStart_toStartOf="@+id/full_body_tv"
-            app:layout_constraintTop_toBottomOf="@+id/full_body_tv" />
+                    <TextView
+                        android:id="@+id/users_name_tv"
+                        style="@style/NormalText"
+                        android:text="@string/workout"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_12sp"
+                        app:layout_constraintStart_toStartOf="@+id/workoutName"
+                        app:layout_constraintTop_toBottomOf="@+id/workoutName"
+                        />
 
 
         <TextView

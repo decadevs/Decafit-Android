@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -130,7 +131,6 @@ class SignUpFragment : Fragment() {
                 errors.contains("cant be empty") -> emailTextInput.error
                 errors.contains("Incomplete number") -> phoneNumberTextInput.error = "Incomplete number"
                 else -> {
-
                     userInfo= RegisterInput(accountData.fullName, accountData.email,accountData.phone_number,accountData.password)
                     singUpObserver(userInfo)
                 }
@@ -152,12 +152,12 @@ class SignUpFragment : Fragment() {
         viewModel.registerUser( userInfo, requireContext())
         viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
             if(resources.data!=null){
+                Toast.makeText(requireContext(), resources.data!!.userRegister.message, Toast.LENGTH_SHORT).show()
                 findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-               snackBar(resources.data!!.userRegister.message)
+
             }
             if (resources.hasErrors()){
                 snackBar(resources?.errors?.get(0)?.message!!)
-                Log.d("SIGNUP","has error====${resources?.errors?.get(0)?.message!!}")
             }
         }
     }

@@ -6,15 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.decagon.decafit.R
 import com.decagon.decafit.common.utils.dommyData.workoutData
 import com.decagon.decafit.databinding.FragmentInputExerciseBinding
 import com.decagon.decafit.databinding.FragmentLoginBinding
 import com.decagon.decafit.workout.data.WorkoutItems
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class InputExerciseFragment : Fragment() {
     private var _binding: FragmentInputExerciseBinding? = null
     private val binding get() = _binding!!
+    private val args: InputExerciseFragmentArgs by navArgs()
+    private lateinit var title: String
+    private lateinit var image: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +34,13 @@ class InputExerciseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        title = args.title
+        image = args.image
+        binding.workoutName.text = title
+        Glide.with(requireContext())
+            .load(image)
+            .centerCrop()
+            .into(binding.inputExerciseImage)
         initListeners()
     }
     private  fun initListeners(){
@@ -33,15 +48,8 @@ class InputExerciseFragment : Fragment() {
             findNavController().navigate(R.id.action_inputExerciseFragment_to_workoutBreakdownFragment)
         }
         binding.inputExerciseBackArrowCV.setOnClickListener {
-            updateWorkout()
             findNavController().popBackStack()
         }
-    }
 
-    fun updateWorkout(){
-        workoutData.set(2,
-            WorkoutItems("Planks", "Lorem ipsum dolor sit amt Lorem ipsum dolor sit amtLorem ipsum dolor sit amtLorem ipsum dolor sit amtLorem ip amtLorem ipsum dolor sit amtLorem ipsum dolor sit amtLorem ipsum dolor sit amt sum dolor sit amtLorem ipsum dolor sit amt ","1:00", 10),
-        )
     }
-
 }

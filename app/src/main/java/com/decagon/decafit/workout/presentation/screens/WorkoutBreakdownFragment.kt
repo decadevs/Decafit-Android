@@ -14,6 +14,7 @@ import com.decagon.decafit.R
 import com.decagon.decafit.WorkoutWitIdQuery
 import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.common.common.data.preferences.Preference
+import com.decagon.decafit.common.common.data.preferences.Preference.WORKOUT_KEY
 import com.decagon.decafit.common.utils.OnclickListener
 import com.decagon.decafit.common.utils.ProgressBarLoading
 import com.decagon.decafit.common.utils.showWorkoutDetails
@@ -49,6 +50,7 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
         initListener()
         getExerciseFromDb()
     }
+
 
     fun initListener(){
         binding.continueWorkoutBtn.setOnClickListener {
@@ -86,8 +88,8 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
         }}
 
     private fun getExerciseFromDb(){
-        val id = Preference
-        viewModel.getWorkoutWithId("6300106a9d9bd74931c514c9",requireContext())
+        val id = Preference.getWorkoutId(WORKOUT_KEY)
+        viewModel.getWorkoutWithId(id!!,requireContext())
         viewModel.workoutWithIdResponse.observe(viewLifecycleOwner){
             Glide.with(requireContext()).load(it.data?.workout?.backgroundImage)
                 .centerCrop()
@@ -95,6 +97,10 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
             binding.workoutBreakdownTv.text = getString(R.string.numberOfExercises,it.data?.workout?.exercises?.size)
             workoutAdapter.differ.submitList(it.data?.workout?.exercises)
 
+            if(it.data?.workout?.exercises!!.isEmpty()){
+                binding.startWorkoutBtn.text = getString(R.string.no_exercise)
+                binding.startWorkoutBtn.isEnabled = false
+            }
         }
     }
 

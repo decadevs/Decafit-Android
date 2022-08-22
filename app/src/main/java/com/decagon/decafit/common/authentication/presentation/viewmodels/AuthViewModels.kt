@@ -34,7 +34,7 @@ class AuthViewModels @Inject constructor(
     private var _loginResponse = MutableLiveData<ApolloResponse<LoginMutation.Data>>()
     val loginResponse: LiveData<ApolloResponse<LoginMutation.Data>> get() = _loginResponse
 
-     private var _networkCheckResponse = MutableLiveData<String>()
+    private var _networkCheckResponse = MutableLiveData<String>()
     val networkCheckResponse: LiveData<String> get() = _networkCheckResponse
 
 
@@ -61,12 +61,15 @@ class AuthViewModels @Inject constructor(
 
     fun loginUser(loginInput: LoginInput, context :Context) {
         if (isNetworkAvailable(context)) {
+            _progressBar.value = true
             viewModelScope.launch {
                 val response = try {
                     repository.login(loginInput)
                 } catch (e: ApolloException) {
+                    _progressBar.value = false
                     return@launch
                 }
+                _progressBar.value = false
                 _loginResponse.value = response
             }
         }else{

@@ -20,8 +20,12 @@ class RepositoryImp @Inject constructor(
         return apolloClient.mutation(RegisterMutation(user = register)).execute()
     }
 
-    override suspend fun login(login: LoginInput): ApolloResponse<LoginMutation.Data> {
-        return apolloClient.mutation(LoginMutation(user = login)).execute()
+    override suspend fun login(userLogin: LoginInput): ApolloResponse<LoginMutation.Data> {
+        return apolloClient.mutation(LoginMutation(user = userLogin)).execute()
+    }
+
+    override suspend fun workOuts(): ApolloResponse<WorkoutsQuery.Data> {
+        return apolloClient.query(WorkoutsQuery()).execute()
     }
 
     override suspend fun getWorkoutWithId(id: String): ApolloResponse<WorkoutWitIdQuery.Data> {

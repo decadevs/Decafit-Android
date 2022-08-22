@@ -23,6 +23,7 @@ import com.decagon.decafit.R
 import com.decagon.decafit.WorkoutWitIdQuery
 import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.STEP_KEY
+import com.decagon.decafit.common.common.data.preferences.Preference.WORKOUT_KEY
 import com.decagon.decafit.common.utils.dommyData.workoutData
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentPauseResumeWorkoutBinding
@@ -119,8 +120,8 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     }
 
     private fun getExerciseFromDb(){
-        val id = Preference.getWorkoutId("")
-        viewModel.getWorkoutWithId("6300106a9d9bd74931c514c9",requireContext())
+        val id = Preference.getWorkoutId(WORKOUT_KEY)
+        viewModel.getWorkoutWithId(id!!,requireContext())
         viewModel.workoutWithIdResponse.observe(viewLifecycleOwner){
             exerciseDatas= it.data?.workout?.exercises!!
             startStepCounter()

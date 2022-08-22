@@ -5,13 +5,6 @@ query Workouts {
     backgroundImage
     sets
     reps
-    exercises {
-      id
-      title
-      description
-      image
-      type
-    }
     createdAt
   }
 }

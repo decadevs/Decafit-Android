@@ -4,8 +4,8 @@ mutation LoginMutation($user: LoginInput!) {
     fullName
     email
     phoneNumber
-    createdAt
     message
+    createdAt
     token
   }
 }

@@ -44,6 +44,12 @@
         <action
             android:id="@+id/action_inputExerciseFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/workoutBreakdownFragment"
