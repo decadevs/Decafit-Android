@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
 import com.decagon.decafit.common.common.data.preferences.Preference.saveHeader
@@ -118,10 +119,13 @@ class LoginFragment : Fragment() {
         viewModel.loginUser(userInfo, requireContext())
         viewModel.loginResponse.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
+                findNavController().navigate(R.id.dashBoardFragment)
                 it.data!!.userLogin.token?.let { it1 -> saveHeader(it1) }
                 saveName(it.data!!.userLogin.fullName)
                 snackBar(it.data!!.userLogin.message) //snackBar(it.data!!.login.message)
+            }
+            if (it.hasErrors()){
+                snackBar(it?.errors?.get(0)!!.message)
             }
         }
     }

@@ -153,8 +153,7 @@ class SignUpFragment : Fragment() {
         viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
             if(resources.data!=null){
                 Toast.makeText(requireContext(), resources.data!!.userRegister.message, Toast.LENGTH_SHORT).show()
-                findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-
+                findNavController().navigate(R.id.loginFragment)
             }
             if (resources.hasErrors()){
                 snackBar(resources?.errors?.get(0)?.message!!)

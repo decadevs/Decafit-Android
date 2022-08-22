@@ -16,7 +16,7 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_dash_board.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.24270833333333333" />
-        <entry key="app/src/main/res/layout/fragment_input_exercise.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_input_exercise.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_pause_resume_workout.xml" value="0.19" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.10520833333333333" />
