@@ -52,4 +52,7 @@
     <string name="jumping_jacks">Jumping Jacks</string>
     <string name="steps_taken">Steps taken</string>
     <string name="numbersOf_steps">%1$s Steps</string>
+    <string name="set_your_limit">Set your limit</string>
+    <string name="number_of_sets">Number of sets</string>
+    <string name="workout">Workout</string>
 </resources>

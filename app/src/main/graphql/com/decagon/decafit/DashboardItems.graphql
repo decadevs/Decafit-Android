@@ -1,0 +1,10 @@
+query Workouts {
+  workouts {
+    id
+    title
+    backgroundImage
+    sets
+    reps
+    createdAt
+  }
+}

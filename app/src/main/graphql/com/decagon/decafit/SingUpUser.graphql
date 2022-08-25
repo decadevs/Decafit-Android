@@ -1,5 +1,5 @@
-mutation Register($user: RegisterInput!) {
-  register(user: $user) {
+mutation RegisterMutation($user: RegisterInput!) {
+  userRegister(user: $user) {
     id
     fullName
     email

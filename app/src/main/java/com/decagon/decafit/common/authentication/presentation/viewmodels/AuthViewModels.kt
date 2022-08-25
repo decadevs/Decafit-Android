@@ -28,7 +28,7 @@ class AuthViewModels @Inject constructor(
     private var _loginResponse = MutableLiveData<ApolloResponse<LoginMutation.Data>>()
     val loginResponse: LiveData<ApolloResponse<LoginMutation.Data>> get() = _loginResponse
 
-     private var _networkCheckResponse = MutableLiveData<String>()
+    private var _networkCheckResponse = MutableLiveData<String>()
     val networkCheckResponse: LiveData<String> get() = _networkCheckResponse
 
 

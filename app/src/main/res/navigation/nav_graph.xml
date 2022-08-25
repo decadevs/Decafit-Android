@@ -43,6 +43,12 @@
         <action
             android:id="@+id/action_inputExerciseFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/workoutBreakdownFragment"
@@ -70,10 +76,25 @@
         <action
             android:id="@+id/action_workoutBreakdownFragment_to_pauseResumeWorkoutFragment"
             app:destination="@id/pauseResumeWorkoutFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_setLimitFragment"
+            app:destination="@id/setLimitFragment" />
     </fragment>
     <fragment
         android:id="@+id/pauseResumeWorkoutFragment"
         android:name="com.decagon.decafit.workout.presentation.screens.PauseResumeWorkoutFragment"
         android:label="fragment_pause_resume_workout"
         tools:layout="@layout/fragment_pause_resume_workout" />
+    <fragment
+        android:id="@+id/setLimitFragment"
+        android:name="com.decagon.decafit.workout.presentation.screens.SetLimitFragment"
+        android:label="fragment_set_limit"
+        tools:layout="@layout/fragment_set_limit" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="integer" />
+    </fragment>
 </navigation>
