@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.getName
 import com.decagon.decafit.common.dashboard.dashBoardViewModel.DashBoardViewModel
 import com.decagon.decafit.common.utils.onItemClickListener
@@ -60,6 +61,7 @@ class DashBoardFragment : Fragment() {
                         findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
                             resources.data!!.workouts[position]!!.title,  resources.data!!.workouts[position]!!.backgroundImage
                         ))
+                        Preference.saveWorkoutId(resources.data?.workouts?.get(position)?.id!!)
                     }
                 })
             }

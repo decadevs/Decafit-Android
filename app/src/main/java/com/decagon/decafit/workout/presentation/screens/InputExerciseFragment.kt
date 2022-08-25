@@ -9,8 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.decagon.decafit.R
+import com.decagon.decafit.common.utils.dommyData.workoutData
 import com.decagon.decafit.databinding.FragmentInputExerciseBinding
 import com.decagon.decafit.databinding.FragmentLoginBinding
+import com.decagon.decafit.workout.data.WorkoutItems
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -37,14 +39,17 @@ class InputExerciseFragment : Fragment() {
         binding.workoutName.text = title
         Glide.with(requireContext())
             .load(image)
-            .into(binding.workoutImage)
+            .centerCrop()
+            .into(binding.inputExerciseImage)
         initListeners()
     }
     private  fun initListeners(){
         binding.nextExerciseBtn.setOnClickListener {
             findNavController().navigate(R.id.action_inputExerciseFragment_to_workoutBreakdownFragment)
         }
+        binding.inputExerciseBackArrowCV.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
     }
-
 }

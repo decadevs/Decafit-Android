@@ -16,11 +16,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.decagon.decafit.R
+import com.decagon.decafit.WorkoutWitIdQuery
+import com.decagon.decafit.common.common.data.preferences.Preference
+import com.decagon.decafit.common.common.data.preferences.Preference.STEP_KEY
+import com.decagon.decafit.common.common.data.preferences.Preference.WORKOUT_KEY
 import com.decagon.decafit.common.utils.dommyData.workoutData
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentPauseResumeWorkoutBinding
+import com.decagon.decafit.workout.presentation.viewmodels.WorkoutViewModels
 import com.decagon.decafit.workout.utils.OnTimerTickListener
 import com.decagon.decafit.workout.utils.WorkoutTimer
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,15 +36,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventListener {
     private var _binding:FragmentPauseResumeWorkoutBinding? = null
     private val binding get() = _binding!!
+    private val viewModel:WorkoutViewModels by viewModels()
+    lateinit var exerciseDatas: List<WorkoutWitIdQuery.Exercise?>
     private lateinit var timer :WorkoutTimer
     private var duration = ""
     private var num=0
+    private var stepsTaken = 0
     val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
 
     private var sensorManager : SensorManager ? = null
     private var running = false
-    private var totalSteps = 0F
-    private var previousSteps = 0F
+    private var totalSteps = 0
+    private var previousSteps = 0
     private var currentStep=0
     private var stepCounter = 0
 
@@ -59,13 +69,14 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getExerciseFromDb()
         initClickListener()
-        timer.startTimer()
+
         if (isPermissionGranted()) {
             requestPermission()
         }
         sensorManager = context?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        startStepCounter()
+
 
     }
 
@@ -80,17 +91,15 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
             binding.pauseBtn.visibility =View.GONE
         }
         binding.resumeBtn.setOnClickListener {
-            if (running){
                 startStepCounter()
-            }else{
                 timer.startTimer()
-            }
+
             binding.pauseBtn.visibility =View.VISIBLE
             binding.resumeBtn.visibility = View.INVISIBLE
         }
         binding.nextWorkoutBtn.setOnClickListener {
-//            timer.stopTimer()
-//            stopStepCounter()
+            timer.stopTimer()
+           stopStepCounter()
             resetStepCounter()
             num++
             setUpWorkout()
@@ -103,7 +112,6 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     }
 
     override fun timerTickListener(duration: String, timeRemaining:String) {
-        num = timer.workoutTracker().toInt()
         setUpWorkout()
         binding.workoutCounterTv.text = duration
         this.duration = duration.dropLast(3)
@@ -111,28 +119,51 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
         binding.remainingTimeTv.text = timeRemaining
     }
 
+    private fun getExerciseFromDb(){
+        val id = Preference.getWorkoutId(WORKOUT_KEY)
+        viewModel.getWorkoutWithId(id!!,requireContext())
+        viewModel.workoutWithIdResponse.observe(viewLifecycleOwner){
+            exerciseDatas= it.data?.workout?.exercises!!
+            startStepCounter()
+            timer.startTimer()
+        }
+    }
+
 
     private fun setUpWorkout(){
-       val numberOfWorkout= workoutData.size
+        //num = timer.workoutTracker().toInt()
+        val numberOfWorkout= exerciseDatas.size
         if(num < numberOfWorkout){
-            binding.workoutHeaderTv.text = workoutData[num].title
-            if (workoutData[num].title == "Running"){
+            binding.workoutHeaderTv.text = exerciseDatas[num]?.title
+            if (exerciseDatas[num]?.title!!.contains("Running") ||exerciseDatas[num]?.title!!.contains("Walking")){
                 startStepCounter()
                 binding.stepsCounterLayout.visibility = View.VISIBLE
                 binding.workoutProgressIndicator.visibility = View.INVISIBLE
                 binding.workoutCounterTv.visibility = View.INVISIBLE
+                Glide.with(requireContext()).load(exerciseDatas[num]?.image)
+                    .centerCrop()
+                    .into(binding.pauseAndResumeImageIV)
             }else{
                 binding.stepsCounterLayout.visibility = View.INVISIBLE
                 binding.workoutProgressIndicator.visibility = View.VISIBLE
                 binding.workoutCounterTv.visibility = View.VISIBLE
+                Glide.with(requireContext()).load(exerciseDatas[num]?.image)
+                    .centerCrop()
+                    .into(binding.pauseAndResumeImageIV)
             }
         }else{
             timer.stopTimer()
+            snackBar("Great Job! Exercises is Finished.")
+            binding.nextWorkoutBtn.text = "END"
+            if(num > numberOfWorkout){
+                findNavController().popBackStack()
+                num =0
+            }
         }
     }
 
     private fun startStepCounter() {
-        Log.d("COUNTER", "currentStep START = $stepCounter")
+
         running =true
         val stepSensor:Sensor? = sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         if (stepSensor == null){
@@ -149,20 +180,32 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     }
 
     private fun resetStepCounter(){
+
         currentStep = 0
-        totalSteps =0F
-        previousSteps = 0F
+        totalSteps =0
+        stepsTaken = 0
         sensorManager?.unregisterListener(this)
     }
-    override fun onSensorChanged(event: SensorEvent) {
 
+
+    override fun onSensorChanged(event: SensorEvent) {
+        stepCounter++
         if (running){
-            totalSteps =event.values[0]
-             currentStep = totalSteps.toInt() - previousSteps.toInt()
-            binding.numbersOfStepsTv.text= getString(R.string.numbersOf_steps,currentStep.toString())
+            totalSteps =event.values[0].toInt()
+            previousSteps = Preference.getPreviousStepCount(STEP_KEY)
+            if (previousSteps == 0){
+                binding.numbersOfStepsTv.text = "$currentStep Steps"
+            }
+            if (previousSteps >1){
+                currentStep = totalSteps.toInt() - previousSteps
+                stepsTaken =+ currentStep
+                binding.numbersOfStepsTv.text = "$stepsTaken Steps"
+            }
 
             Log.d("COUNTER", "currentStep = $currentStep")
+            Log.d("COUNTER", "previousStep = $previousSteps")
             Log.d("COUNTER", "totalSteps = $totalSteps")
+            Preference.savePreviousStepCount(totalSteps)
 
         }
     }
@@ -187,4 +230,6 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
             Manifest.permission.ACTIVITY_RECOGNITION
         ) != PackageManager.PERMISSION_GRANTED
     }
+
+
 }

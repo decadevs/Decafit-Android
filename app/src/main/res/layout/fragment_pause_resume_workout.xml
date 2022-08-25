@@ -14,8 +14,8 @@
             android:layout_height="wrap_content">
 
 
-            <View
-                android:id="@+id/top_view2"
+            <ImageView
+                android:id="@+id/pauseAndResumeImageIV"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="#F0F2F6"
@@ -48,7 +48,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/top_view2" />
+                app:layout_constraintTop_toBottomOf="@+id/pauseAndResumeImageIV" />
 
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -139,7 +139,7 @@
                 android:id="@+id/steps_counter_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

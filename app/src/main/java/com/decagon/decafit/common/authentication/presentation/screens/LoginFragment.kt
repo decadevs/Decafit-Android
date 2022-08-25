@@ -3,16 +3,19 @@ package com.decagon.decafit.common.authentication.presentation.screens
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
 import com.decagon.decafit.common.common.data.preferences.Preference.saveHeader
 import com.decagon.decafit.common.common.data.preferences.Preference.saveName
+import com.decagon.decafit.common.utils.ProgressBarLoading
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
@@ -40,7 +43,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSharedPreference(requireActivity())
-
+        isLoading()
         activateClickListeners()
         loginInputHandler()
     }
@@ -63,6 +66,16 @@ class LoginFragment : Fragment() {
         binding.fragmentLoginEmailET.addTextChangedListener(inputHandler)
         binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
     }
+
+    private fun isLoading(){
+        val progressBar = ProgressBarLoading(requireContext())
+        viewModel.progressBar.observe(viewLifecycleOwner){
+            if (it){
+                progressBar.show()
+            }else{
+                progressBar.dismiss()
+            }
+        }}
 
     private fun activateClickListeners() {
         binding.layout.setOnClickListener {
@@ -89,16 +102,16 @@ class LoginFragment : Fragment() {
                 // call for incorrect email here
                 snackBar("Invalid email address")
             }
+        }
 
-            binding.facebookLogin.setOnClickListener {
-                snackBar("login with facebook")
-            }
-            binding.googleLogin.setOnClickListener {
-                snackBar("login with google")
-            }
-            binding.appleLogin.setOnClickListener {
-                snackBar("login with apple")
-            }
+        binding.facebookLogin.setOnClickListener {
+            snackBar("login with facebook")
+        }
+        binding.googleLogin.setOnClickListener {
+            snackBar("login with google")
+        }
+        binding.appleLogin.setOnClickListener {
+            snackBar("login with apple")
         }
     }
 
@@ -106,10 +119,13 @@ class LoginFragment : Fragment() {
         viewModel.loginUser(userInfo, requireContext())
         viewModel.loginResponse.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
+                findNavController().navigate(R.id.dashBoardFragment)
                 it.data!!.userLogin.token?.let { it1 -> saveHeader(it1) }
                 saveName(it.data!!.userLogin.fullName)
                 snackBar(it.data!!.userLogin.message) //snackBar(it.data!!.login.message)
+            }
+            if (it.hasErrors()){
+                snackBar(it?.errors?.get(0)!!.message)
             }
         }
     }

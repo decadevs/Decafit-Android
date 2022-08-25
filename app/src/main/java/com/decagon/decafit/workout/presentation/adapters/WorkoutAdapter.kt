@@ -1,27 +1,34 @@
 package com.decagon.decafit.workout.presentation.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.bumptech.glide.Glide
 import com.decagon.decafit.R
+import com.decagon.decafit.WorkoutWitIdQuery
+import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.common.utils.OnclickListener
 import com.decagon.decafit.databinding.WorkoutBreakdownItemBinding
 import com.decagon.decafit.workout.data.WorkoutItems
 
 class WorkoutAdapter(private  val listener:OnclickListener, private val context: Context) :RecyclerView.Adapter<WorkoutAdapter.ViewHolder>(){
 
-    private val callBack = object :DiffUtil.ItemCallback<WorkoutItems>(){
-        override fun areItemsTheSame(oldItem: WorkoutItems, newItem: WorkoutItems): Boolean {
-            return ((oldItem.title == newItem.title)&&(oldItem.workoutProgress ==newItem.workoutProgress))
+    private val callBack = object :DiffUtil.ItemCallback<WorkoutWitIdQuery.Exercise>(){
+        override fun areItemsTheSame(oldItem: WorkoutWitIdQuery.Exercise, newItem: WorkoutWitIdQuery.Exercise): Boolean {
+            return ((oldItem.title == newItem.title)&&(oldItem.id ==newItem.id))
         }
 
-        override fun areContentsTheSame(oldItem: WorkoutItems, newItem: WorkoutItems): Boolean {
+        override fun areContentsTheSame(oldItem: WorkoutWitIdQuery.Exercise, newItem: WorkoutWitIdQuery.Exercise): Boolean {
             return oldItem == newItem
         }
     }
@@ -32,25 +39,33 @@ class WorkoutAdapter(private  val listener:OnclickListener, private val context:
 
          val title = binding.workoutTitleTv
          val timer = binding.exerciseTimerTv
+        val exercisesImage = binding.exerciseImageIv
          val workoutStatus = binding.workoutStatusTv
          val workoutProgressCard = binding.workoutStatusCV
          val progressBar = binding.workoutProgressBar
 
-         @RequiresApi(Build.VERSION_CODES.M)
-         fun bindView(items: WorkoutItems, context: Context){
+         fun bindView(items: WorkoutWitIdQuery.Exercise, context: Context){
              title.text = items.title
-             timer.text =items.workoutTime.toString()
-             if (items.workoutProgress ==100){
+             //timer.text =items.workoutTime.toString()
+             Glide.with(context).load(items.image)
+                 .centerCrop()
+                 .override(65,56)
+                 .into(exercisesImage)
+           //  exercisesImage.load(items.image.toString()){placeholder(R.drawable.image_background)}
+             exercisesImage.setBackgroundResource(R.drawable.full_body_img)
+             Log.d("ADAPT", "this isthe image==${items.image}")
+             val iscomplete = false
+             val pausedTime =0
+             if (iscomplete){
                  workoutProgressCard.visibility = View.VISIBLE
                  workoutStatus.setText(R.string.complete_workout)
-                 workoutProgressCard.setCardBackgroundColor(context.getColor(R.color.light_green))
+                // workoutProgressCard.setCardBackgroundColor(context.getColor(R.color.light_green))
                  progressBar.visibility = View.INVISIBLE
-                 progressBar.progress = items.workoutProgress
-             }else if(items.workoutProgress !=0){
+             }else if(pausedTime !=0){
                  workoutProgressCard.visibility = View.VISIBLE
                  workoutStatus.setText(R.string.incomplete_workout)
-                 workoutProgressCard.setCardBackgroundColor(context.getColor(R.color.light_orange))
-                 progressBar.progress = items.workoutProgress
+                // workoutProgressCard.setCardBackgroundColor(context.getColor(R.color.light_orange))
+                 progressBar.progress = pausedTime
              }
          }
     }
