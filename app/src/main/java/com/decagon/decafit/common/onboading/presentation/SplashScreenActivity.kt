@@ -20,14 +20,11 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun splashScreen(){
-        val text2 = binding.splashWelcomeTV
         val text1 = binding.splashDecafitTV
 
         val topText = AnimationUtils.loadAnimation(this, R.anim.slide_from_top_animation)
-        val bottomText = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom_animation)
 
         text1.startAnimation(topText)
-        text2.startAnimation(bottomText)
 
         val splashScreenTimeOut = 4000
         var intent = Intent(this, MainActivity::class.java)

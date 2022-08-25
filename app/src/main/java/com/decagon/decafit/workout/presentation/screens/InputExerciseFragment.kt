@@ -9,10 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.decagon.decafit.R
-import com.decagon.decafit.common.utils.dommyData.workoutData
+import com.decagon.decafit.common.common.data.preferences.Preference
+import com.decagon.decafit.common.utils.hideKeyboard
+import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentInputExerciseBinding
-import com.decagon.decafit.databinding.FragmentLoginBinding
-import com.decagon.decafit.workout.data.WorkoutItems
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -42,14 +42,38 @@ class InputExerciseFragment : Fragment() {
             .centerCrop()
             .into(binding.inputExerciseImage)
         initListeners()
+
     }
     private  fun initListeners(){
+        binding.layout.setOnClickListener {
+            it.hideKeyboard()
+        }
         binding.nextExerciseBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_inputExerciseFragment_to_workoutBreakdownFragment)
+            setUpWorkout()
         }
         binding.inputExerciseBackArrowCV.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
 
+    private fun setUpWorkout(){
+        val workoutSet = binding.numbersOfSetsET.text.toString()
+        val workoutReps = binding.numbersRepsET.text.toString()
+        val workoutTime = binding.estimatedTimeET.text.toString()
+        val workoutCount = binding.numbersCountsET.text.toString()
+
+        if (workoutReps.isNullOrEmpty() || workoutReps.isNullOrEmpty()||workoutCount.isNullOrEmpty()||workoutTime.isNullOrEmpty()){
+            snackBar("Enter all fields")
+        }else{
+        with(Preference){
+            saveWorkoutSet(workoutSet)
+            saveWorkoutRep(workoutReps)
+            saveEstimatedTime(workoutTime)
+            saveNumberOfCount(workoutCount)
+        }
+            findNavController().navigate(R.id.action_inputExerciseFragment_to_workoutBreakdownFragment)
+
+        }
     }
 }
+

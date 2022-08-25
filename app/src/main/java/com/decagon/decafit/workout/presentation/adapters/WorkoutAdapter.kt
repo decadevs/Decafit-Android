@@ -17,6 +17,9 @@ import com.bumptech.glide.Glide
 import com.decagon.decafit.R
 import com.decagon.decafit.WorkoutWitIdQuery
 import com.decagon.decafit.common.common.data.models.Exercises
+import com.decagon.decafit.common.common.data.preferences.Preference
+import com.decagon.decafit.common.common.data.preferences.Preference.COUNT_KEY
+import com.decagon.decafit.common.common.data.preferences.Preference.TIME_KEY
 import com.decagon.decafit.common.utils.OnclickListener
 import com.decagon.decafit.databinding.WorkoutBreakdownItemBinding
 import com.decagon.decafit.workout.data.WorkoutItems
@@ -38,11 +41,11 @@ class WorkoutAdapter(private  val listener:OnclickListener, private val context:
     class ViewHolder(binding:WorkoutBreakdownItemBinding):RecyclerView.ViewHolder(binding.root){
 
          val title = binding.workoutTitleTv
-         val timer = binding.exerciseTimerTv
-        val exercisesImage = binding.exerciseImageIv
-         val workoutStatus = binding.workoutStatusTv
-         val workoutProgressCard = binding.workoutStatusCV
-         val progressBar = binding.workoutProgressBar
+         private val timer = binding.exerciseTimerTv
+        private val exercisesImage = binding.exerciseImageIv
+         private val workoutStatus = binding.workoutStatusTv
+         private val workoutProgressCard = binding.workoutStatusCV
+         private val progressBar = binding.workoutProgressBar
 
          fun bindView(items: WorkoutWitIdQuery.Exercise, context: Context){
              title.text = items.title
@@ -51,12 +54,15 @@ class WorkoutAdapter(private  val listener:OnclickListener, private val context:
                  .centerCrop()
                  .override(65,56)
                  .into(exercisesImage)
-           //  exercisesImage.load(items.image.toString()){placeholder(R.drawable.image_background)}
              exercisesImage.setBackgroundResource(R.drawable.full_body_img)
-             Log.d("ADAPT", "this isthe image==${items.image}")
-             val iscomplete = false
+             val isComplete = false
              val pausedTime =0
-             if (iscomplete){
+             if (items.type.rawValue == "count"){
+                 "X${Preference.getNumberOfCount(COUNT_KEY)}".also { timer.text = it }
+             }else{
+                 timer.text = Preference.getEstimatedTime(TIME_KEY)
+             }
+             if (isComplete){
                  workoutProgressCard.visibility = View.VISIBLE
                  workoutStatus.setText(R.string.complete_workout)
                 // workoutProgressCard.setCardBackgroundColor(context.getColor(R.color.light_green))

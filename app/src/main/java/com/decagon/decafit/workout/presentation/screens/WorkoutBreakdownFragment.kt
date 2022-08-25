@@ -14,6 +14,7 @@ import com.decagon.decafit.R
 import com.decagon.decafit.WorkoutWitIdQuery
 import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.common.common.data.preferences.Preference
+import com.decagon.decafit.common.common.data.preferences.Preference.TIME_KEY
 import com.decagon.decafit.common.common.data.preferences.Preference.WORKOUT_KEY
 import com.decagon.decafit.common.utils.OnclickListener
 import com.decagon.decafit.common.utils.ProgressBarLoading
@@ -96,6 +97,7 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
                 .into(binding.exerciseImage)
             binding.workoutBreakdownTv.text = getString(R.string.numberOfExercises,it.data?.workout?.exercises?.size)
             workoutAdapter.differ.submitList(it.data?.workout?.exercises)
+
 
             if(it.data?.workout?.exercises!!.isEmpty()){
                 binding.startWorkoutBtn.text = getString(R.string.no_exercise)

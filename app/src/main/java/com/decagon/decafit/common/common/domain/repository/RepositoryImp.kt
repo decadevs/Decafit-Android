@@ -2,14 +2,12 @@ package com.decagon.decafit.common.common.domain.repository
 
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.ApolloResponse
-import com.decagon.decafit.LoginMutation
-import com.decagon.decafit.RegisterMutation
-import com.decagon.decafit.WorkoutWitIdQuery
-import com.decagon.decafit.WorkoutsQuery
+import com.decagon.decafit.*
 import com.decagon.decafit.common.common.data.local_data.DecafitDAO
 import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.type.LoginInput
 import com.decagon.decafit.type.RegisterInput
+import com.decagon.decafit.type.ReportCreateInput
 import javax.inject.Inject
 
 class RepositoryImp @Inject constructor(
@@ -26,6 +24,17 @@ class RepositoryImp @Inject constructor(
 
     override suspend fun workOuts(): ApolloResponse<WorkoutsQuery.Data> {
         return apolloClient.query(WorkoutsQuery()).execute()
+    }
+
+    override suspend fun createReport(input: ReportCreateInput): ApolloResponse<CreateReportMutation.Data> {
+        return apolloClient.mutation(CreateReportMutation(input)).execute()
+    }
+
+    override suspend fun getReport(
+        userId: String,
+        workoutId: String
+    ): ApolloResponse<GetReportWorkoutQuery.Data> {
+        return apolloClient.query(GetReportWorkoutQuery(userId,workoutId)).execute()
     }
 
     override suspend fun getWorkoutWithId(id: String): ApolloResponse<WorkoutWitIdQuery.Data> {

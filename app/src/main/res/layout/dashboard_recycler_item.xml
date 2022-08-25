@@ -6,7 +6,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/exercise1"
-        android:layout_width="140dp"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
         app:cardCornerRadius="8dp"
         android:layout_margin="10dp"

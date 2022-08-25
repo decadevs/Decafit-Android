@@ -2,6 +2,8 @@ package com.decagon.decafit.common.common.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.decagon.decafit.WorkoutWitIdQuery
+import com.decagon.decafit.WorkoutsQuery
 import com.decagon.decafit.type.EnumType
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -15,6 +17,7 @@ data class Exercises(
     @SerializedName("image") public val image: String,
     @SerializedName("type") public val type: String?=null
 
+
 //    @SerializedName("id")val id: String,
 //    @SerializedName("title")val title: String,
 //    @SerializedName("completed")val completed: Boolean,
@@ -26,3 +29,9 @@ data class Exercises(
     @PrimaryKey(autoGenerate = false)
     var idd =id
     }
+
+data class EnumType(
+    val time:String,
+    val count :String
+)
+

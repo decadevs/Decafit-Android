@@ -3,6 +3,7 @@ package com.decagon.decafit.common.common.data.preferences
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.text.Editable
 
 object Preference {
     val HEADER_KEY = "Header_KEY"
@@ -10,6 +11,10 @@ object Preference {
      const val STEP_KEY = "step_Key"
     val USER_NAME = "name"
     val WORKOUT_KEY = "workoutId_key"
+    val SET_KEY = "set_key"
+    val REP_KEY = "rep_key"
+    val TIME_KEY = "time_key"
+    val COUNT_KEY = "count_key"
 
 
     lateinit var preferences: SharedPreferences
@@ -29,6 +34,32 @@ object Preference {
 
     fun savePreviousStepCount(step: Int){
         preferences.edit().putInt(STEP_KEY, step).commit()
+    }
+
+    fun saveWorkoutSet(set: String?){
+        preferences.edit().putString(SET_KEY, set).commit()
+    }
+    fun saveWorkoutRep(reps: String?){
+        preferences.edit().putString(REP_KEY, reps).commit()
+    }
+    fun saveEstimatedTime(time: String?){
+        preferences.edit().putString(TIME_KEY, time).commit()
+    }
+    fun saveNumberOfCount(count: String?){
+        preferences.edit().putString(COUNT_KEY, count).commit()
+    }
+    fun getWorkoutSet(key: String): String?{
+        return preferences.getString(key, null)
+    }
+    fun getWorkoutRep(key: String): String?{
+        return preferences.getString(key, null)
+    }
+    fun getEstimatedTime(key: String): String?{
+        return preferences.getString(key, null)
+    }
+
+    fun getNumberOfCount(key: String): String?{
+        return preferences.getString(key, null)
     }
     fun getPreviousStepCount(key: String): Int{
         return preferences.getInt(key, 0)
