@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.decagon.decafit.common.common.data.preferences.Preference.getName
 import com.decagon.decafit.common.dashboard.dashBoardViewModel.DashBoardViewModel
+import com.decagon.decafit.common.dashboard.dashBoardViewModel.UiState
 import com.decagon.decafit.common.utils.onItemClickListener
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentDashBoardBinding
@@ -48,25 +49,41 @@ class DashBoardFragment : Fragment() {
 
     private fun getWorksObserver(){
         viewModel.getWorkOuts(requireContext())
-        viewModel.dashBoardResponse.observe(viewLifecycleOwner){ resources->
-            val workOuts = resources.data!!.workouts
-            if(resources.data != null && !resources.hasErrors()){
-                recyclerAdapter = DashBoardAdapter(workOuts)
-                recyclerView.adapter = recyclerAdapter
-                welcomeMessage.text = "Welcome $name"
+        viewModel.getAllRepositoryList().observe(viewLifecycleOwner){it ->
+                    recyclerAdapter = DashBoardAdapter(it)
+                    recyclerView.adapter = recyclerAdapter
+                    welcomeMessage.text = "Welcome $name"
 
-                recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
-                    override fun allAppsItemClicked(position: Int) {
-                        findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
-                            resources.data!!.workouts[position]!!.title,  resources.data!!.workouts[position]!!.backgroundImage
-                        ))
-                    }
-                })
-            }
-            if (resources.hasErrors()){
-                snackBar(resources.errors?.get(0)?.message!!)
-            }
+            recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
+                override fun allAppsItemClicked(position: Int) {
+                    findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
+                        it[position].title,  it[position].backgroundImage
+                    ))
+                }
+            })
+
+
         }
+//        viewModel.dashBoardResponse.observe(viewLifecycleOwner){ resources->
+//
+//            when(resources) {
+//                is UiState.Failure -> TODO()
+//                is UiState.Success -> {
+//                    recyclerAdapter = DashBoardAdapter(resources.data)
+//                    recyclerView.adapter = recyclerAdapter
+//                    welcomeMessage.text = "Welcome $name"
+//
+//                    recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
+//                        override fun allAppsItemClicked(position: Int) {
+//                            findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
+//                                resources.data[position].title,  resources.data[position].backgroundImage
+//                            ))
+//                        }
+//                    })
+
+//                }
+//            }
+//        }
     }
 
     private fun networkObsever(){
@@ -77,3 +94,21 @@ class DashBoardFragment : Fragment() {
         }
     }
 }
+
+//            val workOuts = resources.data!!.workouts
+//            if(resources != null && !resources.hasErrors()){
+//                recyclerAdapter = DashBoardAdapter(workOuts)
+//                recyclerView.adapter = recyclerAdapter
+//                welcomeMessage.text = "Welcome $name"
+//
+//                recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
+//                    override fun allAppsItemClicked(position: Int) {
+//                        findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
+//                            resources.data!!.workouts[position]!!.title,  resources.data!!.workouts[position]!!.backgroundImage
+//                        ))
+//                    }
+//                })
+//            }
+//            if (resources.hasErrors()){
+//                snackBar(resources.errors?.get(0)?.message!!)
+//            }
