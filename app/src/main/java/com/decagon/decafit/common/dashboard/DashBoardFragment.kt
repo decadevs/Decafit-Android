@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.decagon.decafit.common.common.data.preferences.Preference.getName
 import com.decagon.decafit.common.dashboard.dashBoardViewModel.DashBoardViewModel
-import com.decagon.decafit.common.dashboard.dashBoardViewModel.UiState
 import com.decagon.decafit.common.utils.onItemClickListener
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentDashBoardBinding
@@ -47,23 +46,37 @@ class DashBoardFragment : Fragment() {
         getWorksObserver()
     }
 
-    private fun getWorksObserver(){
+    private fun getWorksObserver() {
         viewModel.getWorkOuts(requireContext())
-        viewModel.getAllRepositoryList().observe(viewLifecycleOwner){it ->
-                    recyclerAdapter = DashBoardAdapter(it)
-                    recyclerView.adapter = recyclerAdapter
-                    welcomeMessage.text = "Welcome $name"
+        viewModel.getAllRepositoryList().observe(viewLifecycleOwner) { it ->
+            recyclerAdapter = DashBoardAdapter(it)
+            recyclerView.adapter = recyclerAdapter
+            welcomeMessage.text = "Welcome $name"
 
             recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
                 override fun allAppsItemClicked(position: Int) {
-                    findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
-                        it[position].title,  it[position].backgroundImage
-                    ))
+                    findNavController().navigate(
+                        DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
+                            it[position].title, it[position].backgroundImage
+                        )
+                    )
                 }
             })
 
 
         }
+    }
+
+
+    private fun networkObsever(){
+        viewModel.networkCheckResponse.observe(viewLifecycleOwner){
+            if (!it.isNullOrEmpty()){
+                snackBar(it)
+            }
+        }
+    }
+}
+
 //        viewModel.dashBoardResponse.observe(viewLifecycleOwner){ resources->
 //
 //            when(resources) {
@@ -84,16 +97,8 @@ class DashBoardFragment : Fragment() {
 //                }
 //            }
 //        }
-    }
-
-    private fun networkObsever(){
-        viewModel.networkCheckResponse.observe(viewLifecycleOwner){
-            if (!it.isNullOrEmpty()){
-                snackBar(it)
-            }
-        }
-    }
-}
+//   }
+//        }
 
 //            val workOuts = resources.data!!.workouts
 //            if(resources != null && !resources.hasErrors()){
@@ -112,3 +117,21 @@ class DashBoardFragment : Fragment() {
 //            if (resources.hasErrors()){
 //                snackBar(resources.errors?.get(0)?.message!!)
 //            }
+
+//viewModel.dashBoardResponse.observe(viewLifecycleOwner){ resources->
+//    val workOuts = resources.data!!.workouts
+//    if(resources.data != null && !resources.hasErrors()){
+//        recyclerAdapter = DashBoardAdapter(workOuts)
+//        recyclerView.adapter = recyclerAdapter
+//        welcomeMessage.text = "Welcome $name"
+//
+//        recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
+//            override fun allAppsItemClicked(position: Int) {
+//                findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
+//                    resources.data!!.workouts[position]!!.title,  resources.data!!.workouts[position]!!.backgroundImage
+//                ))
+//            }
+//        })
+//    }
+//    if (resources.hasErrors()){
+//        snackBar(resources.errors?.get(0)?.message!!)

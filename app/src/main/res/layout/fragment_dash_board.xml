@@ -252,7 +252,6 @@
                     tools:listitem="@layout/dashboard_recycler_item" />
 
             </LinearLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

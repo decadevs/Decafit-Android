@@ -7,13 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.decagon.decafit.WorkoutsQuery
 import com.decagon.decafit.common.common.data.database.model.WorkOutData
 import com.decagon.decafit.common.utils.onItemClickListener
 import com.decagon.decafit.databinding.DashboardRecyclerItemBinding
 
 //List<WorkoutsQuery.Workout?>
 class DashBoardAdapter(private val workOuts: List<WorkOutData>): RecyclerView.Adapter<DashBoardAdapter.AppHolder>() {
+
     private lateinit var context: Context
     private lateinit var mListener: onItemClickListener
 

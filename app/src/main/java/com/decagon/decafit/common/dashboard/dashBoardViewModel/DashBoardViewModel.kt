@@ -8,6 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.decagon.decafit.common.common.data.database.mapper.WorkoutNetworkMapper
 import com.decagon.decafit.common.common.data.database.model.WorkOutData
 import com.decagon.decafit.common.common.data.database.repository.RoomRepositoryImpl
+import com.apollographql.apollo3.api.ApolloResponse
+import com.apollographql.apollo3.exception.ApolloException
+import com.decagon.decafit.WorkoutsQuery
 import com.decagon.decafit.common.common.domain.repository.RepositoryInterface
 import com.decagon.decafit.common.utils.isNetworkAvailable
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,6 +23,7 @@ class DashBoardViewModel @Inject constructor(private val networkMapper: WorkoutN
     private var _dashBoardResponse = MutableLiveData<UiState>()
     val dashBoardResponse: LiveData<UiState> get() = _dashBoardResponse
 
+
     private var _networkCheckResponse = MutableLiveData<String>()
     val networkCheckResponse: LiveData<String> get() = _networkCheckResponse
 
@@ -27,24 +31,41 @@ class DashBoardViewModel @Inject constructor(private val networkMapper: WorkoutN
         return roomRepository.getWorkouts()
     }
 
-    fun getWorkOuts(context : Context) {
+    fun getWorkOuts(context: Context) {
         if (isNetworkAvailable(context)) {
             viewModelScope.launch {
                 val response = repository.workOuts()
                 _dashBoardResponse.value = response.data?.let {
-                    for (i in it.workouts){
+                    for (i in it.workouts) {
                         roomRepository.deleteWorkouts()
                     }
-                     UiState.Success(
-                         it.workouts.mapNotNull { workout -> networkMapper.mapTo(workout!!) },).also {
-                         for (i in it.data){
-                             roomRepository.insertWorkouts(i)
-                         }
-                     }
-                }?: UiState.Failure("Error in loading data")
+                    UiState.Success(
+                        it.workouts.mapNotNull { workout -> networkMapper.mapTo(workout!!) },
+                    ).also {
+                        for (i in it.data) {
+                            roomRepository.insertWorkouts(i)
+                        }
+                    }
+                } ?: UiState.Failure("Error in loading data")
+
             }
-        }else{
-            _networkCheckResponse.value = "N0 INTERNET"
         }
     }
 }
+//
+//fun getWorkOuts(context : Context) {
+//    if (isNetworkAvailable(context)) {
+//        viewModelScope.launch {
+//            val response = try {
+//                repository.workOuts()
+//            } catch (e: ApolloException) {
+//                return@launch
+//            }
+//
+//            _dashBoardResponse.value = response
+//            >>>>>>> 649103637a3905981f802b6c5aedab346227acd2
+//        }
+//    }else{
+//        _networkCheckResponse.value = "N0 INTERNET"
+//    }
+//}
