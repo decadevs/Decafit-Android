@@ -1,6 +1,5 @@
 package com.decagon.decafit.common.authentication.presentation.screens
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -8,7 +7,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +16,7 @@ import com.decagon.decafit.common.common.data.preferences.Preference.initSharedP
 import com.decagon.decafit.common.common.data.preferences.Preference.saveHeader
 import com.decagon.decafit.common.common.data.preferences.Preference.saveName
 import com.decagon.decafit.common.common.data.preferences.Preference.setLoggedIn
+import com.decagon.decafit.common.common.data.preferences.Preference.setLoginData
 import com.decagon.decafit.common.dashboard.DashBoardActivity
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
@@ -96,7 +95,6 @@ class LoginFragment : Fragment() {
                 if (Validation.isValidPasswordFormat(password)) {
                     userInfo = LoginInput(email, password)
                     loginObserver(userInfo)
-//                    viewModel.loginUser(userInfo, requireContext())
                 } else {
                     // call for incorrect password here
                     snackBar("Invalid Password")
@@ -123,11 +121,11 @@ class LoginFragment : Fragment() {
         viewModel.loginResponse.observe(viewLifecycleOwner) {
             if (it.data != null) {
                 setLoggedIn(true)
+                setLoginData(it.data!!)
                 navigateToDashBoard()
-//                findNavController().navigate(LoginFragmentDirections.actionLoginFragment2ToNavGraph())
                 it.data!!.userLogin.token?.let { it1 -> saveHeader(it1) }
                 saveName(it.data!!.userLogin.fullName)
-                snackBar(it.data!!.userLogin.message) //snackBar(it.data!!.login.message)
+                snackBar(it.data!!.userLogin.message)
             }
         }
     }

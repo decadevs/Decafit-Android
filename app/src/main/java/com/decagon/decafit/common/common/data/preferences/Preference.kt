@@ -3,6 +3,8 @@ package com.decagon.decafit.common.common.data.preferences
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.decagon.decafit.LoginMutation
+import com.google.gson.Gson
 
 object Preference {
     val HEADER_KEY = "Header_KEY"
@@ -10,6 +12,9 @@ object Preference {
     val USER_NAME = "name"
     val prefLoginData = "prefLoginData"
     val prefLoggedIn = "prefLoggedIn"
+    val defaultStringValue = "{}"
+
+    private val gson = Gson()
 
 
     lateinit var preferences: SharedPreferences
@@ -52,6 +57,29 @@ object Preference {
             .remove(prefLoggedIn)
             .apply()
         return true
+    }
+
+    fun setLoginData(entity: LoginMutation.Data) {
+        return setStringPreference(prefLoginData, gson.toJson(entity))
+    }
+
+    fun getLoginData(): LoginMutation.Data {
+        return gson.fromJson(getStringPreference(prefLoginData), LoginMutation.Data::class.java).apply {
+            val data = this
+            data.userLogin
+        }
+    }
+
+    fun getStringPreference(
+        key: String, defaultValue: String = defaultStringValue
+    ): String {
+        return preferences.getString(key, defaultValue) ?: defaultStringValue
+    }
+
+    fun setStringPreference(key: String, value: String) {
+        preferences.edit()
+            .putString(key, value)
+            .apply()
     }
 
     fun getLoginDetails(key: String): String?{
