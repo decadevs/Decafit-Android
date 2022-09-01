@@ -1,11 +1,11 @@
 package com.decagon.decafit.workout.presentation.screens
 
-import android.app.DirectAction
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.decagon.decafit.R
@@ -49,9 +49,6 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
             findNavController().navigate(R.id.action_workoutBreakdownFragment_to_pauseResumeWorkoutFragment)
         }
 
-        binding.backArrowCV.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
     fun setUpRecyclerView(){
         val workoutAdapter = WorkoutAdapter(this, requireContext())
@@ -68,5 +65,12 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
         val dialogBinding = WorkoutDetailsDialogBinding.inflate(layoutInflater)
         val workoutDetails = showWorkoutDetails(dialogBinding,workoutItems)
         workoutDetails.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val activity = activity as AppCompatActivity?
+        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
+        actionBar?.title = "Workout Breakdown"
     }
 }

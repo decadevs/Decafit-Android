@@ -3,35 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/dashBoardFragment">
 
 
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.decagon.decafit.common.authentication.presentation.screens.LoginFragment"
-        tools:layout="@layout/fragment_login" >
-
-        <action
-            android:id="@+id/action_loginFragment_to_dashBoardFragment"
-            app:destination="@id/dashBoardFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_inputExerciseFragment"
-            app:destination="@id/inputExerciseFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_signUpFragment2"
-            app:destination="@id/signUpFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.decagon.decafit.common.authentication.presentation.screens.SignUpFragment"
-        android:label="SignUpFragment" >
-        <action
-            android:id="@+id/action_signUpFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
     <fragment
         android:id="@+id/inputExerciseFragment"
         android:name="com.decagon.decafit.workout.presentation.screens.InputExerciseFragment"
@@ -40,9 +14,6 @@
         <action
             android:id="@+id/action_inputExerciseFragment_to_workoutBreakdownFragment"
             app:destination="@id/workoutBreakdownFragment" />
-        <action
-            android:id="@+id/action_inputExerciseFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
         <argument
             android:name="title"
             app:argType="string" />

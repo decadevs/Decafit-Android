@@ -1,7 +1,9 @@
 package com.decagon.decafit.common.utils
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
@@ -10,6 +12,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.R
+import com.decagon.decafit.databinding.LogoutDialogLayoutBinding
 import com.decagon.decafit.databinding.WorkoutDetailsDialogBinding
 import com.decagon.decafit.workout.data.WorkoutItems
 import com.google.android.material.snackbar.Snackbar
@@ -42,6 +45,25 @@ fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, work
     dialogBinding.workoutDescriptionTv.text = workoutItems.description
 
     dialogBinding.workoutCloseBtn.setOnClickListener {
+        dialog.dismiss()
+    }
+    return dialog
+}
+
+fun showLogOutDialog(context: Context, binding: LogoutDialogLayoutBinding, resources: Resources, logOutFunction: () -> Unit): AlertDialog {
+    val builder = AlertDialog.Builder(context)
+    builder.setView(binding.root)
+    builder.setCancelable(false)
+    val dialog = builder.create()
+    val width = (resources.displayMetrics.widthPixels * 0.80).toInt()
+    val height = (resources.displayMetrics.heightPixels * 0.35).toInt()
+    dialog!!.window?.setLayout(width, height)
+
+    binding.logoutDialogYesTextView.setOnClickListener {
+        logOutFunction.invoke()
+        dialog.dismiss()
+    }
+    binding.logoutDialogNoTextView.setOnClickListener {
         dialog.dismiss()
     }
     return dialog

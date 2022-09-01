@@ -25,17 +25,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/pauseWorkoutBackArrow_IV"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/margin_32dp"
-                android:layout_marginTop="48dp"
-                android:contentDescription="@string/back_arrow"
-                android:src="@drawable/ic_arrow_back_"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/workout_header_tv"

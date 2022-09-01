@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
@@ -96,9 +97,6 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
             setUpWorkout()
             binding.resumeBtn.visibility = View.VISIBLE
             binding.pauseBtn.visibility =View.GONE
-        }
-        binding.pauseWorkoutBackArrowIV.setOnClickListener {
-            findNavController().popBackStack()
         }
     }
 
@@ -186,5 +184,12 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
             requireContext(),
             Manifest.permission.ACTIVITY_RECOGNITION
         ) != PackageManager.PERMISSION_GRANTED
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val activity = activity as AppCompatActivity?
+        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
+        actionBar?.title = "Workout Progress"
     }
 }

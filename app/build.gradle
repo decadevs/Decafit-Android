@@ -123,10 +123,10 @@ android {
         implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
         //Dagger - Hilt
-        implementation 'com.google.dagger:hilt-android:2.40.5'
-        kapt 'com.google.dagger:hilt-android-compiler:2.40.5'
+        implementation 'com.google.dagger:hilt-android:2.42'
+        kapt 'com.google.dagger:hilt-android-compiler:2.42'
         //viewmodel delegate
-        implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+//        implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
         kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
         //apollo_android
@@ -163,6 +163,9 @@ android {
         //Glide
         implementation 'com.github.bumptech.glide:glide:4.12.0'
 
+        //circle image
+        implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 //    androidTestImplementation "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
 //    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:3.2.0"
 
@@ -172,4 +175,10 @@ android {
     apollo {
         packageName.set("com.decagon.decafit")
     }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

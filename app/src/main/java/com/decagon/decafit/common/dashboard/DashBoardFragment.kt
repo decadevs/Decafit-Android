@@ -1,10 +1,12 @@
 package com.decagon.decafit.common.dashboard
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,8 @@ import com.decagon.decafit.common.utils.onItemClickListener
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentDashBoardBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
+
 
 @AndroidEntryPoint
 class DashBoardFragment : Fragment() {
@@ -26,12 +30,27 @@ class DashBoardFragment : Fragment() {
     private lateinit var welcomeMessage: TextView
     private lateinit var name: String
     private val viewModel: DashBoardViewModel by viewModels()
+    private lateinit var date: LocalDate
+    var dayOfMonth: Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val actionBar: ActionBar? = activity!!.actionBar
+        actionBar?.title = "Dashboard"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentDashBoardBinding.inflate(inflater, container, false)
+
+        val activity = activity as AppCompatActivity?
+        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
+        actionBar?.title = "Dashboard"
+
 
         return binding.root
     }
@@ -42,6 +61,12 @@ class DashBoardFragment : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         welcomeMessage = binding.welcomeMsg
         name = getName("name").toString()
+
+        date = LocalDate.now()
+
+        dayOfMonth = date.dayOfMonth
+        binding.date.text = dayOfMonth.toString()
+
         networkObsever()
         getWorksObserver()
     }
@@ -67,13 +92,19 @@ class DashBoardFragment : Fragment() {
         }
     }
 
-
     private fun networkObsever(){
         viewModel.networkCheckResponse.observe(viewLifecycleOwner){
             if (!it.isNullOrEmpty()){
                 snackBar(it)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val activity = activity as AppCompatActivity?
+        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
+        actionBar?.title = "Dashboard"
     }
 }
 

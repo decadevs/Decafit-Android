@@ -1,24 +1,31 @@
 package com.decagon.decafit.common.authentication.presentation.screens
 
+import android.R
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
+import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
 import com.decagon.decafit.common.common.data.preferences.Preference.saveHeader
 import com.decagon.decafit.common.common.data.preferences.Preference.saveName
+import com.decagon.decafit.common.common.data.preferences.Preference.setLoggedIn
+import com.decagon.decafit.common.dashboard.DashBoardActivity
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentLoginBinding
 import com.decagon.decafit.type.LoginInput
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -41,8 +48,17 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initSharedPreference(requireActivity())
 
+
         activateClickListeners()
         loginInputHandler()
+        checkIfLoggedIn()
+    }
+
+    private fun checkIfLoggedIn() {
+        val loggedIn = Preference.getLoggedIn()
+        if (loggedIn) {
+            navigateToDashBoard()
+        }
     }
 
     private fun loginInputHandler() {
@@ -69,7 +85,7 @@ class LoginFragment : Fragment() {
             it.hideKeyboard()
         }
         binding.signUpTv.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment2())
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
         }
         binding.fragmentLoginLoginBtn.setOnClickListener {
 
@@ -106,11 +122,22 @@ class LoginFragment : Fragment() {
         viewModel.loginUser(userInfo, requireContext())
         viewModel.loginResponse.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
+                setLoggedIn(true)
+                navigateToDashBoard()
+//                findNavController().navigate(LoginFragmentDirections.actionLoginFragment2ToNavGraph())
                 it.data!!.userLogin.token?.let { it1 -> saveHeader(it1) }
                 saveName(it.data!!.userLogin.fullName)
                 snackBar(it.data!!.userLogin.message) //snackBar(it.data!!.login.message)
             }
         }
+    }
+
+    private fun navigateToDashBoard() {
+        Intent(
+            requireContext(),
+            DashBoardActivity::class.java
+        )
+            .also { intentWorkoutDashboard -> startActivity(intentWorkoutDashboard) }
+
     }
 }
