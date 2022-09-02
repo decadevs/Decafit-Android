@@ -47,29 +47,28 @@ class DashBoardFragment : Fragment() {
         getWorksObserver()
     }
 
-    private fun getWorksObserver(){
+    private fun getWorksObserver() {
         viewModel.getWorkOuts(requireContext())
-        viewModel.dashBoardResponse.observe(viewLifecycleOwner){ resources->
-            val workOuts = resources.data!!.workouts
-            if(resources.data != null && !resources.hasErrors()){
-                recyclerAdapter = DashBoardAdapter(workOuts)
-                recyclerView.adapter = recyclerAdapter
-                welcomeMessage.text = "Welcome $name"
+        viewModel.getAllRepositoryList().observe(viewLifecycleOwner) { it ->
+            recyclerAdapter = DashBoardAdapter(it)
+            recyclerView.adapter = recyclerAdapter
+            welcomeMessage.text = "Welcome $name"
 
-                recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
-                    override fun allAppsItemClicked(position: Int) {
-                        findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
-                            resources.data!!.workouts[position]!!.title,  resources.data!!.workouts[position]!!.backgroundImage
-                        ))
-                        Preference.saveWorkoutId(resources.data?.workouts?.get(position)?.id!!)
-                    }
-                })
-            }
-            if (resources.hasErrors()){
-                snackBar(resources.errors?.get(0)?.message!!)
-            }
+            recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
+                override fun allAppsItemClicked(position: Int) {
+                    findNavController().navigate(
+                        DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
+                            it[position].title, it[position].backgroundImage
+                        )
+                    )
+                    Preference.saveWorkoutId(it[position].id)
+                }
+            })
+
+
         }
     }
+
 
     private fun networkObsever(){
         viewModel.networkCheckResponse.observe(viewLifecycleOwner){

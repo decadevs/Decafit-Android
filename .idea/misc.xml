@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/activity_splash_screen2.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/continue_exercise_dialog.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/dashboard_recycler_item.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/fragment_dash_board.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.24270833333333333" />

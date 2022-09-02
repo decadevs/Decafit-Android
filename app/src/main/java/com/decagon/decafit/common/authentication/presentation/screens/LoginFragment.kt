@@ -15,6 +15,7 @@ import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthVie
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
 import com.decagon.decafit.common.common.data.preferences.Preference.saveHeader
 import com.decagon.decafit.common.common.data.preferences.Preference.saveName
+import com.decagon.decafit.common.common.data.preferences.Preference.saveUserId
 import com.decagon.decafit.common.utils.ProgressBarLoading
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
@@ -122,7 +123,8 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.dashBoardFragment)
                 it.data!!.userLogin.token?.let { it1 -> saveHeader(it1) }
                 saveName(it.data!!.userLogin.fullName)
-                snackBar(it.data!!.userLogin.message) //snackBar(it.data!!.login.message)
+                saveUserId(it.data?.userLogin?.id)
+                snackBar(it.data!!.userLogin.message)
             }
             if (it.hasErrors()){
                 snackBar(it?.errors?.get(0)!!.message)

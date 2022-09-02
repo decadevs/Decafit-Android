@@ -16,7 +16,7 @@ class WorkoutTimer(listener: OnTimerTickListener) {
         runnable = Runnable{
             duration += delay
             handler.postDelayed(runnable, delay)
-            listener.timerTickListener(format(), countRemaining())
+            listener.timerTickListener(format())
         }
     }
 
@@ -24,10 +24,10 @@ class WorkoutTimer(listener: OnTimerTickListener) {
         val secs:Long = (duration/1000) %60
         val min : Long = (duration/1000/60)%60
         val estimatedTime = Preference.getEstimatedTime(TIME_KEY)
-        if (estimatedTime!!.toInt() >60 &&  estimatedTime.toLong()/60 == min && estimatedTime.toLong()%60 == secs ){
-           stopTimer()
-        }else if (estimatedTime.toLong() == secs){
+         if (estimatedTime!!.toInt() >60 &&  estimatedTime.toLong()/60 == min && estimatedTime.toLong()%60 == secs ){
             stopTimer()
+        }else if (estimatedTime.toLong() == secs){
+           stopTimer()
         }
         return  "%02d:%02d".format( min,secs)
 
@@ -42,7 +42,7 @@ class WorkoutTimer(listener: OnTimerTickListener) {
     }
     fun progressTracker(): Long {
         val min: Long = (duration / 1000 / 60) % 60
-        return (min * 60) + (duration / 1000) % 60
+        return min  + ((duration / 1000) % 60)
     }
 
     fun workoutTracker() =(duration/1000/60)%60

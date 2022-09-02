@@ -10,21 +10,30 @@ import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo3.api.ApolloResponse
 import com.apollographql.apollo3.exception.ApolloException
 import com.decagon.decafit.*
-import com.decagon.decafit.common.common.data.local_data.LocalDataBase
+import com.decagon.decafit.common.common.data.database.mapper.ReportInputMapper
+import com.decagon.decafit.common.common.data.database.mapper.ReportWorkoutMapper
+import com.decagon.decafit.common.common.data.database.model.ReportExercise
+import com.decagon.decafit.common.common.data.database.model.ReportWorkoutData
+import com.decagon.decafit.common.common.data.database.model.WorkOutData
+import com.decagon.decafit.common.common.data.database.repository.RoomRepositoryImpl
 import com.decagon.decafit.common.common.data.models.Exercises
+import com.decagon.decafit.common.common.data.preferences.Preference
+import com.decagon.decafit.common.common.data.preferences.Preference.USERID_KEY
 import com.decagon.decafit.common.common.domain.repository.RepositoryInterface
-import com.decagon.decafit.common.utils.dommyData.workoutData
 import com.decagon.decafit.common.utils.isNetworkAvailable
-import com.decagon.decafit.type.RegisterInput
 import com.decagon.decafit.type.ReportCreateInput
-import com.decagon.decafit.workout.data.WorkoutItems
+import com.decagon.decafit.type.ReportExcerciseProgressInput
+import com.decagon.decafit.type.ReportWorkoutInput
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class WorkoutViewModels @Inject constructor(
-    private val repository:RepositoryInterface
+    private val repository:RepositoryInterface,
+    private val localDBRepository:RoomRepositoryImpl,
+    private val networkMapper: ReportWorkoutMapper,
+    private val reportMapper:ReportInputMapper
     ):ViewModel(){
 
     var _progressBar = MutableLiveData<Boolean>()
@@ -45,12 +54,32 @@ class WorkoutViewModels @Inject constructor(
     private var _reportResponse = MutableLiveData<ApolloResponse<GetReportWorkoutQuery.Data>>()
     val reportResponse: LiveData<ApolloResponse<GetReportWorkoutQuery.Data>> get() = _reportResponse
 
-    fun getWorkoutWithId(id:String, context : Context) {
+    fun getWorkoutFromDb(workoutId:String):LiveData<WorkOutData>{
+        return localDBRepository.getWorkoutById(workoutId)
+    }
+    fun getReportWorkoutFromDb(workoutId:String):LiveData<ReportWorkoutData>{
+        return localDBRepository.getReportWorkoutById(workoutId)
+    }
+
+    fun saveReportToLocalDB(report:ReportWorkoutData){
+        localDBRepository.insertReportWorkout(report)
+    }
+
+    fun saveExerciseToLocalDB(report:ReportExercise){
+        localDBRepository.insertReportExercise(report)
+    }
+
+    fun getReportExercise(workoutId: String):LiveData<List<ReportExercise>>{
+        return localDBRepository.getReportExercise(workoutId)
+    }
+
+
+    fun getReportWorkout(userId:String, workoutId:String,context : Context) {
         if (isNetworkAvailable(context)) {
             viewModelScope.launch {
                 _progressBar.value = true
                 val response = try {
-                    repository.getWorkoutWithId(id)
+                    repository.getReport(userId,workoutId)
                 } catch (e: ApolloException) {
                     Toast.makeText(context, "${e.message}", Toast.LENGTH_SHORT).show()
                     _progressBar.value = false
@@ -58,11 +87,9 @@ class WorkoutViewModels @Inject constructor(
                     return@launch
                 }
                 _progressBar.value = false
-                if (response.data != null) {
-                    _workoutWithIdResponse.value = response
-                    _progressBar.value = false
-//                    repository.saveExerciseToLocalDB(exercises)
-
+                if (response.data?.reportWorkout != null) {
+                  val report = networkMapper.mapTo(response.data?.reportWorkout?.workouts!!)
+                    //localDBRepository.insertReportWorkout(report)
                 }
                 if (response.hasErrors()){
                     Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
@@ -73,55 +100,45 @@ class WorkoutViewModels @Inject constructor(
         }
     }
 
-    fun getReportWorkout(id:String, workoutId:String,context : Context) {
-        if (isNetworkAvailable(context)) {
-            viewModelScope.launch {
-                _progressBar.value = true
-                val response = try {
-                    repository.getReport(id,workoutId)
-                } catch (e: ApolloException) {
-                    Toast.makeText(context, "${e.message}", Toast.LENGTH_SHORT).show()
-                    _progressBar.value = false
-                    Log.d("SIGNUP", "network error${e.message}")
-                    return@launch
-                }
-                _progressBar.value = false
-                if (response.data != null) {
-                    _reportResponse.value = response
-                    _progressBar.value = false
-//                    repository.saveExerciseToLocalDB(exercises)
-                }
-                if (response.hasErrors()){
-                    Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
-                }
+    fun reportProgressExerciseInput():List<ReportExcerciseProgressInput>{
+        val workoutId = Preference.getWorkoutId(Preference.WORKOUT_KEY)
+        val exercise = localDBRepository.getReportExercise(workoutId!!).value!!
+        var  input : ReportExcerciseProgressInput? =null
+        if (exercise.isNotEmpty()) {
+            for (i in exercise) {
+                input = reportMapper.mapTo(i)
             }
-        }else{
-            _networkCheckResponse.value = "N0 INTERNET"
         }
+        return listOf(input!!)
     }
 
-    fun createReport(input: ReportCreateInput, context : Context) {
+    fun createReport(input :ReportWorkoutInput, context : Context) {
+        val userId = Preference.getUserId(USERID_KEY)
+
         if (isNetworkAvailable(context)) {
             viewModelScope.launch {
                 _progressBar.value = true
                 val response = try {
-                    repository.createReport(input)
+                    repository.createReport(ReportCreateInput(userId!!,input))
                 } catch (e: ApolloException) {
                     Toast.makeText(context, "${e.message}", Toast.LENGTH_SHORT).show()
                     _progressBar.value = false
                     Log.d("SIGNUP", "network error${e.message}")
                     return@launch
                 }
+
+                Log.d("CREATEREPORT", " report created ====${response.data}")
+
                 _progressBar.value = false
-                if (response.data != null) {
-                    _progressBar.value = false
-                }
                 if (response.hasErrors()){
                     Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
+                    Log.d("CREATEREPORT", " report ERROR ====${response.errors?.get(0)!!.message}")
+
                 }
             }
         }else{
             _networkCheckResponse.value = "N0 INTERNET"
         }
+
     }
 }

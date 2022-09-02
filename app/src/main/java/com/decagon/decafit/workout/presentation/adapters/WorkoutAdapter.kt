@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.bumptech.glide.Glide
+import com.decagon.decafit.GetReportWorkoutQuery
 import com.decagon.decafit.R
 import com.decagon.decafit.WorkoutWitIdQuery
+import com.decagon.decafit.WorkoutsQuery
 import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.COUNT_KEY
@@ -26,12 +28,12 @@ import com.decagon.decafit.workout.data.WorkoutItems
 
 class WorkoutAdapter(private  val listener:OnclickListener, private val context: Context) :RecyclerView.Adapter<WorkoutAdapter.ViewHolder>(){
 
-    private val callBack = object :DiffUtil.ItemCallback<WorkoutWitIdQuery.Exercise>(){
-        override fun areItemsTheSame(oldItem: WorkoutWitIdQuery.Exercise, newItem: WorkoutWitIdQuery.Exercise): Boolean {
+    private val callBack = object :DiffUtil.ItemCallback<WorkoutsQuery.Exercise>(){
+        override fun areItemsTheSame(oldItem: WorkoutsQuery.Exercise, newItem: WorkoutsQuery.Exercise): Boolean {
             return ((oldItem.title == newItem.title)&&(oldItem.id ==newItem.id))
         }
 
-        override fun areContentsTheSame(oldItem: WorkoutWitIdQuery.Exercise, newItem: WorkoutWitIdQuery.Exercise): Boolean {
+        override fun areContentsTheSame(oldItem: WorkoutsQuery.Exercise, newItem: WorkoutsQuery.Exercise): Boolean {
             return oldItem == newItem
         }
     }
@@ -47,7 +49,7 @@ class WorkoutAdapter(private  val listener:OnclickListener, private val context:
          private val workoutProgressCard = binding.workoutStatusCV
          private val progressBar = binding.workoutProgressBar
 
-         fun bindView(items: WorkoutWitIdQuery.Exercise, context: Context){
+         fun bindView(items: WorkoutsQuery.Exercise, context: Context){
              title.text = items.title
              //timer.text =items.workoutTime.toString()
              Glide.with(context).load(items.image)

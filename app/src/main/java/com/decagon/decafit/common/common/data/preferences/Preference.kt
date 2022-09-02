@@ -15,6 +15,7 @@ object Preference {
     val REP_KEY = "rep_key"
     val TIME_KEY = "time_key"
     val COUNT_KEY = "count_key"
+    val USERID_KEY = "userid_key"
 
 
     lateinit var preferences: SharedPreferences
@@ -47,6 +48,12 @@ object Preference {
     }
     fun saveNumberOfCount(count: String?){
         preferences.edit().putString(COUNT_KEY, count).commit()
+    }
+    fun saveUserId(userId: String?){
+        preferences.edit().putString(USERID_KEY, userId).commit()
+    }
+    fun getUserId(key: String): String?{
+        return preferences.getString(key, null)
     }
     fun getWorkoutSet(key: String): String?{
         return preferences.getString(key, null)

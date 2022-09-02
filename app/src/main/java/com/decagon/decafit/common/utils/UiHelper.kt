@@ -16,9 +16,13 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.decagon.decafit.R
 import com.decagon.decafit.WorkoutWitIdQuery
+import com.decagon.decafit.WorkoutsQuery
+import com.decagon.decafit.common.common.data.database.model.ReportExercise
 import com.decagon.decafit.common.common.data.models.Exercises
+import com.decagon.decafit.databinding.ContinueExerciseDialogBinding
 import com.decagon.decafit.databinding.WorkoutDetailsDialogBinding
 import com.decagon.decafit.workout.data.WorkoutItems
+import com.decagon.decafit.workout.presentation.adapters.ReportAdapter
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
@@ -36,7 +40,7 @@ fun View.hideKeyboard() {
     inputManager.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, workoutItems: WorkoutWitIdQuery.Exercise): Dialog {
+fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, workoutItems: WorkoutsQuery.Exercise): Dialog {
     val dialog = Dialog(requireContext()).apply {
         setContentView(dialogBinding.root)
         setCancelable(true)
@@ -49,6 +53,40 @@ fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, work
     dialogBinding.workoutDescriptionTv.text = workoutItems.description
 
     dialogBinding.workoutCloseBtn.setOnClickListener {
+        dialog.dismiss()
+    }
+    return dialog
+}
+
+
+fun Fragment.showReportDetails(dialogBinding :WorkoutDetailsDialogBinding, workoutItems: ReportExercise): Dialog {
+    val dialog = Dialog(requireContext()).apply {
+        setContentView(dialogBinding.root)
+        setCancelable(true)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
+
+    Glide.with(requireContext()).load(workoutItems.image)
+        .into(dialogBinding.detailIV)
+    dialogBinding.discTitleTv.text = workoutItems.title
+    dialogBinding.workoutDescriptionTv.text = workoutItems.description
+
+    dialogBinding.workoutCloseBtn.setOnClickListener {
+        dialog.dismiss()
+    }
+    return dialog
+}
+
+fun Fragment.showChooseToContinueDialog(dialogBinding :ContinueExerciseDialogBinding): Dialog {
+    val dialog = Dialog(requireContext()).apply {
+        setContentView(dialogBinding.root)
+        setCancelable(false)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
+    dialogBinding.continueExerciseBtn.setOnClickListener {
+        dialog.dismiss()
+    }
+    dialogBinding.startNewExerciseBtn.setOnClickListener {
         dialog.dismiss()
     }
     return dialog

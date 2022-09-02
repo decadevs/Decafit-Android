@@ -57,4 +57,7 @@
     <string name="enter_the_number_of_reps_and_sets_for_your_workout">Enter the number of reps and sets for your workout</string>
     <string name="numberOfExercises">%1$d Exercises</string>
     <string name="no_exercise">No Exercise</string>
+    <string name="count">count</string>
+    <string name="end">END</string>
+    <string name="no_sensor_detected">No Sensor Detected On this Devices</string>
 </resources>
