@@ -19,6 +19,7 @@
     <string name="password">Password</string>
     <string name="email_address">Email address</string>
     <string name="create_a_nfitness_nutrition_plan">Create a\nfitness/nutrition plan</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout</string>
     <string name="full_name">Full name</string>
     <string name="phone_number">Phone number</string>
     <string name="wrong_email_address">wrong email address</string>
@@ -50,6 +51,11 @@
     <string name="set_your_limit">Set your limit</string>
     <string name="number_of_sets">Number of sets</string>
     <string name="workout">Workout</string>
+    <string name="profile">Profile</string>
+    <string name="victor_bamikole">Victor Bamikole</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="view_profile">View Profile</string>
     <string name="gift_chuks">Gift Chuks</string>
     <string name="_24_min">24 min</string>
     <string name="_24_kcal">24 Kcal</string>
@@ -60,4 +66,5 @@
     <string name="count">count</string>
     <string name="end">END</string>
     <string name="no_sensor_detected">No Sensor Detected On this Devices</string>
+    <string name="repeat_workout">Repeat</string>
 </resources>

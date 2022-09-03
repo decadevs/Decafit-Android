@@ -54,7 +54,7 @@ class WorkoutViewModels @Inject constructor(
     private var _reportResponse = MutableLiveData<ApolloResponse<GetReportWorkoutQuery.Data>>()
     val reportResponse: LiveData<ApolloResponse<GetReportWorkoutQuery.Data>> get() = _reportResponse
 
-    fun getWorkoutFromDb(workoutId:String):LiveData<WorkOutData>{
+    fun getWorkoutFromLocalDb(workoutId:String):LiveData<WorkOutData>{
         return localDBRepository.getWorkoutById(workoutId)
     }
     fun getReportWorkoutFromDb(workoutId:String):LiveData<ReportWorkoutData>{

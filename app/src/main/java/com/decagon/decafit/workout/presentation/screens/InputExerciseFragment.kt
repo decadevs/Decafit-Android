@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -29,6 +30,11 @@ class InputExerciseFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding= FragmentInputExerciseBinding.inflate(layoutInflater, container, false)
+
+        val activity = activity as AppCompatActivity?
+        activity?.actionBar?.hide()
+//        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
+//        actionBar?.title = "Input Exercise"
         return binding.root
     }
 
@@ -43,6 +49,10 @@ class InputExerciseFragment : Fragment() {
             .into(binding.inputExerciseImage)
         initListeners()
 
+
+//        val activity = activity as AppCompatActivity?
+//        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
+//        actionBar?.title = "Input Exercise"
     }
     private  fun initListeners(){
         binding.layout.setOnClickListener {
@@ -75,5 +85,14 @@ class InputExerciseFragment : Fragment() {
 
         }
     }
-}
 
+
+
+    override fun onResume() {
+        super.onResume()
+        val activity = activity as AppCompatActivity?
+        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
+        actionBar?.title = "Input Exercise"
+    }
+
+}

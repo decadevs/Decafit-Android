@@ -244,7 +244,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <Button
                 android:id="@+id/next_exercise_btn"
                 style="@style/ButtonStyle"

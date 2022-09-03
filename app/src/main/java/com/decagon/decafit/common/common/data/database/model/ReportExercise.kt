@@ -1,8 +1,12 @@
 package com.decagon.decafit.common.common.data.database.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.decagon.decafit.type.EnumType
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 @Entity(tableName = "reportExercise")
 data class ReportExercise(
      val workoutId:String?,
@@ -16,4 +20,4 @@ data class ReportExercise(
      val limit: String?,
      val completed: Boolean?,
      val progress: Int?,
-)
+):Parcelable

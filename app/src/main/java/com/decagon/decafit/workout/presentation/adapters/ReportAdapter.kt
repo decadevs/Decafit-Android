@@ -52,8 +52,10 @@ class ReportAdapter (private  val listener: OnclickListener, private val context
             val pausedTime =0
             if (items.type!!.rawValue == "count"){
                 "X${Preference.getNumberOfCount(Preference.COUNT_KEY)}".also { timer.text = it }
+                progressBar.max = Preference.getNumberOfCount(Preference.COUNT_KEY)!!.toInt()
             }else{
                 timer.text = Preference.getEstimatedTime(Preference.TIME_KEY)
+                progressBar.max = Preference.getEstimatedTime(Preference.TIME_KEY)!!.toInt()
             }
             if (items.completed!!){
                 workoutProgressCard.visibility = View.VISIBLE
@@ -64,13 +66,13 @@ class ReportAdapter (private  val listener: OnclickListener, private val context
                 workoutProgressCard.visibility = View.VISIBLE
                 workoutStatus.setText(R.string.incomplete_workout)
                 workoutProgressCard.setCardBackgroundColor(context.getColor(R.color.light_orange))
-                progressBar.progress = pausedTime
+                progressBar.progress = items.progress!!
             }
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ViewHolder {
         val binding = WorkoutBreakdownItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ReportAdapter.ViewHolder(binding)
+        return ViewHolder(binding)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

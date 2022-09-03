@@ -3,6 +3,7 @@ package com.decagon.decafit.common.utils
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.decagon.decafit.R
+import com.decagon.decafit.databinding.LogoutDialogLayoutBinding
 import com.decagon.decafit.WorkoutWitIdQuery
 import com.decagon.decafit.WorkoutsQuery
 import com.decagon.decafit.common.common.data.database.model.ReportExercise
@@ -77,16 +79,37 @@ fun Fragment.showReportDetails(dialogBinding :WorkoutDetailsDialogBinding, worko
     return dialog
 }
 
-fun Fragment.showChooseToContinueDialog(dialogBinding :ContinueExerciseDialogBinding): Dialog {
+fun showLogOutDialog(context: Context, binding: LogoutDialogLayoutBinding, resources: Resources, logOutFunction: () -> Unit): AlertDialog {
+    val builder = AlertDialog.Builder(context)
+    builder.setView(binding.root)
+    builder.setCancelable(false)
+    val dialog = builder.create()
+    val width = (resources.displayMetrics.widthPixels * 0.80).toInt()
+    val height = (resources.displayMetrics.heightPixels * 0.35).toInt()
+    dialog!!.window?.setLayout(width, height)
+
+    binding.logoutDialogYesTextView.setOnClickListener {
+        logOutFunction.invoke()
+        dialog.dismiss()
+    }
+    binding.logoutDialogNoTextView.setOnClickListener {
+        dialog.dismiss()
+    }
+    return dialog
+}
+
+fun Fragment.showChooseToContinueDialog(dialogBinding :ContinueExerciseDialogBinding, showWorkout:()->Unit, showReportWorkout:()->Unit): Dialog {
     val dialog = Dialog(requireContext()).apply {
         setContentView(dialogBinding.root)
         setCancelable(false)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
     dialogBinding.continueExerciseBtn.setOnClickListener {
+        showReportWorkout.invoke()
         dialog.dismiss()
     }
     dialogBinding.startNewExerciseBtn.setOnClickListener {
+        showWorkout.invoke()
         dialog.dismiss()
     }
     return dialog

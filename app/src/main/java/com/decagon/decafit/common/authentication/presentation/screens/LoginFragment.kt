@@ -1,21 +1,24 @@
 package com.decagon.decafit.common.authentication.presentation.screens
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
+import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
 import com.decagon.decafit.common.common.data.preferences.Preference.saveHeader
 import com.decagon.decafit.common.common.data.preferences.Preference.saveName
 import com.decagon.decafit.common.common.data.preferences.Preference.saveUserId
+import com.decagon.decafit.common.common.data.preferences.Preference.setLoggedIn
+import com.decagon.decafit.common.common.data.preferences.Preference.setLoginData
+import com.decagon.decafit.common.dashboard.DashBoardActivity
 import com.decagon.decafit.common.utils.ProgressBarLoading
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
@@ -23,6 +26,7 @@ import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentLoginBinding
 import com.decagon.decafit.type.LoginInput
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -35,7 +39,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
@@ -47,6 +51,14 @@ class LoginFragment : Fragment() {
         isLoading()
         activateClickListeners()
         loginInputHandler()
+        checkIfLoggedIn()
+    }
+
+    private fun checkIfLoggedIn() {
+        val loggedIn = Preference.getLoggedIn()
+        if (loggedIn) {
+            navigateToDashBoard()
+        }
     }
 
     private fun loginInputHandler() {
@@ -83,7 +95,7 @@ class LoginFragment : Fragment() {
             it.hideKeyboard()
         }
         binding.signUpTv.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment2())
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
         }
         binding.fragmentLoginLoginBtn.setOnClickListener {
 
@@ -94,7 +106,6 @@ class LoginFragment : Fragment() {
                 if (Validation.isValidPasswordFormat(password)) {
                     userInfo = LoginInput(email, password)
                     loginObserver(userInfo)
-//                    viewModel.loginUser(userInfo, requireContext())
                 } else {
                     // call for incorrect password here
                     snackBar("Invalid Password")
@@ -103,7 +114,6 @@ class LoginFragment : Fragment() {
                 // call for incorrect email here
                 snackBar("Invalid email address")
             }
-        }
 
         binding.facebookLogin.setOnClickListener {
             snackBar("login with facebook")
@@ -115,12 +125,15 @@ class LoginFragment : Fragment() {
             snackBar("login with apple")
         }
     }
+    }
 
     private fun loginObserver(userInfo: LoginInput) {
         viewModel.loginUser(userInfo, requireContext())
         viewModel.loginResponse.observe(viewLifecycleOwner) {
             if (it.data != null) {
-                findNavController().navigate(R.id.dashBoardFragment)
+                setLoggedIn(true)
+                setLoginData(it.data!!)
+                navigateToDashBoard()
                 it.data!!.userLogin.token?.let { it1 -> saveHeader(it1) }
                 saveName(it.data!!.userLogin.fullName)
                 saveUserId(it.data?.userLogin?.id)
@@ -130,5 +143,14 @@ class LoginFragment : Fragment() {
                 snackBar(it?.errors?.get(0)!!.message)
             }
         }
+    }
+
+    private fun navigateToDashBoard() {
+        Intent(
+            requireContext(),
+            DashBoardActivity::class.java
+        )
+            .also { intentWorkoutDashboard -> startActivity(intentWorkoutDashboard) }
+
     }
 }

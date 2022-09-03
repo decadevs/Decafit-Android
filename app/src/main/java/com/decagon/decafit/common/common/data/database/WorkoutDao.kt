@@ -22,6 +22,9 @@ interface WorkoutDao {
     @Query("DELETE FROM workouts")
     fun deleteWorkouts()
 
+    @Query("DELETE FROM reportExercise")
+    fun deleteReportWorkout()
+
 
     @Query("SELECT * FROM workouts WHERE id=:id")
     fun getWorkoutById(id:String):LiveData<WorkOutData>

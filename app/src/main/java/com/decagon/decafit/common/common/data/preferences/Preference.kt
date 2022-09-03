@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.text.Editable
+import com.decagon.decafit.LoginMutation
+import com.google.gson.Gson
 
 object Preference {
     val HEADER_KEY = "Header_KEY"
@@ -16,10 +18,14 @@ object Preference {
     val TIME_KEY = "time_key"
     val COUNT_KEY = "count_key"
     val USERID_KEY = "userid_key"
+    val prefLoginData = "prefLoginData"
+    val prefLoggedIn = "prefLoggedIn"
+    val defaultStringValue = "{}"
+
+    private val gson = Gson()
 
 
     lateinit var preferences: SharedPreferences
-
 
     fun initSharedPreference(activity: Activity){
         preferences = activity.getSharedPreferences(MY_PREF, Context.MODE_PRIVATE)
@@ -72,6 +78,64 @@ object Preference {
         return preferences.getInt(key, 0)
     }
 
+
+
+    fun setBooleanPreference(key: String, value: Boolean) {
+        preferences.edit()
+            .putBoolean(key, value)
+            .apply()
+    }
+
+    fun getBooleanPreference(key: String, defaultValue: Boolean = false): Boolean {
+        return preferences.getBoolean(key, defaultValue)
+    }
+
+    fun loggedIn(): Boolean {
+        return getBooleanPreference(prefLoggedIn)
+    }
+
+    fun setLoggedIn(value: Boolean) {
+        return setBooleanPreference(prefLoggedIn, value)
+    }
+
+    fun getLoggedIn(): Boolean {
+        return loggedIn()
+    }
+
+    fun logOut(): Boolean {
+        preferences.edit()
+            .remove(prefLoginData)
+            .remove(prefLoggedIn)
+            .apply()
+        return true
+    }
+
+    fun setLoginData(entity: LoginMutation.Data) {
+        return setStringPreference(prefLoginData, gson.toJson(entity))
+    }
+
+    fun getLoginData(): LoginMutation.Data {
+        return gson.fromJson(getStringPreference(prefLoginData), LoginMutation.Data::class.java).apply {
+            val data = this
+            data.userLogin
+        }
+    }
+
+    fun getStringPreference(
+        key: String, defaultValue: String = defaultStringValue
+    ): String {
+        return preferences.getString(key, defaultValue) ?: defaultStringValue
+    }
+
+    fun setStringPreference(key: String, value: String) {
+        preferences.edit()
+            .putString(key, value)
+            .apply()
+    }
+
+    fun getLoginDetails(key: String): String?{
+        return preferences.getString(key, null)
+    }
 
     fun saveName(name: String){
         preferences.edit().putString(USER_NAME, name).commit()
