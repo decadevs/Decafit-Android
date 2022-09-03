@@ -21,7 +21,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.AppBarConfiguration
 import com.bumptech.glide.Glide
 import com.decagon.decafit.GetReportWorkoutQuery
 import com.decagon.decafit.R
@@ -44,7 +43,6 @@ import com.decagon.decafit.workout.presentation.viewmodels.WorkoutViewModels
 import com.decagon.decafit.workout.utils.OnTimerTickListener
 import com.decagon.decafit.workout.utils.WorkoutCounter
 import com.decagon.decafit.workout.utils.WorkoutTimer
-import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,7 +51,7 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     private var _binding:FragmentPauseResumeWorkoutBinding? = null
     private val binding get() = _binding!!
     private val viewModel:WorkoutViewModels by viewModels()
-    lateinit var exerciseDatas: List<WorkoutsQuery.Exercise?>
+    private lateinit var exerciseDatas: List<WorkoutsQuery.Exercise?>
     private lateinit var timer :WorkoutTimer
     private lateinit var counter:WorkoutCounter
     private var duration = ""
@@ -61,10 +59,10 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     private var stepsTaken = 0
     private var repeat =0
     private var isPaused = false
-    var isCompleted = false
+    private var isCompleted = false
     private var progress =0
     private var countProgress =0
-     var timeRemaining =0
+     private var timeRemaining =0
     private val set = Preference.getWorkoutSet(SET_KEY)!!.toInt()
     private val reps = Preference.getWorkoutRep(REP_KEY)!!.toInt()
     private val estimatedTime = Preference.getEstimatedTime(TIME_KEY)
@@ -72,8 +70,6 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     lateinit var exerciseInput : ReportExercise
     lateinit var DBexerciseInput : List<GetReportWorkoutQuery.Exercise>
     private val args: PauseResumeWorkoutFragmentArgs by navArgs()
-
-
 
     val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
 
@@ -84,15 +80,12 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     private var currentStep=0
     var workoutId:String? =null
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentPauseResumeWorkoutBinding.inflate(layoutInflater, container, false)
-
         return binding.root
     }
 
@@ -112,6 +105,9 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     }
 
     private fun initClickListener(){
+        binding.pauseWorkoutBackArrowIV.setOnClickListener {
+            findNavController().popBackStack()
+        }
         binding.pauseBtn.setOnClickListener {
             isPaused = true
 
@@ -145,7 +141,6 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
                 repeat =0
                 binding.nextWorkoutBtn.setText(R.string.next_workout)
                 saveReportToLocalDB()
-                getReportWorkoutFromDb()
                // createReport()
             }else if(repeat == reps-1){
                 binding.nextWorkoutBtn.setText(R.string.next_workout)
@@ -279,10 +274,6 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
                 stepsTaken += currentStep
                 binding.numbersOfStepsTv.text = "$stepsTaken Steps"
             }
-
-            Log.d("COUNTER", "currentStep = $currentStep")
-            Log.d("COUNTER", "previousStep = $previousSteps")
-            Log.d("COUNTER", "totalSteps = $totalSteps")
             Preference.savePreviousStepCount(totalSteps)
         }
     }
@@ -304,44 +295,11 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
             val reportWorkoutInput = ReportWorkoutInput(id,reps,set,estimatedTime!!,numberOfCount,exerciseFromDB)
             viewModel.createReport(reportWorkoutInput, requireContext())
         }
-
     }
 
     private fun saveReportToLocalDB(){
-//        val reportWorkoutInput = ReportWorkoutData(workoutId!!,reps,set,estimatedTime!!,numberOfCount,DBexerciseInput)
-//        val userId = Preference.getUserId(USERID_KEY)
-//        //val reportInput = ReportCreateInput(userId!!,reportWorkoutInput)
-//        Log.d("REPORT", "saved report to db ====$reportWorkoutInput")
-//       // viewModel.saveReportToLocalDB(reportWorkoutInput)
-
         viewModel.saveExerciseToLocalDB(exerciseInput)
     }
-
-    private fun getReportWorkoutFromDb(){
-        val id = Preference.getWorkoutId(WORKOUT_KEY)!!
-//        viewModel.getReportWorkoutFromDb(id!!).observe(viewLifecycleOwner) {
-//            if (it != null) {
-//                Log.d("REPORT", "report workout$it")
-//                Log.d("REPORT", "report exercise ${it.exercises}")
-//            }
-//        }
-
-//        viewModel.getReportExercise(id).observe(viewLifecycleOwner){
-//            var  input : ReportExcerciseProgressInput? =null
-//            val reportMapper = ReportInputMapper()
-//            val exerciseFromDB = mutableListOf<ReportExcerciseProgressInput>()
-//
-//            if (it.isNotEmpty()) {
-//                for (i in it) {
-//                    input = reportMapper.mapTo(i)
-//                    exerciseFromDB.add(input)
-//                }
-//            }
-//            Log.d("REPORT", "report exercise from db=== $exerciseFromDB")
-//        }
-
-    }
-
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         //TODO("Not yet implemented")

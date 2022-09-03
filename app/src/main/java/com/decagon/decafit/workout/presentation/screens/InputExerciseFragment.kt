@@ -33,8 +33,6 @@ class InputExerciseFragment : Fragment() {
 
         val activity = activity as AppCompatActivity?
         activity?.actionBar?.hide()
-//        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
-//        actionBar?.title = "Input Exercise"
         return binding.root
     }
 
@@ -48,11 +46,6 @@ class InputExerciseFragment : Fragment() {
             .centerCrop()
             .into(binding.inputExerciseImage)
         initListeners()
-
-
-//        val activity = activity as AppCompatActivity?
-//        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
-//        actionBar?.title = "Input Exercise"
     }
     private  fun initListeners(){
         binding.layout.setOnClickListener {
@@ -72,7 +65,7 @@ class InputExerciseFragment : Fragment() {
         val workoutTime = binding.estimatedTimeET.text.toString()
         val workoutCount = binding.numbersCountsET.text.toString()
 
-        if (workoutReps.isNullOrEmpty() || workoutReps.isNullOrEmpty()||workoutCount.isNullOrEmpty()||workoutTime.isNullOrEmpty()){
+        if (workoutReps.isEmpty() || workoutReps.isEmpty()||workoutCount.isEmpty()||workoutTime.isEmpty()){
             snackBar("Enter all fields")
         }else{
         with(Preference){
@@ -82,11 +75,8 @@ class InputExerciseFragment : Fragment() {
             saveNumberOfCount(workoutCount)
         }
             findNavController().navigate(R.id.action_inputExerciseFragment_to_workoutBreakdownFragment)
-
         }
     }
-
-
 
     override fun onResume() {
         super.onResume()
@@ -94,5 +84,4 @@ class InputExerciseFragment : Fragment() {
         val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
         actionBar?.title = "Input Exercise"
     }
-
 }

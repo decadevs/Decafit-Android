@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.decagon.decafit.R
@@ -58,7 +57,7 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
     }
 
 
-    fun initListener(){
+    private fun initListener(){
         binding.continueWorkoutBtn.setOnClickListener {
             findNavController().navigate(WorkoutBreakdownFragmentDirections.actionWorkoutBreakdownFragmentToPauseResumeWorkoutFragment2(reportExercise = reportExercise))
         }
@@ -68,8 +67,12 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
             findNavController().navigate(WorkoutBreakdownFragmentDirections.actionWorkoutBreakdownFragmentToPauseResumeWorkoutFragment2(reportExercise = reportExercise))
         }
 
+        binding.backArrowCV.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
     }
-    fun setUpWorkoutRecyclerView(){
+    private fun setUpWorkoutRecyclerView(){
         workoutAdapter = WorkoutAdapter(this, requireContext())
         val recyclerView = binding.workoutRV
         recyclerView.apply {
@@ -79,7 +82,7 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
         workoutAdapter.differ.submitList(reportWorkout)
     }
 
-    fun setUpReportRecyclerView(reportExercise: List<ReportExercise>){
+    private fun setUpReportRecyclerView(reportExercise: List<ReportExercise>){
         reportExerciseAdapter = ReportAdapter(this, requireContext())
         val recyclerView = binding.workoutRV
         recyclerView.apply {
@@ -115,7 +118,7 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
 
             reportWorkout =it.exercise!!
 
-            if(it.exercise!!.isEmpty()){
+            if(it.exercise.isEmpty()){
                 binding.startWorkoutBtn.text = getString(R.string.no_exercise)
                 binding.startWorkoutBtn.isEnabled = false
             }
