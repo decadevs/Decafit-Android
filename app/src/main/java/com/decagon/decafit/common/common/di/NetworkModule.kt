@@ -1,12 +1,8 @@
 package com.decagon.decafit.common.common.di
 
-import android.app.Application
 import android.content.Context
-import androidx.room.Room
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
-import com.decagon.decafit.common.common.data.local_data.DecafitDAO
-import com.decagon.decafit.common.common.data.local_data.LocalDataBase
 import com.decagon.decafit.common.common.data.networks.NetworkConstant.BASE_URL1
 import com.decagon.decafit.common.common.domain.repository.RepositoryImp
 import com.decagon.decafit.common.common.domain.repository.RepositoryInterface
@@ -51,20 +47,4 @@ class NetworkModule {
     ): RepositoryInterface {
         return repositoryImp
     }
-
-    @Singleton
-    @Provides
-    fun provideLocalDatabase(app: Application): LocalDataBase {
-        return Room.databaseBuilder(app, LocalDataBase::class.java, "exercise_db")
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-    @Singleton
-    @Provides
-    fun provideDecafitDAO (
-        localDataBase: LocalDataBase
-    ): DecafitDAO {
-        return localDataBase.decafitDAO()
-    }
-
 }
