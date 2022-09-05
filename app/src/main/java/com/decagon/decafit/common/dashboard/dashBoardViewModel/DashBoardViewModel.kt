@@ -8,9 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.decagon.decafit.common.common.data.database.mapper.WorkoutNetworkMapper
 import com.decagon.decafit.common.common.data.database.model.WorkOutData
 import com.decagon.decafit.common.common.data.database.repository.RoomRepositoryImpl
-import com.apollographql.apollo3.api.ApolloResponse
-import com.apollographql.apollo3.exception.ApolloException
-import com.decagon.decafit.WorkoutsQuery
 import com.decagon.decafit.common.common.domain.repository.RepositoryInterface
 import com.decagon.decafit.common.utils.isNetworkAvailable
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,6 +36,7 @@ class DashBoardViewModel @Inject constructor(private val networkMapper: WorkoutN
                     for (i in it.workouts) {
                         roomRepository.deleteWorkouts()
                     }
+
                     UiState.Success(
                         it.workouts.mapNotNull { workout -> networkMapper.mapTo(workout!!) },
                     ).also {

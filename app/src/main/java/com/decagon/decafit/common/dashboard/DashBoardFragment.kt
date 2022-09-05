@@ -1,21 +1,28 @@
 package com.decagon.decafit.common.dashboard
 
+import android.app.ActionBar
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.getName
 import com.decagon.decafit.common.dashboard.dashBoardViewModel.DashBoardViewModel
 import com.decagon.decafit.common.utils.onItemClickListener
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentDashBoardBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
+
 
 @AndroidEntryPoint
 class DashBoardFragment : Fragment() {
@@ -26,6 +33,16 @@ class DashBoardFragment : Fragment() {
     private lateinit var welcomeMessage: TextView
     private lateinit var name: String
     private val viewModel: DashBoardViewModel by viewModels()
+    private lateinit var date: LocalDate
+    var dayOfMonth: Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val actionBar: ActionBar? = requireActivity().actionBar
+        actionBar?.title = "Dashboard"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,15 +50,27 @@ class DashBoardFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentDashBoardBinding.inflate(inflater, container, false)
 
+        val activity = activity as AppCompatActivity?
+        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
+        actionBar?.title = "Dashboard"
+
+
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         welcomeMessage = binding.welcomeMsg
         name = getName("name").toString()
+
+        date = LocalDate.now()
+
+        dayOfMonth = date.dayOfMonth
+        binding.date.text = dayOfMonth.toString()
+
         networkObsever()
         getWorksObserver()
     }
@@ -60,13 +89,13 @@ class DashBoardFragment : Fragment() {
                             it[position].title, it[position].backgroundImage
                         )
                     )
+                    Preference.saveWorkoutId(it[position].id)
                 }
             })
 
 
         }
     }
-
 
     private fun networkObsever(){
         viewModel.networkCheckResponse.observe(viewLifecycleOwner){
@@ -75,63 +104,12 @@ class DashBoardFragment : Fragment() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        val activity = activity as AppCompatActivity?
+        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
+        actionBar?.title = "Dashboard"
+    }
 }
 
-//        viewModel.dashBoardResponse.observe(viewLifecycleOwner){ resources->
-//
-//            when(resources) {
-//                is UiState.Failure -> TODO()
-//                is UiState.Success -> {
-//                    recyclerAdapter = DashBoardAdapter(resources.data)
-//                    recyclerView.adapter = recyclerAdapter
-//                    welcomeMessage.text = "Welcome $name"
-//
-//                    recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
-//                        override fun allAppsItemClicked(position: Int) {
-//                            findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
-//                                resources.data[position].title,  resources.data[position].backgroundImage
-//                            ))
-//                        }
-//                    })
-
-//                }
-//            }
-//        }
-//   }
-//        }
-
-//            val workOuts = resources.data!!.workouts
-//            if(resources != null && !resources.hasErrors()){
-//                recyclerAdapter = DashBoardAdapter(workOuts)
-//                recyclerView.adapter = recyclerAdapter
-//                welcomeMessage.text = "Welcome $name"
-//
-//                recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
-//                    override fun allAppsItemClicked(position: Int) {
-//                        findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
-//                            resources.data!!.workouts[position]!!.title,  resources.data!!.workouts[position]!!.backgroundImage
-//                        ))
-//                    }
-//                })
-//            }
-//            if (resources.hasErrors()){
-//                snackBar(resources.errors?.get(0)?.message!!)
-//            }
-
-//viewModel.dashBoardResponse.observe(viewLifecycleOwner){ resources->
-//    val workOuts = resources.data!!.workouts
-//    if(resources.data != null && !resources.hasErrors()){
-//        recyclerAdapter = DashBoardAdapter(workOuts)
-//        recyclerView.adapter = recyclerAdapter
-//        welcomeMessage.text = "Welcome $name"
-//
-//        recyclerAdapter.setOnItemClickListener(object : onItemClickListener {
-//            override fun allAppsItemClicked(position: Int) {
-//                findNavController().navigate(DashBoardFragmentDirections.actionDashBoardFragmentToInputExerciseFragment(
-//                    resources.data!!.workouts[position]!!.title,  resources.data!!.workouts[position]!!.backgroundImage
-//                ))
-//            }
-//        })
-//    }
-//    if (resources.hasErrors()){
-//        snackBar(resources.errors?.get(0)?.message!!)

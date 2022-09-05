@@ -6,9 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.decagon.decafit.common.common.data.database.converter.ExerciseTypeConverter
+import com.decagon.decafit.common.common.data.database.model.ReportExercise
+import com.decagon.decafit.common.common.data.database.model.ReportWorkoutData
 import com.decagon.decafit.common.common.data.database.model.WorkOutData
 
-@Database(entities = [WorkOutData::class], version = 1)
+@Database(entities = [WorkOutData::class, ReportWorkoutData::class, ReportExercise::class], version = 1)
 @TypeConverters(ExerciseTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
