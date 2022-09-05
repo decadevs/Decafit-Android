@@ -1,9 +1,11 @@
 package com.decagon.decafit.common.authentication.presentation.screens
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -13,6 +15,7 @@ import com.decagon.decafit.R
 import com.decagon.decafit.common.authentication.data.SignUpRequest
 import com.decagon.decafit.common.authentication.presentation.viewmodels.AuthViewModels
 import com.decagon.decafit.common.common.data.preferences.Preference
+import com.decagon.decafit.common.utils.ProgressBarLoading
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentSignUpBinding
@@ -46,7 +49,9 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Preference.initSharedPreference(requireActivity())
         networkObsever()
-        initSingUpInput()
+       initSingUpInput()
+        isLoading()
+
     }
 
     private fun initSingUpInput(){
@@ -60,7 +65,9 @@ class SignUpFragment : Fragment() {
                 // create a user account
                 isAllFieldsValidated(SignUpRequest(email, fullName, phoneNumber, password))
             }
-
+            signInTv.setOnClickListener {
+                findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+            }
             fullNameTextInput.addTextChangedListener {
                 fullName = binding.fullNameTextInput.text.toString().trim()
                 fullNameTExtInputValidation(fullName)
@@ -131,12 +138,22 @@ class SignUpFragment : Fragment() {
         }
     }
 
+    private fun isLoading(){
+        val progressBar = ProgressBarLoading(requireContext())
+        viewModel.progressBar.observe(viewLifecycleOwner){
+            if (it){
+                progressBar.show()
+            }else{
+                progressBar.dismiss()
+            }
+    }}
+
     private fun singUpObserver(userInfo: RegisterInput){
         viewModel.registerUser( userInfo, requireContext())
         viewModel.registerResponse.observe(viewLifecycleOwner){ resources->
             if(resources.data!=null){
-                findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-                snackBar(resources.data!!.userRegister.message)
+                Toast.makeText(requireContext(), resources.data!!.userRegister.message, Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.loginFragment)
             }
             if (resources.hasErrors()){
                 snackBar(resources?.errors?.get(0)?.message!!)

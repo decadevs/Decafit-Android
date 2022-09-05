@@ -6,7 +6,6 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id "dagger.hilt.android.plugin"
     id("com.apollographql.apollo3").version("3.2.2")
-
 }
 
 android {
@@ -129,10 +128,8 @@ android {
 //        implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
         kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
-        //apollo_android
-        implementation("com.apollographql.apollo3:apollo-runtime:3.2.2")
-        // Coroutines extensions for easier asynchronicity handling
-        //implementation("com.apollographql.apollo:apollo-coroutines-support:x.y.z")
+    //apollo_android
+    implementation("com.apollographql.apollo3:apollo-runtime:3.2.2")
 
 //    coil
         implementation("io.coil-kt:coil:2.1.0")
@@ -142,6 +139,10 @@ android {
         implementation "androidx.room:room-runtime:$room_version"
         implementation "androidx.room:room-ktx:$room_version"
         kapt "androidx.room:room-compiler:$room_version"
+
+    //converter
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 
 //Fragment testing dependency
         debugImplementation "androidx.fragment:fragment-testing:$fragment_version"

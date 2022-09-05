@@ -15,9 +15,11 @@ import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.initSharedPreference
 import com.decagon.decafit.common.common.data.preferences.Preference.saveHeader
 import com.decagon.decafit.common.common.data.preferences.Preference.saveName
+import com.decagon.decafit.common.common.data.preferences.Preference.saveUserId
 import com.decagon.decafit.common.common.data.preferences.Preference.setLoggedIn
 import com.decagon.decafit.common.common.data.preferences.Preference.setLoginData
 import com.decagon.decafit.common.dashboard.DashBoardActivity
+import com.decagon.decafit.common.utils.ProgressBarLoading
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
@@ -37,7 +39,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
@@ -46,8 +48,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSharedPreference(requireActivity())
-
-
+        isLoading()
         activateClickListeners()
         loginInputHandler()
         checkIfLoggedIn()
@@ -79,6 +80,16 @@ class LoginFragment : Fragment() {
         binding.fragmentLoginPasswordET.addTextChangedListener(inputHandler)
     }
 
+    private fun isLoading(){
+        val progressBar = ProgressBarLoading(requireContext())
+        viewModel.progressBar.observe(viewLifecycleOwner){
+            if (it){
+                progressBar.show()
+            }else{
+                progressBar.dismiss()
+            }
+        }}
+
     private fun activateClickListeners() {
         binding.layout.setOnClickListener {
             it.hideKeyboard()
@@ -104,16 +115,16 @@ class LoginFragment : Fragment() {
                 snackBar("Invalid email address")
             }
 
-            binding.facebookLogin.setOnClickListener {
-                snackBar("login with facebook")
-            }
-            binding.googleLogin.setOnClickListener {
-                snackBar("login with google")
-            }
-            binding.appleLogin.setOnClickListener {
-                snackBar("login with apple")
-            }
+        binding.facebookLogin.setOnClickListener {
+            snackBar("login with facebook")
         }
+        binding.googleLogin.setOnClickListener {
+            snackBar("login with google")
+        }
+        binding.appleLogin.setOnClickListener {
+            snackBar("login with apple")
+        }
+    }
     }
 
     private fun loginObserver(userInfo: LoginInput) {
@@ -125,7 +136,11 @@ class LoginFragment : Fragment() {
                 navigateToDashBoard()
                 it.data!!.userLogin.token?.let { it1 -> saveHeader(it1) }
                 saveName(it.data!!.userLogin.fullName)
+                saveUserId(it.data?.userLogin?.id)
                 snackBar(it.data!!.userLogin.message)
+            }
+            if (it.hasErrors()){
+                snackBar(it?.errors?.get(0)!!.message)
             }
         }
     }

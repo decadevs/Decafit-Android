@@ -1,0 +1,20 @@
+mutation CreateReport($input: ReportCreateInput!) {
+  reportCreate(input: $input) {
+    userID
+    workouts {
+      workoutId
+      workoutReps
+      workoutSet
+      workoutTime
+      workoutCount
+      exercises {
+        excerciseId
+        type
+        paused
+        limit
+        completed
+        progress
+      }
+    }
+  }
+}

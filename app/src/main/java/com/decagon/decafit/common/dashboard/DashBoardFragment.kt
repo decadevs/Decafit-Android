@@ -1,17 +1,20 @@
 package com.decagon.decafit.common.dashboard
 
 import android.app.ActionBar
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.getName
 import com.decagon.decafit.common.dashboard.dashBoardViewModel.DashBoardViewModel
 import com.decagon.decafit.common.utils.onItemClickListener
@@ -36,7 +39,7 @@ class DashBoardFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val actionBar: ActionBar? = activity!!.actionBar
+        val actionBar: ActionBar? = requireActivity().actionBar
         actionBar?.title = "Dashboard"
     }
 
@@ -55,6 +58,7 @@ class DashBoardFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.recyclerView
@@ -85,6 +89,7 @@ class DashBoardFragment : Fragment() {
                             it[position].title, it[position].backgroundImage
                         )
                     )
+                    Preference.saveWorkoutId(it[position].id)
                 }
             })
 

@@ -1,6 +1,7 @@
 package com.decagon.decafit.common.common.data.database.mapper
 
 import com.decagon.decafit.WorkoutsQuery
+import com.decagon.decafit.common.common.data.database.model.ReportExercise
 import com.decagon.decafit.common.common.data.database.model.WorkOutData
 import javax.inject.Inject
 

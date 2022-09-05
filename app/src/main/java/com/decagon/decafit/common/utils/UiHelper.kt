@@ -6,17 +6,27 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.decagon.decafit.R
 import com.decagon.decafit.databinding.LogoutDialogLayoutBinding
+import com.decagon.decafit.WorkoutWitIdQuery
+import com.decagon.decafit.WorkoutsQuery
+import com.decagon.decafit.common.common.data.database.model.ReportExercise
+import com.decagon.decafit.common.common.data.models.Exercises
+import com.decagon.decafit.databinding.ContinueExerciseDialogBinding
 import com.decagon.decafit.databinding.WorkoutDetailsDialogBinding
 import com.decagon.decafit.workout.data.WorkoutItems
+import com.decagon.decafit.workout.presentation.adapters.ReportAdapter
 import com.google.android.material.snackbar.Snackbar
-
+import java.util.*
 
 
 fun Fragment.snackBar(message: String) {
@@ -32,15 +42,34 @@ fun View.hideKeyboard() {
     inputManager.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, workoutItems: WorkoutItems): Dialog {
+fun Fragment.showWorkoutDetails(dialogBinding :WorkoutDetailsDialogBinding, workoutItems: WorkoutsQuery.Exercise): Dialog {
     val dialog = Dialog(requireContext()).apply {
         setContentView(dialogBinding.root)
         setCancelable(true)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
+    Glide.with(requireContext()).load(workoutItems.image)
+        .into(dialogBinding.detailIV)
+    dialogBinding.discTitleTv.text = workoutItems.title
+    dialogBinding.workoutDescriptionTv.text = workoutItems.description
 
-    dialogBinding.imageView2.setImageResource(R.drawable.workout_detail_background)
+    dialogBinding.workoutCloseBtn.setOnClickListener {
+        dialog.dismiss()
+    }
+    return dialog
+}
+
+
+fun Fragment.showReportDetails(dialogBinding :WorkoutDetailsDialogBinding, workoutItems: ReportExercise): Dialog {
+    val dialog = Dialog(requireContext()).apply {
+        setContentView(dialogBinding.root)
+        setCancelable(true)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
+
+    Glide.with(requireContext()).load(workoutItems.image)
+        .into(dialogBinding.detailIV)
     dialogBinding.discTitleTv.text = workoutItems.title
     dialogBinding.workoutDescriptionTv.text = workoutItems.description
 
@@ -69,6 +98,23 @@ fun showLogOutDialog(context: Context, binding: LogoutDialogLayoutBinding, resou
     return dialog
 }
 
+fun Fragment.showChooseToContinueDialog(dialogBinding :ContinueExerciseDialogBinding, showWorkout:()->Unit, showReportWorkout:()->Unit): Dialog {
+    val dialog = Dialog(requireContext()).apply {
+        setContentView(dialogBinding.root)
+        setCancelable(false)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
+    dialogBinding.continueExerciseBtn.setOnClickListener {
+        showReportWorkout.invoke()
+        dialog.dismiss()
+    }
+    dialogBinding.startNewExerciseBtn.setOnClickListener {
+        showWorkout.invoke()
+        dialog.dismiss()
+    }
+    return dialog
+}
+
 
 
 fun Fragment.onBackPressed(){
@@ -78,3 +124,16 @@ fun Fragment.onBackPressed(){
         }
     }
 }
+
+fun Fragment.showProgressBar():Dialog{
+
+    val dialog = Dialog(requireContext()).apply {
+        setContentView(R.layout.progressbar_layout)
+        setCancelable(true)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
+
+    return dialog
+
+}
+
