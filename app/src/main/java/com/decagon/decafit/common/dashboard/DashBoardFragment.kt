@@ -77,8 +77,6 @@ class DashBoardFragment : Fragment() {
 
         networkObsever()
         getWorksObserver()
-
-        this.onBackPressed()
     }
 
     private fun getWorksObserver() {

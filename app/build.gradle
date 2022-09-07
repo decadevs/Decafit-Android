@@ -78,8 +78,7 @@ android {
         testImplementation 'org.mockito:mockito-core:2.24.5'
         androidTestImplementation 'org.mockito:mockito-android:2.24.5'
         androidTestImplementation 'androidx.navigation:navigation-testing:2.4.1'
-        androidTestImplementation 'org.junit.jupiter:junit-jupiter'
-        androidTestImplementation 'org.junit.jupiter:junit-jupiter'
+
         // Lifecycle Scopes
         implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
         implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
