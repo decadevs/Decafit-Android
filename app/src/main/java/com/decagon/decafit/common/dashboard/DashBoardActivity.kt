@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -45,6 +46,7 @@ class DashBoardActivity : AppCompatActivity() {
 
 
 
+
         _binding = ActivityDashBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -52,7 +54,6 @@ class DashBoardActivity : AppCompatActivity() {
 
         navController = findNavController(com.decagon.decafit.R.id.host_dashboard)
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
-//        setupActionBarWithNavController(navController, appBarConfiguration)
         //setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.drawerNavView.setupWithNavController(navController)
@@ -98,14 +99,11 @@ class DashBoardActivity : AppCompatActivity() {
 
     }
 
-//    override fun onBackPressed() {
-//        if (pressedTime + 2000 > System.currentTimeMillis()) {
-//            super.onBackPressed()
-//            finish()
-//        } else {
-//            Toast.makeText(baseContext, "Press back again to exit", Toast.LENGTH_SHORT).show()
-//        }
-//        pressedTime = System.currentTimeMillis()
-//    }
-
+    fun openCloseNavigationDrawer(view: View) {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+    }
 }

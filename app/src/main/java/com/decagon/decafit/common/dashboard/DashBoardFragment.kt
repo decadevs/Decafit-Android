@@ -59,6 +59,9 @@ class DashBoardFragment : Fragment() {
         val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
         actionBar?.title = "Dashboard"
 
+        binding.profileContainer.setOnClickListener{ v ->
+            (activity as DashBoardActivity).openCloseNavigationDrawer(v)
+        }
 
         return binding.root
     }
