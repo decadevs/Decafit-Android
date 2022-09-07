@@ -1,7 +1,6 @@
 package com.decagon.decafit.common.common.data.database.model
 
 import com.apollographql.apollo3.api.EnumType
-import kotlinx.android.parcel.Parcelize
 
 
 data class Exercise(

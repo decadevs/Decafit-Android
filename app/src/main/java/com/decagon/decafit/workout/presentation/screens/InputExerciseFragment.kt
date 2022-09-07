@@ -54,9 +54,9 @@ class InputExerciseFragment : Fragment() {
         binding.nextExerciseBtn.setOnClickListener {
             setUpWorkout()
         }
-        binding.inputExerciseBackArrowCV.setOnClickListener {
-            findNavController().popBackStack()
-        }
+//        binding.inputExerciseBackArrowCV.setOnClickListener {
+//            findNavController().popBackStack()
+//        }
     }
 
     private fun setUpWorkout(){

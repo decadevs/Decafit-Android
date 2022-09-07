@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -35,6 +37,7 @@ class DashBoardFragment : Fragment() {
     private val viewModel: DashBoardViewModel by viewModels()
     private lateinit var date: LocalDate
     var dayOfMonth: Int = 0
+    private var pressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +76,7 @@ class DashBoardFragment : Fragment() {
 
         networkObsever()
         getWorksObserver()
+        handleBackPress()
     }
 
     private fun getWorksObserver() {
@@ -111,5 +115,21 @@ class DashBoardFragment : Fragment() {
         val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
         actionBar?.title = "Dashboard"
     }
+
+
+    private fun handleBackPress(){
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val activity = activity as AppCompatActivity?
+                if (pressedTime + 2000 > System.currentTimeMillis()) {
+                    activity!!.finish()
+                } else {
+                    Toast.makeText(context, "Press back again to Logout", Toast.LENGTH_SHORT).show()
+                }
+                pressedTime = System.currentTimeMillis()
+            }
+        })
+    }
+
 }
 

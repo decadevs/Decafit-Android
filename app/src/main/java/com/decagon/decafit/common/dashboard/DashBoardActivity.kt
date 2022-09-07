@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -21,6 +22,7 @@ import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.utils.showLogOutDialog
 import com.decagon.decafit.databinding.ActivityDashBoardBinding
 import com.decagon.decafit.databinding.LogoutDialogLayoutBinding
+import com.google.android.material.internal.ContextUtils.getActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -34,6 +36,7 @@ class DashBoardActivity : AppCompatActivity() {
     private lateinit var logoutDialogLayoutBinding: LogoutDialogLayoutBinding
     private lateinit var  logoutDialog: AlertDialog
     private lateinit var name: String
+    private var pressedTime: Long = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +54,7 @@ class DashBoardActivity : AppCompatActivity() {
 
         navController = findNavController(com.decagon.decafit.R.id.host_dashboard)
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
-        //setupActionBarWithNavController(navController, appBarConfiguration)
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.drawerNavView.setupWithNavController(navController)
 
@@ -95,5 +98,15 @@ class DashBoardActivity : AppCompatActivity() {
             .also { loginFragment-> startActivity(loginFragment) }
 
     }
+
+//    override fun onBackPressed() {
+//        if (pressedTime + 2000 > System.currentTimeMillis()) {
+//            super.onBackPressed()
+//            finish()
+//        } else {
+//            Toast.makeText(baseContext, "Press back again to exit", Toast.LENGTH_SHORT).show()
+//        }
+//        pressedTime = System.currentTimeMillis()
+//    }
 
 }

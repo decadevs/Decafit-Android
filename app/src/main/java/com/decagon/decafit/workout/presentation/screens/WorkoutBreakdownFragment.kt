@@ -67,9 +67,9 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
             findNavController().navigate(WorkoutBreakdownFragmentDirections.actionWorkoutBreakdownFragmentToPauseResumeWorkoutFragment2(reportExercise = reportExercise))
         }
 
-        binding.backArrowCV.setOnClickListener {
-            findNavController().popBackStack()
-        }
+//        binding.backArrowCV.setOnClickListener {
+//            findNavController().popBackStack()
+//        }
 
     }
     private fun setUpWorkoutRecyclerView(){
