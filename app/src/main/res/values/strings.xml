@@ -19,6 +19,7 @@
     <string name="password">Password</string>
     <string name="email_address">Email address</string>
     <string name="create_a_nfitness_nutrition_plan">Create a\nfitness/nutrition plan</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout</string>
     <string name="full_name">Full name</string>
     <string name="phone_number">Phone number</string>
     <string name="wrong_email_address">wrong email address</string>
@@ -31,11 +32,6 @@
     <string name="full_body">Full Body</string>
     <string name="timer_value">00:20</string>
     <string name="complete_workout">complete</string>
-    <string name="gift_chuks">Gift Chuks</string>
-    <string name="_24_min">24 min</string>
-    <string name="_24_kcal">24 Kcal</string>
-    <string name="number_or_reps">Number or reps</string>
-    <string name="enter_the_number_of_reps_and_sets_for_your_workout">Enter the number of reps and sets for your workout</string>
     <string name="incomplete_workout"><font color="#F26430">Incomplete</font></string>
     <string name="description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed.</string>
     <string name="start_workout">Start Workout</string>
@@ -49,10 +45,26 @@
     <string name="next_workout">Next Workout</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
-    <string name="jumping_jacks">Jumping Jacks</string>
+    <string name="jumping_jacks"> </string>
     <string name="steps_taken">Steps taken</string>
     <string name="numbersOf_steps">%1$s Steps</string>
     <string name="set_your_limit">Set your limit</string>
     <string name="number_of_sets">Number of sets</string>
     <string name="workout">Workout</string>
+    <string name="profile">Profile</string>
+    <string name="victor_bamikole">Victor Bamikole</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="view_profile">View Profile</string>
+    <string name="gift_chuks">Gift Chuks</string>
+    <string name="_24_min">24 min</string>
+    <string name="_24_kcal">24 Kcal</string>
+    <string name="number_or_reps">Number or reps</string>
+    <string name="enter_the_number_of_reps_and_sets_for_your_workout">Enter the number of reps and sets for your workout</string>
+    <string name="numberOfExercises">%1$d Exercises</string>
+    <string name="no_exercise">No Exercise</string>
+    <string name="count">count</string>
+    <string name="end">END</string>
+    <string name="no_sensor_detected">No Sensor Detected On this Devices</string>
+    <string name="repeat_workout">Repeat</string>
 </resources>

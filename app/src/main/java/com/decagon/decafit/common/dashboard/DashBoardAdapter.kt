@@ -7,11 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.decagon.decafit.WorkoutsQuery
+import com.decagon.decafit.common.common.data.database.model.WorkOutData
 import com.decagon.decafit.common.utils.onItemClickListener
 import com.decagon.decafit.databinding.DashboardRecyclerItemBinding
 
-class DashBoardAdapter(private val workOuts: List<WorkoutsQuery.Workout?>): RecyclerView.Adapter<DashBoardAdapter.AppHolder>() {
+//List<WorkoutsQuery.Workout?>
+class DashBoardAdapter(private val workOuts: List<WorkOutData>): RecyclerView.Adapter<DashBoardAdapter.AppHolder>() {
+
     private lateinit var context: Context
     private lateinit var mListener: onItemClickListener
 
@@ -32,7 +34,7 @@ class DashBoardAdapter(private val workOuts: List<WorkoutsQuery.Workout?>): Recy
             }
         }
 
-        fun bind(workOuts: WorkoutsQuery.Workout) {
+        fun bind(workOuts: WorkOutData) {
             Glide.with(context)
                 .load(workOuts.backgroundImage)
                 .into(workOutImage)
@@ -48,7 +50,7 @@ class DashBoardAdapter(private val workOuts: List<WorkoutsQuery.Workout?>): Recy
     }
 
     override fun onBindViewHolder(holder: AppHolder, position: Int) {
-        holder.bind(workOuts[position]!!)
+        holder.bind(workOuts[position])
     }
 
     override fun getItemCount(): Int {

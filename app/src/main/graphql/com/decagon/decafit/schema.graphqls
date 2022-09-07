@@ -149,9 +149,11 @@ input ReportExcerciseProgressInput {
 
   paused: Boolean
 
-  pausedTime: String
+  limit: String
 
   completed: Boolean
+
+  progress: Int
 }
 
 input ReportCreateInput {
@@ -181,9 +183,11 @@ type ReportExcerciseProgress {
 
   paused: Boolean
 
-  pausedTime: String
+  limit: String
 
   completed: Boolean
+
+  progress: Int
 }
 
 type ReportWorkout {
