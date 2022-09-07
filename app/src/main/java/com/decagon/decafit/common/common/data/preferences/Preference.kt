@@ -106,7 +106,9 @@ object Preference {
         preferences.edit()
             .remove(prefLoginData)
             .remove(prefLoggedIn)
+            .clear()
             .apply()
+
         return true
     }
 
