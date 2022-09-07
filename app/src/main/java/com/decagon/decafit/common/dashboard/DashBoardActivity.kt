@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -17,12 +16,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.decagon.decafit.MainActivity
-import com.decagon.decafit.R
 import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.utils.showLogOutDialog
 import com.decagon.decafit.databinding.ActivityDashBoardBinding
 import com.decagon.decafit.databinding.LogoutDialogLayoutBinding
-import com.google.android.material.internal.ContextUtils.getActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -42,8 +39,9 @@ class DashBoardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val actionBar: ActionBar? = this.actionBar
-        actionBar?.title = "Dashboard"
+
+//        val actionBar: ActionBar? = this.actionBar
+//        actionBar?.title = "Dashboard"
 
 
 
@@ -54,7 +52,8 @@ class DashBoardActivity : AppCompatActivity() {
 
         navController = findNavController(com.decagon.decafit.R.id.host_dashboard)
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.drawerNavView.setupWithNavController(navController)
 

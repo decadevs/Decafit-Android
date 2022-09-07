@@ -105,9 +105,9 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     }
 
     private fun initClickListener(){
-//        binding.pauseWorkoutBackArrowIV.setOnClickListener {
-//            findNavController().popBackStack()
-//        }
+        binding.pauseWorkoutBackArrowIV.setOnClickListener {
+            findNavController().popBackStack()
+        }
         binding.pauseBtn.setOnClickListener {
             isPaused = true
 
