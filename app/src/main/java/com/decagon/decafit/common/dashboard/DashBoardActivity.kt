@@ -40,12 +40,8 @@ class DashBoardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
 //        val actionBar: ActionBar? = this.actionBar
 //        actionBar?.title = "Dashboard"
-
-
-
 
         _binding = ActivityDashBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
