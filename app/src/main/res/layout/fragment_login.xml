@@ -31,10 +31,10 @@
          <TextView
              style="@style/NormalBoldText"
              android:layout_marginLeft="@dimen/margin_32dp"
+             android:layout_marginBottom="@dimen/margin_46dp"
+             android:fontFamily="@font/poppins_medium"
              android:text="@string/track_your_fitness"
              android:textColor="@color/white"
-             android:fontFamily="@font/poppins_medium"
-             android:layout_marginBottom="@dimen/margin_46dp"
              app:layout_constraintBottom_toBottomOf="@+id/login_image"
              app:layout_constraintStart_toStartOf="parent" />
 
@@ -43,8 +43,8 @@
              style="@style/NormalBoldText"
              android:layout_marginLeft="@dimen/margin_32dp"
              android:layout_marginTop="@dimen/margin_16dp"
-             android:text="@string/sign_in"
              android:fontFamily="@font/poppins_medium"
+             android:text="@string/sign_in"
              android:textColor="@color/black"
              android:textSize="24sp"
              app:layout_constraintStart_toStartOf="parent"
@@ -79,10 +79,10 @@
              style="@style/TextInputStyle"
              android:layout_marginHorizontal="@dimen/margin_32dp"
              android:layout_marginTop="@dimen/margin_32dp"
-             app:passwordToggleEnabled="true"
              app:layout_constraintLeft_toLeftOf="parent"
              app:layout_constraintRight_toRightOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/email_textInputLayout">
+             app:layout_constraintTop_toBottomOf="@+id/email_textInputLayout"
+             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fragment_login_password_ET"
@@ -103,89 +103,100 @@
              style="@style/ButtonStyle"
              android:layout_marginHorizontal="@dimen/margin_32dp"
              android:layout_marginVertical="@dimen/margin_32dp"
+             android:fontFamily="@font/ubuntu_medium"
              android:paddingVertical="10dp"
              android:text="Sign In"
-             android:fontFamily="@font/ubuntu_medium"
              android:textColor="@color/white"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toBottomOf="@+id/password_textInputLayout" />
 
-         <View
-             android:id="@+id/view"
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:id="@+id/social_signIn_layout"
              android:layout_width="match_parent"
-             android:layout_height="2dp"
-             android:layout_marginHorizontal="@dimen/margin_32dp"
-             android:layout_marginTop="@dimen/margin_32dp"
-             android:background="@color/gray"
+             android:layout_height="wrap_content"
+             android:visibility="gone"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintHorizontal_bias="0.5"
              app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/fragment_login_login_btn" />
+             app:layout_constraintTop_toBottomOf="@+id/fragment_login_login_btn">
 
-         <TextView
-             android:id="@+id/textView2"
-             style="@style/FaintText"
-             android:layout_marginTop="23dp"
-             android:background="@color/white"
-             android:paddingHorizontal="@dimen/margin_15dp"
-             android:text="Or sign in with"
-             android:textSize="12sp"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintHorizontal_bias="0.5"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/fragment_login_login_btn" />
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="@dimen/margin_32dp"
+                android:layout_marginTop="@dimen/margin_32dp"
+                android:background="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-         <ImageButton
-             android:id="@+id/google_login"
-             style="@style/LoginImageButtonStyle"
-             android:layout_marginTop="@dimen/margin_32dp"
-             android:layout_marginStart="35dp"
-             android:src="@drawable/ic_google"
-             app:layout_constraintStart_toStartOf="@+id/view"
-             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/FaintText"
+                android:layout_marginTop="23dp"
+                android:background="@color/white"
+                android:paddingHorizontal="@dimen/margin_15dp"
+                android:text="Or sign in with"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-         <androidx.appcompat.widget.AppCompatImageButton
-             android:id="@+id/facebook_login"
-             style="@style/LoginImageButtonStyle"
-             android:layout_marginTop="@dimen/margin_32dp"
-             android:src="@drawable/ic_facebook"
-             app:layout_constraintEnd_toStartOf="@+id/apple_login"
-             app:layout_constraintStart_toEndOf="@+id/google_login"
-             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <ImageButton
+                android:id="@+id/google_login"
+                style="@style/LoginImageButtonStyle"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="@dimen/margin_32dp"
+                android:src="@drawable/ic_google"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-         <ImageButton
-             android:id="@+id/apple_login"
-             style="@style/LoginImageButtonStyle"
-             android:layout_marginTop="@dimen/margin_32dp"
-             android:src="@drawable/ic_apple"
-             android:layout_marginEnd="35dp"
-             app:layout_constraintEnd_toEndOf="@+id/view"
-             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/facebook_login"
+                style="@style/LoginImageButtonStyle"
+                android:layout_marginTop="@dimen/margin_32dp"
+                android:src="@drawable/ic_facebook"
+                app:layout_constraintEnd_toStartOf="@+id/apple_login"
+                app:layout_constraintStart_toEndOf="@+id/google_login"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-         <TextView
-             android:id="@+id/don_t_have_an_account_TV"
-             style="@style/NormalBoldText"
-             android:layout_marginStart="45dp"
-             android:layout_marginTop="@dimen/margin_32dp"
-             android:text="@string/don_t_have_an_account"
-             android:textSize="@dimen/text_size_16sp"
+            <ImageButton
+                android:id="@+id/apple_login"
+                style="@style/LoginImageButtonStyle"
+                android:layout_marginTop="@dimen/margin_32dp"
+                android:layout_marginEnd="35dp"
+                android:src="@drawable/ic_apple"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+         </androidx.constraintlayout.widget.ConstraintLayout>
 
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/facebook_login" />
+            <TextView
+                android:id="@+id/don_t_have_an_account_TV"
+                style="@style/NormalBoldText"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="@dimen/margin_32dp"
+                android:text="@string/don_t_have_an_account"
+                android:textSize="@dimen/text_size_16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_login_login_btn" />
 
-         <TextView
-             android:id="@+id/sign_up_tv"
-             style="@style/NormalBoldText"
-             android:layout_marginStart="10dp"
-             android:layout_marginTop="@dimen/margin_32dp"
-             android:layout_marginBottom="45dp"
-             android:text="Sign up"
-             android:textColor="@color/orange"
-             android:textSize="@dimen/text_size_16sp"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintStart_toEndOf="@+id/don_t_have_an_account_TV"
-             app:layout_constraintTop_toBottomOf="@+id/facebook_login" />
+            <TextView
+                android:id="@+id/sign_up_tv"
+                style="@style/NormalBoldText"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="@dimen/margin_32dp"
+                android:layout_marginBottom="45dp"
+                android:text="Sign up"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/text_size_16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/don_t_have_an_account_TV"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_login_login_btn" />
+
       </androidx.constraintlayout.widget.ConstraintLayout>
    </androidx.core.widget.NestedScrollView>
 

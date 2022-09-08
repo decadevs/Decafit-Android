@@ -73,16 +73,21 @@ object Validation {
         // check if the full name is entered and is a valid name
         if(splitName.size <2 || splitName.size >3){
             result.add("Enter your full name")
-        }else if (!validateEmailInput(accountData.email) ) {
+        }
+        if (!validateEmailInput(accountData.email) ) {
             result.add("cant be empty")
-        } else if ( validatePhoneNumber(accountData.phone_number)){
+        }
+        if ( validatePhoneNumber(accountData.phone_number)){
             result.add("Incomplete number")
-        }else if (accountData.password.length <= 7) {
+        }
+        if (accountData.password.length <= 7) {
             result.add("Minimum of 8 characters")
-        }else if (!accountData.password.contains(UPPERCASE) || !accountData.password.contains(LOWERCASE)
+        }
+        if (!accountData.password.contains(UPPERCASE) || !accountData.password.contains(LOWERCASE)
         ) {
             result.add("Uppercase and lowercase")
-        } else if (!accountData.password.contains(DIGITCHARACTER)) {
+        }
+        if (!accountData.password.contains(DIGITCHARACTER)) {
             result.add("Numbers")
         }
         return result

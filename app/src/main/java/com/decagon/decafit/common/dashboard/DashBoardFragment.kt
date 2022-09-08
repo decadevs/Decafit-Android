@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.getName
 import com.decagon.decafit.common.dashboard.dashBoardViewModel.DashBoardViewModel
-import com.decagon.decafit.common.utils.onBackPressed
 import com.decagon.decafit.common.utils.onItemClickListener
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentDashBoardBinding
@@ -56,7 +53,6 @@ class DashBoardFragment : Fragment() {
         val activity = activity as AppCompatActivity?
         val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
         actionBar?.title = "Dashboard"
-
 
 
         return binding.root
@@ -108,7 +104,6 @@ class DashBoardFragment : Fragment() {
             }
         }
     }
-
 
     override fun onResume() {
         super.onResume()

@@ -3,7 +3,6 @@ package com.decagon.decafit.common.common.domain.repository
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.ApolloResponse
 import com.decagon.decafit.*
-import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.type.LoginInput
 import com.decagon.decafit.type.RegisterInput
 import com.decagon.decafit.type.ReportCreateInput

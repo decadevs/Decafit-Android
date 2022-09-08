@@ -96,4 +96,5 @@ class DashBoardActivity : AppCompatActivity() {
             .also { loginFragment-> startActivity(loginFragment) }
 
     }
+
 }
