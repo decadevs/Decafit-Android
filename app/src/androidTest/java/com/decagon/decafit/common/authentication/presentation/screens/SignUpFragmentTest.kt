@@ -32,6 +32,7 @@ import org.mockito.Mockito.verify
 @HiltAndroidTest
 class SignUpFragmentTest {
 
+
     private val fullName = "Benjamin obeta"
     private val email = "abdul@gmail.com"
     private val validPassword = "Password123#"

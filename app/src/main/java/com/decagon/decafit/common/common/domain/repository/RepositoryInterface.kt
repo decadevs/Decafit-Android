@@ -15,8 +15,8 @@ interface RepositoryInterface {
     suspend fun login(register: LoginInput): ApolloResponse<LoginMutation.Data>
     suspend fun getWorkoutWithId(id: String):ApolloResponse<WorkoutWitIdQuery.Data>
     suspend fun getWorkouts():ApolloResponse<WorkoutsQuery.Data>
-    suspend fun saveExerciseToLocalDB(exercises: List<Exercises>)
-    suspend fun getExerciseFromLocalDB():List<Exercises>
+//    suspend fun saveExerciseToLocalDB(exercises: List<Exercises>)
+//    suspend fun getExerciseFromLocalDB():List<Exercises>
     suspend fun updateExercise(id: String?, completed: Boolean, paused: Boolean,pausedTime:String )
     suspend fun workOuts(): ApolloResponse<WorkoutsQuery.Data>
     suspend fun createReport(input: ReportCreateInput): ApolloResponse<CreateReportMutation.Data>
