@@ -67,4 +67,5 @@
     <string name="end">END</string>
     <string name="no_sensor_detected">No Sensor Detected On this Devices</string>
     <string name="repeat_workout">Repeat</string>
+    <string name="pending_exercise">You are yet to complete this workout.</string>
 </resources>

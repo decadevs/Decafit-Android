@@ -3,16 +3,13 @@ package com.decagon.decafit.common.common.domain.repository
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.ApolloResponse
 import com.decagon.decafit.*
-import com.decagon.decafit.common.common.data.local_data.DecafitDAO
-import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.type.LoginInput
 import com.decagon.decafit.type.RegisterInput
 import com.decagon.decafit.type.ReportCreateInput
 import javax.inject.Inject
 
 class RepositoryImp @Inject constructor(
-    private val apolloClient: ApolloClient,
-    private val decafitDAO: DecafitDAO
+    private val apolloClient: ApolloClient
 ) : RepositoryInterface{
     override suspend fun register(register: RegisterInput): ApolloResponse<RegisterMutation.Data> {
         return apolloClient.mutation(RegisterMutation(user = register)).execute()
@@ -45,13 +42,13 @@ class RepositoryImp @Inject constructor(
         return apolloClient.query(WorkoutsQuery()).execute()
     }
 
-    override suspend fun saveExerciseToLocalDB(exercises: List<Exercises>) {
-        decafitDAO.saveExercises(exercises)
-    }
-
-    override suspend fun getExerciseFromLocalDB(): List<Exercises> {
-        return decafitDAO.getAllExercise()
-    }
+//    override suspend fun saveExerciseToLocalDB(exercises: List<Exercises>) {
+//        decafitDAO.saveExercises(exercises)
+//    }
+//
+//    override suspend fun getExerciseFromLocalDB(): List<Exercises> {
+//        return decafitDAO.getAllExercise()
+//    }
 
     override suspend fun updateExercise(
         id: String?,

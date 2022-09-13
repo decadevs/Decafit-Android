@@ -6,27 +6,19 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.decagon.decafit.R
-import com.decagon.decafit.databinding.LogoutDialogLayoutBinding
-import com.decagon.decafit.WorkoutWitIdQuery
 import com.decagon.decafit.WorkoutsQuery
 import com.decagon.decafit.common.common.data.database.model.ReportExercise
-import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.databinding.ContinueExerciseDialogBinding
+import com.decagon.decafit.databinding.LogoutDialogLayoutBinding
 import com.decagon.decafit.databinding.WorkoutDetailsDialogBinding
-import com.decagon.decafit.workout.data.WorkoutItems
-import com.decagon.decafit.workout.presentation.adapters.ReportAdapter
 import com.google.android.material.snackbar.Snackbar
-import java.util.*
 
 
 fun Fragment.snackBar(message: String) {
@@ -118,22 +110,19 @@ fun Fragment.showChooseToContinueDialog(dialogBinding :ContinueExerciseDialogBin
 
 
 fun Fragment.onBackPressed(){
-    val callBack =object : OnBackPressedCallback(true) {
+    var pressedTime =0L
+    activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true){
         override fun handleOnBackPressed() {
-            findNavController().popBackStack()
+            if (pressedTime + 2000 > System.currentTimeMillis()) {
+                activity?.finish()
+
+            } else {
+                Toast.makeText(requireContext(), "Press back again to exit", Toast.LENGTH_SHORT).show()
+            }
+            pressedTime = System.currentTimeMillis()
         }
-    }
+
+})
 }
 
-fun Fragment.showProgressBar():Dialog{
-
-    val dialog = Dialog(requireContext()).apply {
-        setContentView(R.layout.progressbar_layout)
-        setCancelable(true)
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    }
-
-    return dialog
-
-}
 

@@ -89,10 +89,14 @@ class WorkoutViewModels @Inject constructor(
                 _progressBar.value = false
                 if (response.data?.reportWorkout != null) {
                   val report = networkMapper.mapTo(response.data?.reportWorkout?.workouts!!)
-                    //localDBRepository.insertReportWorkout(report)
+                    localDBRepository.insertReportWorkout(report)
+                    Log.d("CREATEREPORT", " report from backend ====${response.data?.reportWorkout}")
+
                 }
                 if (response.hasErrors()){
                     Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
+                    Log.d("CREATEREPORT", " error getting report from backend ====${response.errors?.get(0)!!.message}")
+
                 }
             }
         }else{

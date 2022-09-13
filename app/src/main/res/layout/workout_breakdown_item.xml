@@ -51,6 +51,7 @@
             android:text="Jumping jacks"
             android:textColor="@color/black"
             android:textSize="18dp"
+            android:fontFamily="@font/poppins_medium"
             app:layout_constraintStart_toEndOf="@+id/exerciseImage_Iv"
             app:layout_constraintTop_toTopOf="@+id/exerciseImage_Iv" />
 
@@ -60,7 +61,9 @@
             android:elevation="10dp"
             android:text="@string/timer_value"
             android:textSize="@dimen/text_size_16sp"
-            android:textStyle="bold"
+            android:textStyle="normal"
+            android:letterSpacing="0.1"
+            android:fontFamily="@font/poppins_medium"
             app:layout_constraintStart_toStartOf="@+id/workout_title_tv"
             app:layout_constraintTop_toBottomOf="@+id/workout_title_tv" />
 
@@ -87,6 +90,7 @@
                 android:layout_marginHorizontal="@dimen/margin_16dp"
                 android:layout_marginVertical="8dp"
                 android:text="@string/complete_workout"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/green"
                 android:textSize="12sp"
                 android:textStyle="bold" />

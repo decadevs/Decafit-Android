@@ -90,7 +90,10 @@ class SignUpFragment : Fragment() {
 
 
     private fun passwordInputValidationListener(password: String) {
-        val validatePassword = Validation.validatePasswordPattern(password)
+        val validatePassword = Validation.isValidPasswordFormat(password)
+        if (validatePassword){
+
+        }
     }
 
     private fun onEmailTextInputChangeListener(email: String) {
@@ -128,8 +131,11 @@ class SignUpFragment : Fragment() {
         with(binding) {
             when {
                 errors.contains("Enter your full name") -> fullNameTextInput.error = "Enter your full name"
-                errors.contains("cant be empty") -> emailTextInput.error
+                errors.contains("cant be empty") -> emailTextInput.error ="incorrect email"
                 errors.contains("Incomplete number") -> phoneNumberTextInput.error = "Incomplete number"
+                errors.contains("Minimum of 8 characters") -> passwordTextInput.error = "Minimum of 8 characters"
+                errors.contains("Uppercase and lowercase")-> passwordTextInput.error = "must contain Uppercase and lowercase"
+                errors.contains("Numbers")-> passwordTextInput.error = "must contain Numbers"
                 else -> {
                     userInfo= RegisterInput(accountData.fullName, accountData.email,accountData.phone_number,accountData.password)
                     singUpObserver(userInfo)
