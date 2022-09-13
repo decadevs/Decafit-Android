@@ -23,12 +23,12 @@
         <entry key="app/src/main/res/layout/drawer_header_layout.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_dash_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.24270833333333333" />
-        <entry key="app/src/main/res/layout/fragment_input_exercise.xml" value="0.19" />
+        <entry key="app/src/main/res/layout/fragment_input_exercise.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_pause_resume_workout.xml" value="0.19" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/fragment_set_limit.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_workout_breakdown.xml" value="0.25" />
         <entry key="app/src/main/res/layout/logout_dialog_layout.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/layout/progressbar_layout.xml" value="0.24270833333333333" />
