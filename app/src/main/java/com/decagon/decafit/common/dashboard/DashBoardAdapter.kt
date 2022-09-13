@@ -11,7 +11,6 @@ import com.decagon.decafit.common.common.data.database.model.WorkOutData
 import com.decagon.decafit.common.utils.onItemClickListener
 import com.decagon.decafit.databinding.DashboardRecyclerItemBinding
 
-//List<WorkoutsQuery.Workout?>
 class DashBoardAdapter(private val workOuts: List<WorkOutData>): RecyclerView.Adapter<DashBoardAdapter.AppHolder>() {
 
     private lateinit var context: Context

@@ -68,7 +68,6 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
             reportExercise = ReportList(emptyList())
             findNavController().navigate(WorkoutBreakdownFragmentDirections.actionWorkoutBreakdownFragmentToPauseResumeWorkoutFragment2(reportExercise = reportExercise))
         }
-
         binding.backArrowCV.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -132,7 +131,7 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
             val dialogBinding = ContinueExerciseDialogBinding.inflate(layoutInflater)
             reportExercise= ReportList( report.filter { it.completed ==false })
             val chooseToContinueExercise =showChooseToContinueDialog(dialogBinding,
-                { setUpWorkoutRecyclerView() }, { setUpReportRecyclerView(report.filter { it.completed ==false }) })
+                { setUpWorkoutRecyclerView() }, { setUpReportRecyclerView(report)})
             if (report.isNotEmpty() && report.any { it.completed == false }) {
                 chooseToContinueExercise.show()
             }else{

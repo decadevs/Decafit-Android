@@ -192,6 +192,7 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
 
     private fun setUpWorkout(){
         val numberOfWorkout= exerciseDatas.size
+        binding.repsCountTv.text = getString(R.string.reps_count,(repeat+1).toString(),reps.toString())
         if(num < numberOfWorkout){
             binding.workoutHeaderTv.text = exerciseDatas[num]?.title
             val exercise = exerciseDatas[num]
@@ -260,6 +261,8 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
         currentStep = 0
         totalSteps =0
         stepsTaken = 0
+        progress=0
+        countProgress =0
         sensorManager?.unregisterListener(this)
     }
 

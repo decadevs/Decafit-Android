@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -32,15 +34,14 @@ class DashBoardActivity : AppCompatActivity() {
     private lateinit var logoutDialogLayoutBinding: LogoutDialogLayoutBinding
     private lateinit var  logoutDialog: AlertDialog
     private lateinit var name: String
+    private var pressedTime: Long = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val actionBar: ActionBar? = this.actionBar
-        actionBar?.title = "Dashboard"
-
-
+//        val actionBar: ActionBar? = this.actionBar
+//        actionBar?.title = "Dashboard"
 
         _binding = ActivityDashBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -94,4 +95,11 @@ class DashBoardActivity : AppCompatActivity() {
 
     }
 
+    fun openCloseNavigationDrawer(view: View) {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+    }
 }

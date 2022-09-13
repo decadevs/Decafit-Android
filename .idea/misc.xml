@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.24520383693045564" />
         <entry key="app/src/main/res/drawable/button_background.xml" value="0.157" />
+        <entry key="app/src/main/res/drawable/dark_background.xml" value="0.157" />
         <entry key="app/src/main/res/drawable/ic_baseline_av_timer_24.xml" value="0.134" />
         <entry key="app/src/main/res/drawable/ic_play_icon.xml" value="0.134" />
         <entry key="app/src/main/res/drawable/ic_play_round_icon.xml" value="0.134" />
