@@ -35,6 +35,7 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
     private val viewModel:WorkoutViewModels by viewModels()
     lateinit var reportWorkout:List<WorkoutsQuery.Exercise?>
     lateinit var reportExercise:ReportList
+    lateinit var newExercise:ReportList
 
 
     override fun onCreateView(
@@ -64,6 +65,7 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
         binding.startWorkoutBtn.setOnClickListener {
             binding.startWorkoutBtn.visibility = View.GONE
             binding.continueWorkoutBtn.visibility = View.VISIBLE
+            reportExercise = ReportList(emptyList())
             findNavController().navigate(WorkoutBreakdownFragmentDirections.actionWorkoutBreakdownFragmentToPauseResumeWorkoutFragment2(reportExercise = reportExercise))
         }
 
@@ -107,9 +109,9 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
     private fun getExerciseFromDb(){
         val workoutId = Preference.getWorkoutId(WORKOUT_KEY)
         val userId = Preference.getUserId(USERID_KEY)
-        viewModel.getReportWorkout(userId!!,workoutId!!, requireContext())
+       // viewModel.getReportWorkout(userId!!,workoutId!!, requireContext())
 
-        viewModel.getWorkoutFromLocalDb(workoutId).observe(viewLifecycleOwner){
+        viewModel.getWorkoutFromLocalDb(workoutId!!).observe(viewLifecycleOwner){
             Glide.with(requireContext()).load(it.backgroundImage)
                 .centerCrop()
                 .into(binding.exerciseImage)

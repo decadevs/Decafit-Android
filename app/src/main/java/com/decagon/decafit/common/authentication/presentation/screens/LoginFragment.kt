@@ -18,7 +18,7 @@ import com.decagon.decafit.common.common.data.preferences.Preference.saveName
 import com.decagon.decafit.common.common.data.preferences.Preference.saveUserId
 import com.decagon.decafit.common.common.data.preferences.Preference.setLoggedIn
 import com.decagon.decafit.common.common.data.preferences.Preference.setLoginData
-import com.decagon.decafit.common.dashboard.DashBoardActivity
+import com.decagon.decafit.common.dashboard.presentation.screens.DashBoardActivity
 import com.decagon.decafit.common.utils.ProgressBarLoading
 import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard

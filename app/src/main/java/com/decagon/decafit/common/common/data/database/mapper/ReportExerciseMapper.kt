@@ -17,3 +17,4 @@ class ReportExerciseMapper @Inject constructor():Mapper<WorkoutsQuery.Exercise, 
         )
     }
 }
+

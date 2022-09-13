@@ -7,7 +7,7 @@
     android:background="@color/gray">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="120dp"
         android:layout_marginBottom="1dp"
         android:background="@color/white"
@@ -46,12 +46,14 @@
         <TextView
             android:id="@+id/workout_title_tv"
             style="@style/NormalBoldText"
+            android:layout_width="0dp"
             android:layout_marginStart="@dimen/margin_16dp"
             android:elevation="10dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="Jumping jacks"
             android:textColor="@color/black"
-            android:textSize="18dp"
-            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/exerciseImage_Iv"
             app:layout_constraintTop_toTopOf="@+id/exerciseImage_Iv" />
 

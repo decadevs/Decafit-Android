@@ -1,4 +1,4 @@
-package com.decagon.decafit.common.dashboard
+package com.decagon.decafit.common.dashboard.presentation.screens
 
 import android.app.ActionBar
 import android.os.Build
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.getName
+import com.decagon.decafit.common.dashboard.DashBoardAdapter
 import com.decagon.decafit.common.dashboard.dashBoardViewModel.DashBoardViewModel
 import com.decagon.decafit.common.utils.onItemClickListener
 import com.decagon.decafit.common.utils.snackBar

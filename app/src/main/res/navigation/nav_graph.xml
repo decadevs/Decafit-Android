@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/dashBoardFragment"
-        android:name="com.decagon.decafit.common.dashboard.DashBoardFragment"
+        android:name="com.decagon.decafit.common.dashboard.presentation.screens.DashBoardFragment"
         android:label="fragment_dash_board"
         tools:layout="@layout/fragment_dash_board" >
         <action

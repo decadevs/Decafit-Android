@@ -56,13 +56,13 @@ class WorkoutAdapter(private  val listener:OnclickListener, private val context:
                  .centerCrop()
                  .override(65,56)
                  .into(exercisesImage)
-             exercisesImage.setBackgroundResource(R.drawable.full_body_img)
+             //exercisesImage.setBackgroundResource(R.drawable.full_body_img)
              val isComplete = false
              val pausedTime =0
              if (items.type.rawValue == "count"){
                  "X${Preference.getNumberOfCount(COUNT_KEY)}".also { timer.text = it }
              }else{
-                 timer.text = Preference.getEstimatedTime(TIME_KEY)
+                 "${Preference.getEstimatedTime(TIME_KEY)} secs".also { timer.text = it }
              }
              if (isComplete){
                  workoutProgressCard.visibility = View.VISIBLE

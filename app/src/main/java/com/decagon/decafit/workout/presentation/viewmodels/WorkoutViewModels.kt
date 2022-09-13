@@ -94,7 +94,7 @@ class WorkoutViewModels @Inject constructor(
 
                 }
                 if (response.hasErrors()){
-                    Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
                     Log.d("CREATEREPORT", " error getting report from backend ====${response.errors?.get(0)!!.message}")
 
                 }
@@ -135,7 +135,7 @@ class WorkoutViewModels @Inject constructor(
 
                 _progressBar.value = false
                 if (response.hasErrors()){
-                    Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
                     Log.d("CREATEREPORT", " report ERROR ====${response.errors?.get(0)!!.message}")
 
                 }

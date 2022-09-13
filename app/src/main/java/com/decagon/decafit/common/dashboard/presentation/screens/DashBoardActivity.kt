@@ -1,4 +1,4 @@
-package com.decagon.decafit.common.dashboard
+package com.decagon.decafit.common.dashboard.presentation.screens
 
 import android.app.ActionBar
 import android.app.AlertDialog
@@ -7,17 +7,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.decagon.decafit.MainActivity
-import com.decagon.decafit.R
 import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.utils.showLogOutDialog
 import com.decagon.decafit.databinding.ActivityDashBoardBinding

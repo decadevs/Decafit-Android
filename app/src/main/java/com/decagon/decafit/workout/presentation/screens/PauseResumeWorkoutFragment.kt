@@ -69,7 +69,7 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     private val numberOfCount = Preference.getNumberOfCount(COUNT_KEY)!!.toInt()
     lateinit var exerciseInput : ReportExercise
     lateinit var DBexerciseInput : List<GetReportWorkoutQuery.Exercise>
-    private val args: PauseResumeWorkoutFragmentArgs by navArgs()
+    private val args: PauseResumeWorkoutFragmentArgs? by navArgs()
 
     val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
 
@@ -139,11 +139,11 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
             if(repeat == reps){ //checks for the numbers of reps for each exercise
                 num++
                 repeat =0
-                binding.nextWorkoutBtn.setText(R.string.next_workout)
                 saveReportToLocalDB()
-               // createReport()
-            }else if(repeat == reps-1){
-                binding.nextWorkoutBtn.setText(R.string.next_workout)
+                binding.nextWorkoutBtn.setText(R.string.repeat_workout)
+                // createReport()
+            }else if (repeat <reps-1){
+                binding.nextWorkoutBtn.setText(R.string.repeat_workout)
             }else{
                 binding.nextWorkoutBtn.setText(R.string.next_workout)
             }
@@ -173,10 +173,10 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
     private fun getExerciseFromDb(){
         workoutId = Preference.getWorkoutId(WORKOUT_KEY)
         viewModel.getWorkoutFromLocalDb(workoutId!!).observe(viewLifecycleOwner) {
-            exerciseDatas = if (args.reportExercise!!.report.isNotEmpty()) {
+            exerciseDatas = if (args?.reportExercise?.report!!.isNotEmpty()) {
                 val mapper = ReportExerciseMapper()
                 val exerciseList = mutableListOf<WorkoutsQuery.Exercise>()
-                for (i in args.reportExercise!!.report) {
+                for (i in args?.reportExercise!!.report) {
                     val  d = mapper.mapTo(i)
                     exerciseList.add(d)
                 }
@@ -236,6 +236,7 @@ class PauseResumeWorkoutFragment : Fragment(),OnTimerTickListener,SensorEventLis
                 findNavController().popBackStack()
                 num =0
             }
+            num=num+1
         }
     }
 
