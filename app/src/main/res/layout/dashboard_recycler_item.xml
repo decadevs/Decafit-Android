@@ -33,18 +33,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/card1ExTime"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                android:layout_marginBottom="24dp"-->
-<!--                android:elevation="50dp"-->
-<!--                android:text="@string/_20_days"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="@dimen/text_size_16sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/card1ExImage"-->
-<!--                app:layout_constraintEnd_toEndOf="parent" />-->
+            <View
+                android:elevation="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/dark_background"/>
 
             <ImageView
                 android:id="@+id/card1ExImage"

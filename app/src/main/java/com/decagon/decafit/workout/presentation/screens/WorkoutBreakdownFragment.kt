@@ -66,7 +66,6 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
             binding.continueWorkoutBtn.visibility = View.VISIBLE
             findNavController().navigate(WorkoutBreakdownFragmentDirections.actionWorkoutBreakdownFragmentToPauseResumeWorkoutFragment2(reportExercise = reportExercise))
         }
-
         binding.backArrowCV.setOnClickListener {
             findNavController().popBackStack()
         }
