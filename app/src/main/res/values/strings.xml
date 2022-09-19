@@ -42,7 +42,7 @@
     <string name="kcal_points">240 Kcal</string>
     <string name="workout_time_min">24 min</string>
     <string name="workout_counter">00:04</string>
-    <string name="next_workout">Next Workout</string>
+    <string name="next_workout">Next Exercise</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
     <string name="jumping_jacks"> </string>
@@ -68,4 +68,9 @@
     <string name="no_sensor_detected">No Sensor Detected On this Devices</string>
     <string name="repeat_workout">Repeat</string>
     <string name="pending_exercise">You are yet to complete this workout.</string>
+    <string name="countdown">Countdown</string>
+    <string name="reps_count">%1$s of %2$s reps</string>
+    <string name="number_of_counts">Number of Counts</string>
+    <string name="move_to_next_set">move to set %1$s</string>
+    <string name="number_of_steps">%1$s Steps</string>
 </resources>

@@ -69,7 +69,7 @@ class WorkoutViewModels @Inject constructor(
         localDBRepository.insertReportExercise(report)
     }
 
-    fun getReportExercise(workoutId: String):LiveData<List<ReportExercise>>{
+    fun getReportOfExerciseFromLocalDB(workoutId: String):LiveData<List<ReportExercise>>{
         return localDBRepository.getReportExercise(workoutId)
     }
 
@@ -77,7 +77,7 @@ class WorkoutViewModels @Inject constructor(
     fun getReportWorkout(userId:String, workoutId:String,context : Context) {
         if (isNetworkAvailable(context)) {
             viewModelScope.launch {
-                _progressBar.value = true
+                //_progressBar.value = true
                 val response = try {
                     repository.getReport(userId,workoutId)
                 } catch (e: ApolloException) {
@@ -94,9 +94,8 @@ class WorkoutViewModels @Inject constructor(
 
                 }
                 if (response.hasErrors()){
-                    Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
                     Log.d("CREATEREPORT", " error getting report from backend ====${response.errors?.get(0)!!.message}")
-
                 }
             }
         }else{
@@ -104,17 +103,6 @@ class WorkoutViewModels @Inject constructor(
         }
     }
 
-    fun reportProgressExerciseInput():List<ReportExcerciseProgressInput>{
-        val workoutId = Preference.getWorkoutId(Preference.WORKOUT_KEY)
-        val exercise = localDBRepository.getReportExercise(workoutId!!).value!!
-        var  input : ReportExcerciseProgressInput? =null
-        if (exercise.isNotEmpty()) {
-            for (i in exercise) {
-                input = reportMapper.mapTo(i)
-            }
-        }
-        return listOf(input!!)
-    }
 
     fun createReport(input :ReportWorkoutInput, context : Context) {
         val userId = Preference.getUserId(USERID_KEY)
@@ -135,9 +123,7 @@ class WorkoutViewModels @Inject constructor(
 
                 _progressBar.value = false
                 if (response.hasErrors()){
-                    Toast.makeText(context, response.errors?.get(0)!!.message, Toast.LENGTH_SHORT).show()
                     Log.d("CREATEREPORT", " report ERROR ====${response.errors?.get(0)!!.message}")
-
                 }
             }
         }else{

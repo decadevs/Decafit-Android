@@ -17,14 +17,6 @@ data class Exercises(
     @SerializedName("image") public val image: String,
     @SerializedName("type") public val type: String?=null
 
-
-//    @SerializedName("id")val id: String,
-//    @SerializedName("title")val title: String,
-//    @SerializedName("completed")val completed: Boolean,
-//    @SerializedName("description")val description: String,
-//    @SerializedName("paused")val paused: Boolean,
-//    @SerializedName("pausedTime")val pausedTime: Int,
-
     ):Serializable{
     @PrimaryKey(autoGenerate = false)
     var idd =id

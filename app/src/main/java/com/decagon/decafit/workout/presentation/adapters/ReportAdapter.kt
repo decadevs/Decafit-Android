@@ -30,6 +30,7 @@ class ReportAdapter (private  val listener: OnclickListener, private val context
     }
 
     val differ = AsyncListDiffer(this, callBack)
+
     class ViewHolder (binding: WorkoutBreakdownItemBinding):RecyclerView.ViewHolder(binding.root){
 
         val title = binding.workoutTitleTv
@@ -42,17 +43,15 @@ class ReportAdapter (private  val listener: OnclickListener, private val context
         @RequiresApi(Build.VERSION_CODES.M)
         fun bindView(items: ReportExercise, context: Context){
             title.text = items.title
-            //timer.text =items.workoutTime.toString()
             Glide.with(context).load(items.image)
                 .centerCrop()
                 .override(65,56)
                 .into(exercisesImage)
             exercisesImage.setBackgroundResource(R.drawable.full_body_img)
-            val isComplete = false
-            val pausedTime =0
+
             if (items.type!!.rawValue == "count"){
                 "X${Preference.getNumberOfCount(Preference.COUNT_KEY)}".also { timer.text = it }
-                progressBar.max = Preference.getNumberOfCount(Preference.COUNT_KEY)!!.toInt()
+                progressBar.max = 100
             }else{
                 timer.text = Preference.getEstimatedTime(Preference.TIME_KEY)
                 progressBar.max = Preference.getEstimatedTime(Preference.TIME_KEY)!!.toInt()

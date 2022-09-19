@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.decagon.decafit.R
 import com.decagon.decafit.common.common.data.preferences.Preference
+import com.decagon.decafit.common.utils.Validation
 import com.decagon.decafit.common.utils.hideKeyboard
 import com.decagon.decafit.common.utils.snackBar
 import com.decagon.decafit.databinding.FragmentInputExerciseBinding
@@ -65,16 +66,29 @@ class InputExerciseFragment : Fragment() {
         val workoutTime = binding.estimatedTimeET.text.toString()
         val workoutCount = binding.numbersCountsET.text.toString()
 
-        if (workoutReps.isEmpty() || workoutReps.isEmpty()||workoutCount.isEmpty()||workoutTime.isEmpty()){
-            snackBar("Enter all fields")
-        }else{
-        with(Preference){
-            saveWorkoutSet(workoutSet)
-            saveWorkoutRep(workoutReps)
-            saveEstimatedTime(workoutTime)
-            saveNumberOfCount(workoutCount)
-        }
-            findNavController().navigate(R.id.action_inputExerciseFragment_to_workoutBreakdownFragment)
+
+        when (Validation.validateInputExercise(workoutSet,workoutReps,workoutTime,workoutCount)) {
+            "empty field" -> {
+                snackBar("Enter all fields")
+            }
+            "reps less than limit" -> {
+                binding.numbersRepsET.error ="must be 1 or more"
+            }
+             "time less than limit" -> {
+                binding.estimatedTimeET.error ="must be more than 2"
+            }
+            "count less than limit" ->{
+                binding.numbersCountsET.error = "must be more than 2"
+            }
+            else -> {
+                with(Preference){
+                    saveWorkoutSet(workoutSet)
+                    saveWorkoutRep(workoutReps)
+                    saveEstimatedTime(workoutTime)
+                    saveNumberOfCount(workoutCount)
+                }
+                findNavController().navigate(R.id.action_inputExerciseFragment_to_workoutBreakdownFragment)
+            }
         }
     }
 

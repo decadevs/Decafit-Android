@@ -42,5 +42,5 @@ interface WorkoutDao {
     fun getReportWorkoutById(id:String):LiveData<ReportWorkoutData>
 
     @Query("SELECT * FROM reportExercise WHERE workoutId=:workoutId")
-    fun getReportReportExercise(workoutId:String):LiveData<List<ReportExercise>>
+    fun reportReportExercise(workoutId:String):LiveData<List<ReportExercise>>
 }

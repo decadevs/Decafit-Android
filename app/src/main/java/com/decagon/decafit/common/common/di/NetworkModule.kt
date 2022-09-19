@@ -3,6 +3,7 @@ package com.decagon.decafit.common.common.di
 import android.content.Context
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
+import com.decagon.decafit.common.common.data.networks.AuthInterceptor
 import com.decagon.decafit.common.common.data.networks.NetworkConstant.BASE_URL1
 import com.decagon.decafit.common.common.domain.repository.RepositoryImp
 import com.decagon.decafit.common.common.domain.repository.RepositoryInterface

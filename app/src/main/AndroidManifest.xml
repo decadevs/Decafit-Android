@@ -25,7 +25,7 @@
         android:theme="@style/Theme.DecafitAndroid"
         tools:targetApi="31">
         <activity
-            android:name=".common.dashboard.DashBoardActivity"
+            android:name=".common.dashboard.presentation.screens.DashBoardActivity"
             android:exported="false"
             android:screenOrientation="userPortrait"
             />

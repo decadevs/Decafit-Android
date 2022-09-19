@@ -10,6 +10,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import com.decagon.decafit.R
+import com.decagon.decafit.common.dashboard.presentation.screens.DashBoardFragment
 
 
 @RunWith(AndroidJUnit4::class)

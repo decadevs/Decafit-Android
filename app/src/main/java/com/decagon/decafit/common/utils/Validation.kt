@@ -58,7 +58,7 @@ object Validation {
                 "(?=.*[a-zA-Z])" +      //any letter
                 "(?=\\S+$)" +           //no white spaces
                 ".{8,}" +               //at least 8 characters
-                "$");
+                "$")
         return passwordREGEX.matcher(password).matches()
     }
 
@@ -121,5 +121,18 @@ object Validation {
         }
 
         return result
+    }
+
+    fun validateInputExercise(workoutSet:String,workoutReps:String,workoutTime:String,workoutCount:String):String{
+        if (workoutSet.isEmpty() || workoutReps.isEmpty()||workoutCount.isEmpty()||workoutTime.isEmpty()){
+            return "empty field"
+        }else if (workoutReps.toInt()<1){
+            return "reps less than limit"
+        }else if (workoutTime.toInt()<2){
+            return "time less than limit"
+        } else if(workoutCount.toInt()<2){
+            return "count less than limit"
+        }
+        return ""
     }
 }

@@ -1,4 +1,4 @@
-package com.decagon.decafit.common.dashboard.dashBoardViewModel
+package com.decagon.decafit.common.dashboard.presentation.screens.dashBoardViewModel
 
 import com.decagon.decafit.common.common.data.database.model.WorkOutData
 

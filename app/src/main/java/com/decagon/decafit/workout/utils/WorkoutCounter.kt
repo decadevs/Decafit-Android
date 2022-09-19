@@ -9,6 +9,7 @@ class WorkoutCounter(listener: OnTimerTickListener) {
         private lateinit var runnable: Runnable
         private var duration = 0L
         private var delay = 100L
+        var isActive = false
 
         init {
             runnable = Runnable{
@@ -40,12 +41,15 @@ class WorkoutCounter(listener: OnTimerTickListener) {
         fun workoutTracker() =(duration/1000/60)%60
 
         fun startTimer(){
+            isActive =true
             handler.postDelayed(runnable, delay)
         }
         fun pauseTimer(){
+            isActive = false
             handler.removeCallbacks(runnable)
         }
         fun stopTimer(){
+            isActive =false
             handler.removeCallbacks(runnable)
             duration = 0L
         }

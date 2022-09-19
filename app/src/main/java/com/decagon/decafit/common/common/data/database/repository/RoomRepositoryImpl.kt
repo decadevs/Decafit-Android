@@ -21,6 +21,10 @@ class RoomRepositoryImpl @Inject constructor(private val workoutDao: WorkoutDao)
         workoutDao.deleteWorkouts()
     }
 
+    fun deleteReportWorkout(){
+        workoutDao.deleteReportWorkout()
+    }
+
     fun getWorkoutById(workoutId:String):LiveData<WorkOutData>{
        return workoutDao.getWorkoutById(workoutId)
     }
@@ -32,7 +36,7 @@ class RoomRepositoryImpl @Inject constructor(private val workoutDao: WorkoutDao)
     }
 
     fun getReportExercise(workoutId: String): LiveData<List<ReportExercise>> {
-        return workoutDao.getReportReportExercise(workoutId)
+        return workoutDao.reportReportExercise(workoutId)
     }
 
     fun getReportWorkoutById(id:String):LiveData<ReportWorkoutData>{

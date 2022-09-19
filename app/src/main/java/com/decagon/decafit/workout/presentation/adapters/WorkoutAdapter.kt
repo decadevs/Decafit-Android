@@ -1,30 +1,22 @@
 package com.decagon.decafit.workout.presentation.adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.bumptech.glide.Glide
-import com.decagon.decafit.GetReportWorkoutQuery
 import com.decagon.decafit.R
-import com.decagon.decafit.WorkoutWitIdQuery
 import com.decagon.decafit.WorkoutsQuery
-import com.decagon.decafit.common.common.data.models.Exercises
 import com.decagon.decafit.common.common.data.preferences.Preference
 import com.decagon.decafit.common.common.data.preferences.Preference.COUNT_KEY
 import com.decagon.decafit.common.common.data.preferences.Preference.TIME_KEY
 import com.decagon.decafit.common.utils.OnclickListener
 import com.decagon.decafit.databinding.WorkoutBreakdownItemBinding
-import com.decagon.decafit.workout.data.WorkoutItems
 
 class WorkoutAdapter(private  val listener:OnclickListener, private val context: Context) :RecyclerView.Adapter<WorkoutAdapter.ViewHolder>(){
 
@@ -56,13 +48,13 @@ class WorkoutAdapter(private  val listener:OnclickListener, private val context:
                  .centerCrop()
                  .override(65,56)
                  .into(exercisesImage)
-             exercisesImage.setBackgroundResource(R.drawable.full_body_img)
+             //exercisesImage.setBackgroundResource(R.drawable.full_body_img)
              val isComplete = false
              val pausedTime =0
              if (items.type.rawValue == "count"){
                  "X${Preference.getNumberOfCount(COUNT_KEY)}".also { timer.text = it }
              }else{
-                 timer.text = Preference.getEstimatedTime(TIME_KEY)
+                 "${Preference.getEstimatedTime(TIME_KEY)} secs".also { timer.text = it }
              }
              if (isComplete){
                  workoutProgressCard.visibility = View.VISIBLE
