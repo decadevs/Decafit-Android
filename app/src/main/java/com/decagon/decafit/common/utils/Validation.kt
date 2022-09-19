@@ -58,7 +58,7 @@ object Validation {
                 "(?=.*[a-zA-Z])" +      //any letter
                 "(?=\\S+$)" +           //no white spaces
                 ".{8,}" +               //at least 8 characters
-                "$");
+                "$")
         return passwordREGEX.matcher(password).matches()
     }
 
