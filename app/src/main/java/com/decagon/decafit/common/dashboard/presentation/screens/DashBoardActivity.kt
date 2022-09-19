@@ -1,13 +1,12 @@
 package com.decagon.decafit.common.dashboard.presentation.screens
 
-import android.app.ActionBar
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -18,6 +17,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.decagon.decafit.MainActivity
 import com.decagon.decafit.common.common.data.preferences.Preference
+import com.decagon.decafit.common.dashboard.presentation.screens.dashBoardViewModel.DashBoardViewModel
 import com.decagon.decafit.common.utils.showLogOutDialog
 import com.decagon.decafit.databinding.ActivityDashBoardBinding
 import com.decagon.decafit.databinding.LogoutDialogLayoutBinding
@@ -35,6 +35,8 @@ class DashBoardActivity : AppCompatActivity() {
     private lateinit var  logoutDialog: AlertDialog
     private lateinit var name: String
     private var pressedTime: Long = 0
+    private val viewModel: DashBoardViewModel by viewModels()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,6 +84,7 @@ class DashBoardActivity : AppCompatActivity() {
     }
 
     private fun logOut(){
+        viewModel.deleteReportWorkout()
         Preference.logOut()
         navigateToDashBoard()
     }

@@ -35,7 +35,6 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
     private val viewModel:WorkoutViewModels by viewModels()
     lateinit var reportWorkout:List<WorkoutsQuery.Exercise?>
     lateinit var reportExercise:ReportList
-    lateinit var newExercise:ReportList
 
 
     override fun onCreateView(
@@ -108,26 +107,25 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
     private fun getExerciseFromDb(){
         val workoutId = Preference.getWorkoutId(WORKOUT_KEY)
         val userId = Preference.getUserId(USERID_KEY)
-       // viewModel.getReportWorkout(userId!!,workoutId!!, requireContext())
-
-        viewModel.getWorkoutFromLocalDb(workoutId!!).observe(viewLifecycleOwner){
+        viewModel.getReportWorkout(userId!!,workoutId!!, requireContext())
+        viewModel.getWorkoutFromLocalDb(workoutId).observe(viewLifecycleOwner){
             Glide.with(requireContext()).load(it.backgroundImage)
                 .centerCrop()
                 .into(binding.exerciseImage)
             binding.workoutBreakdownTv.text = getString(R.string.numberOfExercises,it.exercise?.size)
             getReportWorkoutFromLocalDb()
-
             reportWorkout =it.exercise!!
-
             if(it.exercise.isEmpty()){
                 binding.startWorkoutBtn.text = getString(R.string.no_exercise)
                 binding.startWorkoutBtn.isEnabled = false
             }
         }
     }
+
+    /**get the report from the local db and check if there is incomplete exercise*/
     private fun getReportWorkoutFromLocalDb(){
         val id = Preference.getWorkoutId(WORKOUT_KEY)
-        viewModel.getReportExercise(id!!).observe(viewLifecycleOwner) { report ->
+        viewModel.getReportOfExerciseFromLocalDB(id!!).observe(viewLifecycleOwner) { report ->
             val dialogBinding = ContinueExerciseDialogBinding.inflate(layoutInflater)
             reportExercise= ReportList( report.filter { it.completed ==false })
             val chooseToContinueExercise =showChooseToContinueDialog(dialogBinding,
@@ -140,19 +138,14 @@ class WorkoutBreakdownFragment : Fragment(),OnclickListener {
         }
     }
 
+    /**show the details of the exercise nClick of the exercise */
     override fun onclickWorkoutItem(workoutItems: WorkoutsQuery.Exercise) {
         val dialogBinding = WorkoutDetailsDialogBinding.inflate(layoutInflater)
         val workoutDetails = showWorkoutDetails(dialogBinding,workoutItems)
         workoutDetails.show()
     }
 
-    override fun onResume() {
-        super.onResume()
-        val activity = activity as AppCompatActivity?
-        val actionBar: androidx.appcompat.app.ActionBar? = activity!!.supportActionBar
-        actionBar?.title = "Workout Breakdown"
-    }
-
+    /**show the details of the exercise nClick of the exercise */
     override fun onclickReportExerciseItem(workoutItems: ReportExercise) {
         val dialogBinding = WorkoutDetailsDialogBinding.inflate(layoutInflater)
         val workoutDetails = showReportDetails(dialogBinding,workoutItems)

@@ -1,4 +1,4 @@
-package com.decagon.decafit.common.common.di
+package com.decagon.decafit.common.common.data.networks
 
 import android.content.Context
 import com.decagon.decafit.common.common.data.preferences.Preference.getHeader

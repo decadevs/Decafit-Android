@@ -1,4 +1,4 @@
-package com.decagon.decafit.common.dashboard.dashBoardViewModel
+package com.decagon.decafit.common.dashboard.presentation.screens.dashBoardViewModel
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -28,6 +28,9 @@ class DashBoardViewModel @Inject constructor(private val networkMapper: WorkoutN
         return roomRepository.getWorkouts()
     }
 
+    fun deleteReportWorkout(){
+        roomRepository.deleteReportWorkout()
+    }
     fun getWorkOuts(context: Context) {
         if (isNetworkAvailable(context)) {
             viewModelScope.launch {
@@ -50,20 +53,3 @@ class DashBoardViewModel @Inject constructor(private val networkMapper: WorkoutN
         }
     }
 }
-//
-//fun getWorkOuts(context : Context) {
-//    if (isNetworkAvailable(context)) {
-//        viewModelScope.launch {
-//            val response = try {
-//                repository.workOuts()
-//            } catch (e: ApolloException) {
-//                return@launch
-//            }
-//
-//            _dashBoardResponse.value = response
-//            >>>>>>> 649103637a3905981f802b6c5aedab346227acd2
-//        }
-//    }else{
-//        _networkCheckResponse.value = "N0 INTERNET"
-//    }
-//}
